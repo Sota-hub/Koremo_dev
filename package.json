@@ -1,0 +1,22 @@
+{
+  "name": "koremo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Sota-hub/Koremo",
+  "license": "UNLICENSED",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "jest": "^28.1.0",
+    "lerna": "^4.0.0",
+    "prettier": "^2.6.2",
+    "ts-jest": "^28.0.2",
+    "typescript": "^4.6.4"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
