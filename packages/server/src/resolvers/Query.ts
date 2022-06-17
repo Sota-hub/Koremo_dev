@@ -8,11 +8,11 @@ const user = {
   profileImageUrl: "A",
   lastAccessedAt: 1,
   friends: [],
-  applying: []
-}
+  applying: [],
+};
 
 const Query = {
-  friend: () => user
+  friend: () => user,
 };
 
 export default Query;

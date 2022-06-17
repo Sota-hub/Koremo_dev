@@ -1,4 +1,4 @@
-interface Base {
+interface Basic {
   id: ID!
   createdAt: Date!
   updatedAt: Date!

@@ -1,9 +1,9 @@
-type User implements Base {
+type User implements Basic {
   id: ID!
   createdAt: Date!
   updatedAt: Date!
   name: String!
   email: String!
-  profileImageUrl: String!
+  profileImageUrl: String
   lastAccessedAt: Date!
 }
