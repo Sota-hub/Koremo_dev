@@ -1,0 +1,14 @@
+overwrite: true
+schema: "./schemas/*.graphql"
+documents: 
+  - "./queries/*.graphql"
+  - "./mutations/*.graphql"
+generates:
+  ../graphql-client/src/index.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      scalars:
+        Date: Date

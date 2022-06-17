@@ -1,0 +1,3 @@
+# type Mutation {
+#   friend(id: ID!): User #テキトーなデータ
+# }

@@ -1,0 +1,10 @@
+overwrite: true
+schema: "./schemas/*.graphql"
+generates:
+  ../graphql-resolvers/src/index.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+    config:
+      scalars:
+        Date: Date

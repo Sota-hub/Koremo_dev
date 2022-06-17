@@ -1,0 +1,9 @@
+# Pick from User table
+query friend($id: ID!) {
+  friend(id: $id) {
+    id
+    name
+    profileImageUrl
+    lastAccessedAt
+  }
+}

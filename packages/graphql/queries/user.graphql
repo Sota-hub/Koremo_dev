@@ -1,0 +1,12 @@
+# Pick from User table
+query user {
+  user {
+    id
+    createdAt
+    updatedAt
+    name
+    email
+    profileImageUrl
+    lastAccessedAt
+  }
+}

@@ -1,0 +1,5 @@
+interface Base {
+  id: ID!
+  createdAt: Date!
+  updatedAt: Date!
+}

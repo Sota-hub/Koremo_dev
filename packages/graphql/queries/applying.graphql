@@ -1,0 +1,14 @@
+# Pick from Apply table
+# -----------------------------
+# id | applyingUserId | appliedUserId 
+#    | (申し込んだ人) | （申し込まれた人）
+# const friendIds = find(Apply, where: { applyingUserId: id })
+# find(User, where: { id: friendIds.appliedUserId })
+query applying($id: ID!) {
+  applying(id: $id) {
+    id
+    name
+    profileImageUrl
+    lastAccessedAt
+  }
+}

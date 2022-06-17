@@ -1,13 +1,13 @@
 {
-  "name": "client",
+  "name": "@koremo/client",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --ext .js,.ts",
-    "lint_fix": "eslint . --ext .js,.ts --fix"
+    "lint": "eslint ./**/*.{ts,tsx}",
+    "lint_fix": "eslint ./**/*.{ts,tsx} && prettier --write ./**/*.{ts,tsx}"
   },
   "dependencies": {
     "next": "12.1.6",
