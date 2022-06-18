@@ -10,13 +10,13 @@ import BasicColumns from "./BasicColumns";
 
 @Entity()
 class User extends BaseEntity implements BasicColumns {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn() // generated automatically
   id!: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn() // generated automatically
   createdAt!: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn() // generated automatically
   updatedAt!: Date;
 
   @Column()

@@ -17,6 +17,7 @@
     "@types/jest": "^27.5.1",
     "@types/mysql": "^2.15.21",
     "@types/passport": "^1.0.9",
+    "@types/passport-google-oauth20": "^2.0.11",
     "@types/passport-local": "^1.0.34",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
@@ -40,6 +41,7 @@
     "express-session": "^1.17.3",
     "graphql": "^16.5.0",
     "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "typeorm": "^0.3.6"
   }

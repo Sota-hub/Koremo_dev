@@ -18,7 +18,7 @@ const port = process.env.PORT;
   await dataSource
     .initialize()
     .then(() => console.log("Connection Succeeded!"))
-    .catch((e) => console.error("Connection Failed: ", e));
+    .catch((err) => console.error("Connection Failed: ", err));
 
   // create app
   const app = express();
@@ -44,7 +44,7 @@ const port = process.env.PORT;
     typeDefs: await typeDefs,
     resolvers,
     context: ({ req, res }) => {
-      return apolloContext( req, res );
+      return apolloContext(req, res);
     },
     csrfPrevention: true,
     cache: "bounded",
