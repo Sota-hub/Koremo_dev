@@ -25,6 +25,9 @@ class User extends BaseEntity implements BasicColumns {
   @Column()
   email!: string;
 
+  @Column()
+  passwordHash!: string;
+
   @Column({ nullable: true })
   profileImageUrl!: string;
 
