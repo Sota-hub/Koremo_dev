@@ -1,3 +1,4 @@
+# don't return password hash and google id from the perspective of security
 type User implements Basic {
   id: ID!
   createdAt: Date!

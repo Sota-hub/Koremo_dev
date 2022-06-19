@@ -23,9 +23,9 @@ const apolloContext = (req: any, res: any) => {
     const newUser = new User();
     newUser.name = "";
     newUser.email = email;
-    newUser.passwordHash = passwordHash;
     newUser.profileImageUrl = "";
     newUser.lastAccessedAt = new Date();
+    newUser.passwordHash = passwordHash;
 
     const savedUser = await newUser.save();
 
@@ -62,16 +62,6 @@ const apolloContext = (req: any, res: any) => {
     );
   };
 
-  const loginGoogle = () => {
-    passport.authenticate('google', {
-      failureRedirect: "/login",
-      failureMessage: true,
-    }),
-    (req: any, res: any) => {
-      res.redirect('/');
-    }
-  }
-
   const logoutLocal = () => {
     req.logout((err: Error) => {
       if (err) throw new Error(`Something went wrong: ${err}`);
@@ -79,11 +69,22 @@ const apolloContext = (req: any, res: any) => {
     });
   };
 
+  const googleOAuth = () => {
+    passport.authenticate('google', { scope: ["profile", "email"] });
+  }
+
+  const googleOAuthCallback = () => {
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    (_: any, res: any): void => res.redirect('/[userId]');
+  }
+
   return {
     dataSource,
     signupLocal,
     loginLocal,
     logoutLocal,
+    googleOAuth,
+    googleOAuthCallback
   };
 };
 

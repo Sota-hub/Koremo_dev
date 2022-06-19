@@ -25,14 +25,17 @@ class User extends BaseEntity implements BasicColumns {
   @Column()
   email!: string;
 
-  @Column()
-  passwordHash!: string;
-
   @Column({ nullable: true })
   profileImageUrl!: string;
 
   @Column()
   lastAccessedAt!: Date;
+
+  @Column({ nullable: true })
+  passwordHash!: string;
+
+  @Column({ nullable: true })
+  googleId!: string;
 }
 
 export default User;
