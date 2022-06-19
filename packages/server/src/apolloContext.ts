@@ -15,7 +15,7 @@ const apolloContext = (req: any, res: any) => {
     if (!email || !password) throw new Error(`Email and password are required`);
 
     const user = await User.findOne({ where: { email } });
-    if (user) throw new Error("Entered Email has already been registered")
+    if (user) throw new Error("Entered Email has already been registered");
 
     const salt = await bcrypt.genSalt(10);
     const passwordHash = bcrypt.hashSync(password, salt);
@@ -70,13 +70,13 @@ const apolloContext = (req: any, res: any) => {
   };
 
   const googleOAuth = () => {
-    passport.authenticate('google', { scope: ["profile", "email"] });
-  }
+    passport.authenticate("google", { scope: ["profile", "email"] });
+  };
 
   const googleOAuthCallback = () => {
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    (_: any, res: any): void => res.redirect('/[userId]');
-  }
+    passport.authenticate("google", { failureRedirect: "/login" }),
+      (_: any, res: any): void => res.redirect("/[userId]");
+  };
 
   return {
     dataSource,
@@ -84,7 +84,7 @@ const apolloContext = (req: any, res: any) => {
     loginLocal,
     logoutLocal,
     googleOAuth,
-    googleOAuthCallback
+    googleOAuthCallback,
   };
 };
 
