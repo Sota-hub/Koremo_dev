@@ -4,8 +4,8 @@
 #    | (申し込んだ人) | （申し込まれた人）
 # const friendIds = find(Apply, where: { applyingUserId: id })
 # find(User, where: { id: friendIds.appliedUserId })
-query applying($id: ID!) {
-  applying(id: $id) {
+query waiting($id: ID!) {
+  waiting(id: $id) {
     id
     name
     profileImageUrl

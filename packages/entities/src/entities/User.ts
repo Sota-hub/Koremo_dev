@@ -1,10 +1,10 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  BaseEntity,
   Column,
+  PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  BaseEntity,
 } from "typeorm";
 import BasicColumns from "./BasicColumns";
 

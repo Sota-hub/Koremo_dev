@@ -7,6 +7,6 @@ type Query {
   friends(id: ID!): [Friend]! # フレンドがいない可能性もある id = user's id
   # use for getting pending user(who is asking to be a friend with user)
   pending(id: ID!): [Friend]! # id = user's id
-  # use for getting applying user(who is asked to be a friend by user)
-  applying(id: ID!): [Friend]! # id = user's id
+  # use for getting waiting user(who is asked to be a friend by user)
+  waiting(id: ID!): [Friend]! # id = user's id
 }
