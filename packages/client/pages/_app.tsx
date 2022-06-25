@@ -1,8 +1,38 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import React, { useState } from "react";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client";
+import { User } from "@koremo/graphql-client";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: createHttpLink({ uri: process.env.SERVER_URL }),
+});
 
-export default MyApp
+const App = ({ Component, pageProps, router }: AppProps) => {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  //setCurrentUser(auth mutation)
+
+  return (
+    <ApolloProvider client={client}>
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{pageProps.title}</title>
+      </Head>
+      <Component
+        {...pageProps}
+        router={router}
+        currentUser={currentUser}
+      ></Component>
+    </ApolloProvider>
+  );
+};
+
+export default App;

@@ -7,8 +7,6 @@ const user = {
   email: "A",
   profileImageUrl: "A",
   lastAccessedAt: 1,
-  friends: [],
-  waiting: [],
 };
 
 const Query = {
