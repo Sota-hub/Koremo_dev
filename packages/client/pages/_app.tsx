@@ -11,13 +11,15 @@ import { User } from "@koremo/graphql-client";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: createHttpLink({ uri: process.env.SERVER_URL }),
+  link: createHttpLink({ uri: process.env.NEXT_PUBLIC_SERVER_URL }),
 });
 
 const App = ({ Component, pageProps, router }: AppProps) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  //setCurrentUser(auth mutation)
+  //setCurrentUser(auth mutation) // localStrategyの場合cookieのセッションを確認, googleStrategyの場合は
+  // if (mutation.loading) return <p>loading<p>
+  // if (!mutation.data) router.replace("localhost:3000/login")
 
   return (
     <ApolloProvider client={client}>
