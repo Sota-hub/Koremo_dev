@@ -1,10 +1,8 @@
 import dataSource from "./DataSource";
 import passport from "./passportConfig";
 import { User as CurrentUser } from "@koremo/graphql-resolvers";
-import entities from "@koremo/entities";
+import { User } from "@koremo/entities";
 import bcrypt from "bcrypt";
-
-const { User } = entities;
 
 // TODO: req: any + res: any ← How to define returned req from passport LocalStrategy↓
 // express.Request<ParamsDictionary, any, any, QueryString.ParsedQs, Record<string, any>>
@@ -79,7 +77,7 @@ const apolloContext = (req: any, res: any) => {
   };
 
   return {
-    dataSource,
+    dataSource, //いらないかも
     signupLocal,
     loginLocal,
     logoutLocal,

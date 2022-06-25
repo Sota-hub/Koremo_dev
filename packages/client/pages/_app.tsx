@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { User } from "@koremo/graphql-client";
 import {
   ApolloClient,
   createHttpLink,
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
-import { User } from "@koremo/graphql-client";
+
+import "../styles/normalize.css";
+import "../styles/global.css";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -15,7 +18,7 @@ const client = new ApolloClient({
 });
 
 const App = ({ Component, pageProps, router }: AppProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, /*setCurrentUser*/] = useState<User | null>(null);
 
   //setCurrentUser(auth mutation) // localStrategyの場合cookieのセッションを確認, googleStrategyの場合は
   // if (mutation.loading) return <p>loading<p>

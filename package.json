@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "homepage": "https://github.com/Sota-hub/Koremo",
   "license": "UNLICENSED",
-  "scripts": {},
+  "scripts": {
+    "dev": "lerna run dev",
+    "build": "lerna run build",
+    "lint": "lerna run lint",
+    "lint_fix": "lerna run lint_fix"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^27.5.1",

@@ -3,7 +3,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { User as CurrentUser } from "@koremo/graphql-resolvers";
-import entities from "@koremo/entities";
+import { User } from "@koremo/entities";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
@@ -12,7 +12,6 @@ dotenv.config();
 const clientID = process.env.CLIENT_ID as string;
 const clientSecret = process.env.CLIENT_SECRET as string;
 const callbackURL = process.env.CALLBACK_URL as string;
-const { User } = entities;
 
 passport.serializeUser((user: any, done) => {
   // TODO: fix any type ( can't use User type from entities)

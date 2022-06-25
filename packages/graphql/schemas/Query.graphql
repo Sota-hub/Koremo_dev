@@ -1,12 +1,12 @@
 type Query {
   # use fir login
-  user: User 
+  # user: User 
   # use for searching a friend & getting the friend data多分後者は使わない
-  friend(id: ID!): Friend # 見つからない可能性もある id = friend's id
+  # friend(id: ID!): Friend # 見つからない可能性もある id = friend's id
   # use for getting the friends data
-  friends(id: ID!): [Friend]! # フレンドがいない可能性もある id = user's id
+  friends(userId: ID!): [Friend]! # フレンドがいない可能性もある id = user's id
   # use for getting pending user(who is asking to be a friend with user)
-  pending(id: ID!): [Friend]! # id = user's id
+  # pending(id: ID!): [Friend]! # id = user's id
   # use for getting waiting user(who is asked to be a friend by user)
-  waiting(id: ID!): [Friend]! # id = user's id
+  # waiting(id: ID!): [Friend]! # id = user's id
 }

@@ -1,6 +1,6 @@
 type Friend {
   id: ID!
   name: String!
-  profileImageUrl: String!
+  profileImageUrl: String
   lastAccessedAt: Date!
 }

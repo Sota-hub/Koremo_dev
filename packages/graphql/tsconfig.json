@@ -16,5 +16,5 @@
     "declaration": true 
     //↑コンパイル先に.d.tsファイルを作る（このapiをインポートするときインポート先で型がanyであることが原因のエラーが出ることを防いでいる）
   },
-  "exclude": ["node_modules", "./build/**/*"] // declaration:truenにしたらbuildファイルもexcludeしないと.d.tsがまたコンパイル対象になってしまう
+  "include": ["./src/index.ts"] //ここでしts使わない
 }

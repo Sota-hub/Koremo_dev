@@ -1,6 +1,5 @@
-# Pick from User table
-query friend($id: ID!) {
-  friend(id: $id) {
+query friends($userId: ID!) {
+  friends(userId: $userId) {
     id
     name
     profileImageUrl

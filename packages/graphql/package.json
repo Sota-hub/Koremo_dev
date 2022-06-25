@@ -5,8 +5,9 @@
   "main": "build/index.js",
   "scripts": {
     "build": "tsc",
-    "generate_client": "graphql-codegen --config codegen-client.yml",
-    "generate_resolvers": "graphql-codegen --config codegen-resolvers.yml"
+    "generate_client": "graphql-codegen --config codegen-client.yml && cd ../graphql-client && yarn build",
+    "generate_resolvers": "graphql-codegen --config codegen-resolvers.yml && cd ../graphql-resolvers && yarn build",
+    "generate": "graphql-codegen --config codegen-client.yml && graphql-codegen --config codegen-resolvers.yml && cd ../graphql-client && yarn build && cd ../graphql-resolvers && yarn build "
   },
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^7.3.15",

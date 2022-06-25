@@ -2,7 +2,7 @@
 // いろんなとこで使うこ可能性があるので別ファイルにした
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
-import entities from "@koremo/entities";
+import * as entities from "@koremo/entities";
 
 dotenv.config();
 const host = process.env.MYSQL_HOST;

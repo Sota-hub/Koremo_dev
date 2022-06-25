@@ -1,9 +1,9 @@
 import { Resolvers } from "@koremo/graphql-resolvers";
-// import Query from "./Query";
+import Query from "./queryResolvers/Query";
 // import Mutation from "./Mutation";
 
 const resolvers: Resolvers = {
-  // Query,
+  Query,
   // Mutation,
 };
 
