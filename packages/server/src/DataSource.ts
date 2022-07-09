@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import * as entities from "@koremo/entities";
 
 dotenv.config();
-const host = process.env.MYSQL_HOST;
+const host = process.env.MYSQL_ROOT_HOST;
 const username = process.env.MYSQL_USER;
 const password = process.env.MYSQL_PASSWORD;
 const database = process.env.MYSQL_DATABASE;
@@ -17,8 +17,6 @@ const dataSource = new DataSource({
   password,
   database,
   logging: true,
-  // synchronize: true,
-  // ↑EntityとDBを同期(cliでsyncエラー出るので代わりにコメントアウトで対応中)
   entities: Object.values(entities),
 });
 

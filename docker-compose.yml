@@ -7,7 +7,7 @@ services:
     image: mysql:5.7 #mysql:8.0だとmysql2がいるけどdataSourceのtypeにはそれがないので仕方なく5.7使う
     restart: always
     env_file:
-      - ./env/mysql.env
+      - .env
     volumes:
       - data:/var/lib/mysql
     ports:
@@ -15,3 +15,5 @@ services:
 
 volumes:
   data:
+
+# メモ：MYSQL_ROOT_PASSWORDとかを書き換えた後ボリュームが残っていると資格情報も残ってしまいエラーが出るので、その時はdocker volume rm <volume_name> を実行する

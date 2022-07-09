@@ -7,7 +7,10 @@
     "dev": "lerna run dev",
     "build": "lerna run build",
     "lint": "lerna run lint",
-    "lint_fix": "lerna run lint_fix"
+    "lint_fix": "lerna run lint_fix",
+    "strap": "lerna bootstrap",
+    "up": "docker-compose up",
+    "down": "docker-compose down"
   },
   "dependencies": {},
   "devDependencies": {
