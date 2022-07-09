@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 export const connectionSource = new DataSource({
   type: "mysql",
@@ -11,5 +11,5 @@ export const connectionSource = new DataSource({
   database: process.env.MYSQL_DATABASE,
   logging: true,
   entities: ["build/entity/*.js"],
-  migrations: ["build/migration/*.js"]
-})
+  migrations: ["build/migration/*.js"],
+});
