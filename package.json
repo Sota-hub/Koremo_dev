@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "lerna run dev",
     "build": "lerna run build",
+    "start": "lerna run start",
     "lint": "lerna run lint",
     "lint_fix": "lerna run lint_fix",
     "strap": "lerna bootstrap",
