@@ -1,4 +1,4 @@
-// ファイル名をdataSourceにするとts.configの予約名と被るのでエラーが出るのでDataSourceにしている
+// ファイル名をdataSourceにするとts.configの予約名と被るのでエラーが出るので_dataSourceにしている
 // いろんなとこで使うこ可能性があるので別ファイルにした
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";

@@ -1,4 +1,4 @@
-import dataSource from "./DataSource";
+import dataSource from "./_dataSource";
 import passport from "./passportConfig";
 import { User as CurrentUser } from "@koremo/graphql-resolvers";
 import { User } from "@koremo/entities";

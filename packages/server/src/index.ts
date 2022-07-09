@@ -4,7 +4,7 @@ import session from "express-session";
 import typeDefs from "@koremo/graphql";
 import resolvers from "./resolvers/index";
 import dotenv from "dotenv";
-import dataSource from "./DataSource";
+import dataSource from "./_dataSource";
 import passport from "./passportConfig";
 import apolloContext from "./apolloContext";
 
