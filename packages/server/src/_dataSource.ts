@@ -5,14 +5,18 @@ import dotenv from "dotenv";
 import * as entities from "@koremo/entities";
 
 dotenv.config();
-const host = process.env.MYSQL_ROOT_HOST;
-const username = process.env.MYSQL_USER;
-const password = process.env.MYSQL_PASSWORD;
-const database = process.env.MYSQL_DATABASE;
+
+// Using cloud database for development
+const host = process.env.HOST;
+const username = process.env.USERNAME;
+const password = process.env.PASSWORD;
+const database = process.env.DATABASE;
+const port  = Number(process.env.PORT);
 
 const dataSource = new DataSource({
   type: "mysql",
   host,
+  port,
   username,
   password,
   database,
