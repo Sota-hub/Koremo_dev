@@ -11,6 +11,6 @@ const Index: PageFC = (props) => {
   return <p>Index page</p>;
 };
 
-export const getStaticProps = titleSSG("index page");
+export const getStaticProps = titleSSG("Index page");
 
 export default Index;

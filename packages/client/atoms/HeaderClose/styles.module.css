@@ -1,0 +1,12 @@
+.close {
+  height: 40px;
+  width: 40px;
+  position: relative;
+  margin: 0 0 0 auto;
+}
+
+@media screen and (min-width: 800px) {
+  .close {
+    display: none;
+  }
+}
