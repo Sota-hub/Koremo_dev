@@ -18,7 +18,7 @@ const client = new ApolloClient({
 });
 
 const App = ({ Component, pageProps, router }: AppProps) => {
-  const [currentUser, /*setCurrentUser*/] = useState<User | null>(null);
+  const [currentUser /*setCurrentUser*/] = useState<User | null>(null);
 
   //setCurrentUser(auth mutation) // localStrategyの場合cookieのセッションを確認, googleStrategyの場合は
   // if (mutation.loading) return <p>loading<p>

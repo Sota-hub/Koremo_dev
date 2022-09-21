@@ -3,6 +3,9 @@ No solution to use constants in css module file so far...
 colors 
   black: #000
   white: #fff
+  blue: #3C549F
+  pink: #E06A9E
+  white-gray: #a0a0a0
 
 break-point
   mobile: 800px

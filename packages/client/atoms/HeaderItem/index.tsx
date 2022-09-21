@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
 interface HeaderItemProps {
   link: string;
@@ -10,7 +10,7 @@ interface HeaderItemProps {
 }
 
 const HeaderItem: FC<HeaderItemProps> = (props) => {
-  const {link, text, icon} = props;
+  const { link, text, icon } = props;
   return (
     <Link href={link} passHref>
       <a className={styles.link}>
@@ -20,7 +20,7 @@ const HeaderItem: FC<HeaderItemProps> = (props) => {
         <p className={styles.text}>{text}</p>
       </a>
     </Link>
-  )
-}
+  );
+};
 
 export default HeaderItem;

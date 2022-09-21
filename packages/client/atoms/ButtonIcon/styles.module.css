@@ -1,0 +1,13 @@
+.icon {
+  height: 26px;
+  width: 26px;
+  position: relative;
+  margin-right: 8px;
+}
+
+@media screen and (min-width: 800px) {
+    .icon {
+      height: 40px;
+      width: 40px;
+    }
+}

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import HeaderLogo from "../../atoms/HeaderLogo";
 import HeaderMenu from "../../molecules/HeaderMenu";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
 const Header: FC = (props) => {
   return (
@@ -9,7 +9,7 @@ const Header: FC = (props) => {
       <HeaderLogo />
       <HeaderMenu />
     </div>
-  )
-}
+  );
+};
 
 export default Header;

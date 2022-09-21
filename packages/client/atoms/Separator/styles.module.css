@@ -1,0 +1,15 @@
+.separator {
+  border-top: 0.5px solid #a0a0a0;
+  width: 80%;
+  margin: 2.5rem auto;
+}
+
+@media screen and (min-width: 800px) {
+  .vertical {
+    margin: 0;
+    width: auto;
+    height: 100%;
+    border: none;
+    border-right: 0.5px solid #a0a0a0;
+  }
+}

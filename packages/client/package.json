@@ -7,10 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint ./**/*.{ts,tsx}",
-    "lint_fix": "eslint ./**/*.{ts,tsx} && prettier --write ./**/*.{ts,tsx}"
+    "lint_fix": "eslint './**/*.{ts,tsx}' && prettier --write './**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@koremo/enums": "^0.0.0",
     "@koremo/graphql-client": "^0.0.0",
     "next": "12.1.6",
     "react": "18.1.0",
