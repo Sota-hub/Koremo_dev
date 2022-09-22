@@ -29,6 +29,11 @@ export type Friend = {
   profileImageUrl?: Maybe<Scalars['String']>;
 };
 
+export type LocalLoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type LocalSignupInput = {
   confPass: Scalars['String'];
   email: Scalars['String'];
@@ -37,7 +42,13 @@ export type LocalSignupInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  localLogin?: Maybe<User>;
   localSignup?: Maybe<User>;
+};
+
+
+export type MutationLocalLoginArgs = {
+  input: LocalLoginInput;
 };
 
 
@@ -140,6 +151,7 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  LocalLoginInput: LocalLoginInput;
   LocalSignupInput: LocalSignupInput;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
@@ -154,6 +166,7 @@ export type ResolversParentTypes = {
   Date: Scalars['Date'];
   Friend: Friend;
   ID: Scalars['ID'];
+  LocalLoginInput: LocalLoginInput;
   LocalSignupInput: LocalSignupInput;
   Mutation: {};
   Query: {};
@@ -181,6 +194,7 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  localLogin?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLocalLoginArgs, 'input'>>;
   localSignup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLocalSignupArgs, 'input'>>;
 };
 

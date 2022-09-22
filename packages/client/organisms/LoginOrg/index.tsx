@@ -8,15 +8,14 @@ import styles from "./styles.module.css";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
-// import { useLocalLoginMutation } from "@koremo/graphql-client";
+import { useLocalLoginMutation } from "@koremo/graphql-client";
 
 const LoginOrg: FC = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-
-  // const [localLoginFunction] = useLocalLoginMutation();
+  const [localLoginFunction] = useLocalLoginMutation();
 
   const validation = (email: string, password: string) => {
     const emailTest = emailExpression.test(email);
@@ -42,15 +41,15 @@ const LoginOrg: FC = (props) => {
       return;
     } else {
       try {
-        // const data = await localLoginFunction({
-        //   variables: {
-        //     input: {
-        //       email,
-        //       password
-        //     },
-        //   },
-        // });
-        // console.log("=== Logged in! ===", data);
+        const data = await localLoginFunction({
+          variables: {
+            input: {
+              email,
+              password
+            },
+          },
+        });
+        console.log("=== Logged in! ===", data);
       } catch (e) {
         console.log("=== Error occurred... ===", e);
       }

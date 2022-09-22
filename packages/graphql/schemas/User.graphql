@@ -14,3 +14,8 @@ input LocalSignupInput {
   password: String!
   confPass: String!
 }
+
+input LocalLoginInput {
+  email: String!
+  password: String!
+}

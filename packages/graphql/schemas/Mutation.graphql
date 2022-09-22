@@ -1,3 +1,4 @@
 type Mutation {
   localSignup(input: LocalSignupInput!): User
+  localLogin(input: LocalLoginInput!): User
 }

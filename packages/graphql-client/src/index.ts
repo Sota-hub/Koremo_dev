@@ -30,6 +30,11 @@ export type Friend = {
   profileImageUrl?: Maybe<Scalars['String']>;
 };
 
+export type LocalLoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type LocalSignupInput = {
   confPass: Scalars['String'];
   email: Scalars['String'];
@@ -38,7 +43,13 @@ export type LocalSignupInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  localLogin?: Maybe<User>;
   localSignup?: Maybe<User>;
+};
+
+
+export type MutationLocalLoginArgs = {
+  input: LocalLoginInput;
 };
 
 
@@ -67,6 +78,13 @@ export type User = Basic & {
   updatedAt: Scalars['Date'];
 };
 
+export type LocalLoginMutationVariables = Exact<{
+  input: LocalLoginInput;
+}>;
+
+
+export type LocalLoginMutation = { __typename?: 'Mutation', localLogin?: { __typename?: 'User', id: string, createdAt: Date, updatedAt: Date, name: string, email: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null };
+
 export type LocalSignupMutationVariables = Exact<{
   input: LocalSignupInput;
 }>;
@@ -82,6 +100,45 @@ export type FriendsQueryVariables = Exact<{
 export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null> };
 
 
+export const LocalLoginDocument = gql`
+    mutation localLogin($input: LocalLoginInput!) {
+  localLogin(input: $input) {
+    id
+    createdAt
+    updatedAt
+    name
+    email
+    profileImageUrl
+    lastAccessedAt
+  }
+}
+    `;
+export type LocalLoginMutationFn = Apollo.MutationFunction<LocalLoginMutation, LocalLoginMutationVariables>;
+
+/**
+ * __useLocalLoginMutation__
+ *
+ * To run a mutation, you first call `useLocalLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLocalLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [localLoginMutation, { data, loading, error }] = useLocalLoginMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLocalLoginMutation(baseOptions?: Apollo.MutationHookOptions<LocalLoginMutation, LocalLoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LocalLoginMutation, LocalLoginMutationVariables>(LocalLoginDocument, options);
+      }
+export type LocalLoginMutationHookResult = ReturnType<typeof useLocalLoginMutation>;
+export type LocalLoginMutationResult = Apollo.MutationResult<LocalLoginMutation>;
+export type LocalLoginMutationOptions = Apollo.BaseMutationOptions<LocalLoginMutation, LocalLoginMutationVariables>;
 export const LocalSignupDocument = gql`
     mutation localSignup($input: LocalSignupInput!) {
   localSignup(input: $input) {
