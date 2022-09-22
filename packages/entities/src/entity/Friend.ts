@@ -1,24 +1,8 @@
-import {
-  Entity,
-  BaseEntity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Entity, Column } from "typeorm";
 import BasicColumns from "./BasicColumns";
 
 @Entity()
-class Frined extends BaseEntity implements BasicColumns {
-  @PrimaryGeneratedColumn()
-  id!: string;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-
+class Friend extends BasicColumns {
   @Column()
   userId!: string;
 
@@ -29,4 +13,4 @@ class Frined extends BaseEntity implements BasicColumns {
   status!: number; // 1=Friend, 2=Pending
 }
 
-export default Frined;
+export default Friend;

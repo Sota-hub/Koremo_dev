@@ -8,7 +8,7 @@ const Index: PageFC = (props) => {
   console.log(router);
   console.log(currentUser);
 
-  return <></>;
+  return <p>index page</p>;
 };
 
 export const getStaticProps = titleSSG("Development Trial Page");

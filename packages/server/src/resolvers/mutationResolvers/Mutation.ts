@@ -5,7 +5,7 @@ import localLogin from "./localLogin";
 
 const Mutation: MutationResolvers = {
   localSignup,
-  localLogin
+  localLogin,
 };
 
 export default Mutation;

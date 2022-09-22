@@ -6,7 +6,7 @@ import resolvers from "./resolvers/index";
 import dotenv from "dotenv";
 import dataSource from "./_dataSource";
 import passport from "./passportConfig";
-import apolloContext from "./apolloContext";
+// import apolloContext from "./apolloContext";
 
 dotenv.config();
 
@@ -44,7 +44,8 @@ const port = process.env.SERVER_PORT;
     typeDefs: await typeDefs,
     resolvers,
     context: ({ req, res }) => {
-      return apolloContext(req, res);
+      return { req, res };
+      // return apolloContext(req, res);
     },
     csrfPrevention: true,
     cache: "bounded",

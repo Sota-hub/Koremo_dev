@@ -45,7 +45,7 @@ const LoginOrg: FC = (props) => {
           variables: {
             input: {
               email,
-              password
+              password,
             },
           },
         });

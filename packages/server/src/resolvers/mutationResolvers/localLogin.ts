@@ -12,7 +12,6 @@ const localLogin: MutationResolvers["localLogin"] = (_, args) => {
     lastAccessedAt: new Date(),
   };
   return user;
-  
-}
+};
 
 export default localLogin;

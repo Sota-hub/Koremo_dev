@@ -1,35 +1,44 @@
 import React, { FC, useState, useCallback } from "react";
+import { Router } from "next/router";
 import RemindCheckbox from "../../molecules/RemindCheckbox";
 import Button from "../../molecules/Button";
 import Input from "../../atoms/Input";
 import Separator from "../../atoms/Separator";
 import ErrorMessage from "../../atoms/ErrorMessage";
 import styles from "./styles.module.css";
+import { LocalSignupInput } from "@koremo/graphql-client";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
 import { useLocalSignupMutation } from "@koremo/graphql-client";
 
-const SignupOrg: FC = (props) => {
+interface SignupOrgProps {
+  router: Router;
+}
+
+const SignupOrg: FC<SignupOrgProps> = (props) => {
+  const { router } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPass, setConfPass] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confPassError, setConfPassError] = useState(false);
+  const [signupErrorMessage, setSignupErrorMessage] = useState("");
 
   // useLocalSignupMutation returns Apollo.useMutation(LocalSignupDocument, options), as in, const [localSignupFunction, {data, loading, error}] = Apollo.useMutation(LocalSignupDocument, options)
   const [localSignupFunction] = useLocalSignupMutation();
 
-  const validation = (email: string, password: string, confPass: string) => {
-    const emailTest = emailExpression.test(email);
-    const passwordTest = passwordExpression.test(password);
-    const confPassTest = password === confPass;
+  const validation = (input: LocalSignupInput) => {
+    const emailTest = emailExpression.test(input.email);
+    const passwordTest = passwordExpression.test(input.password);
+    const confPassTest = input.password === input.confPass;
 
     if (emailTest && passwordTest && confPassTest) {
       setEmailError(false);
       setPasswordError(false);
       setConfPassError(false);
+      setSignupErrorMessage("");
       return true;
     }
 
@@ -46,7 +55,7 @@ const SignupOrg: FC = (props) => {
   };
 
   const localSignupRequest = async () => {
-    if (!validation(email, password, confPass)) {
+    if (!validation({ email, password, confPass })) {
       return;
     } else {
       try {
@@ -59,9 +68,12 @@ const SignupOrg: FC = (props) => {
             },
           },
         });
-        console.log("=== Signed up! ===", data);
+        console.log(data);
+        router.push("/");
       } catch (e) {
-        console.log("=== Error occurred... ===", e);
+        const error = e as Error;
+        console.log(error);
+        setSignupErrorMessage(error.message);
       }
     }
   };
@@ -98,6 +110,7 @@ const SignupOrg: FC = (props) => {
             textColor={TextColor.White}
             onClick={localSignupRequest}
           />
+          {signupErrorMessage && <ErrorMessage message={signupErrorMessage} />}
         </div>
         <div>
           <Separator vertical={true} />

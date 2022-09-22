@@ -31,6 +31,7 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
+    "@koremo/common-types": "^0.0.0",
     "@koremo/constants": "^0.0.0",
     "@koremo/entities": "^0.0.0",
     "@koremo/graphql": "^0.0.0",

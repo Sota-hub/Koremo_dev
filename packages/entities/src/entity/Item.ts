@@ -1,24 +1,8 @@
-import {
-  Entity,
-  BaseEntity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Entity, Column } from "typeorm";
 import BasicColumns from "./BasicColumns";
 
 @Entity()
-class Item extends BaseEntity implements BasicColumns {
-  @PrimaryGeneratedColumn()
-  id!: string;
-
-  @CreateDateColumn()
-  createdAt!: Date;
-
-  @UpdateDateColumn()
-  updatedAt!: Date;
-
+class Item extends BasicColumns {
   @Column()
   name!: string;
 
