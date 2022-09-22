@@ -1,0 +1,7 @@
+.message {
+  width: 80%;
+  margin: 0 auto;
+  display: block;
+  color: #ff3333;
+  transform: translateY(-15px);
+}

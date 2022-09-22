@@ -3,6 +3,7 @@ import RemindCheckbox from "../../molecules/RemindCheckbox";
 import Button from "../../molecules/Button";
 import Input from "../../atoms/Input";
 import Separator from "../../atoms/Separator";
+import ErrorMessage from "../../atoms/ErrorMessage";
 import styles from "./styles.module.css";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
@@ -29,6 +30,9 @@ const SignupOrg: FC = (props) => {
     const confPassTest = password === confPass;
 
     if (emailTest && passwordTest && confPassTest) {
+      setEmailError(false);
+      setPasswordError(false);
+      setConfPassError(false);
       return true;
     }
 
@@ -76,16 +80,19 @@ const SignupOrg: FC = (props) => {
               placeholder="Email"
               onChange={useCallback((v: string) => setEmail(v), [])}
             />
+            {emailError && <ErrorMessage message="Invalid email address" />}
             <Input
               type="password"
               placeholder="Password"
               onChange={useCallback((v: string) => setPassword(v), [])}
             />
+            {passwordError && <ErrorMessage message="Invalid password" />}
             <Input
               type="password"
               placeholder="Confirm Password"
               onChange={useCallback((v: string) => setConfPass(v), [])}
             />
+            {confPassError && <ErrorMessage message="Doesn't match" />}
           </form>
           <RemindCheckbox />
           <Button
