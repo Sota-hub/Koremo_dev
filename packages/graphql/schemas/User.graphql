@@ -8,3 +8,9 @@ type User implements Basic {
   profileImageUrl: String
   lastAccessedAt: Date!
 }
+
+input LocalSignupInput {
+  email: String!
+  password: String!
+  confPass: String!
+}

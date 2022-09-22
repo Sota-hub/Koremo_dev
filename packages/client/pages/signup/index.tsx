@@ -2,7 +2,7 @@ import React from "react";
 import { PageFC } from "../../types";
 import titleSSG from "../../helpers/functions/titleSSG";
 import SignupOrg from "../../organisms/SignupOrg";
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
 const Signup: PageFC = (props) => {
   const { router, currentUser } = props;

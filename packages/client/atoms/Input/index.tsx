@@ -11,7 +11,7 @@ interface InputProps {
 const Input: FC<InputProps> = (props) => {
   const { type, placeholder, id, onChange } = props;
 
-  if (!!onChange) {
+  if (onChange) {
     return (
       <input
         type={type}

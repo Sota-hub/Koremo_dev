@@ -11,7 +11,7 @@ import apolloContext from "./apolloContext";
 dotenv.config();
 
 const secret = process.env.SESSION_SECRET as string;
-const port = process.env.PORT;
+const port = process.env.SERVER_PORT;
 
 (async () => {
   // connect to the database when this app is up

@@ -30,6 +30,22 @@ export type Friend = {
   profileImageUrl?: Maybe<Scalars['String']>;
 };
 
+export type LocalSignupInput = {
+  confPass: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  localSignup?: Maybe<User>;
+};
+
+
+export type MutationLocalSignupArgs = {
+  input: LocalSignupInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
@@ -51,6 +67,13 @@ export type User = Basic & {
   updatedAt: Scalars['Date'];
 };
 
+export type LocalSignupMutationVariables = Exact<{
+  input: LocalSignupInput;
+}>;
+
+
+export type LocalSignupMutation = { __typename?: 'Mutation', localSignup?: { __typename?: 'User', id: string, createdAt: Date, updatedAt: Date, name: string, email: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null };
+
 export type FriendsQueryVariables = Exact<{
   userId: Scalars['ID'];
 }>;
@@ -59,6 +82,45 @@ export type FriendsQueryVariables = Exact<{
 export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null> };
 
 
+export const LocalSignupDocument = gql`
+    mutation localSignup($input: LocalSignupInput!) {
+  localSignup(input: $input) {
+    id
+    createdAt
+    updatedAt
+    name
+    email
+    profileImageUrl
+    lastAccessedAt
+  }
+}
+    `;
+export type LocalSignupMutationFn = Apollo.MutationFunction<LocalSignupMutation, LocalSignupMutationVariables>;
+
+/**
+ * __useLocalSignupMutation__
+ *
+ * To run a mutation, you first call `useLocalSignupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLocalSignupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [localSignupMutation, { data, loading, error }] = useLocalSignupMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useLocalSignupMutation(baseOptions?: Apollo.MutationHookOptions<LocalSignupMutation, LocalSignupMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LocalSignupMutation, LocalSignupMutationVariables>(LocalSignupDocument, options);
+      }
+export type LocalSignupMutationHookResult = ReturnType<typeof useLocalSignupMutation>;
+export type LocalSignupMutationResult = Apollo.MutationResult<LocalSignupMutation>;
+export type LocalSignupMutationOptions = Apollo.BaseMutationOptions<LocalSignupMutation, LocalSignupMutationVariables>;
 export const FriendsDocument = gql`
     query friends($userId: ID!) {
   friends(userId: $userId) {

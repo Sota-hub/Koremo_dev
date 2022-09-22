@@ -11,7 +11,7 @@ const host = process.env.HOST;
 const username = process.env.USERNAME;
 const password = process.env.PASSWORD;
 const database = process.env.DATABASE;
-const port  = Number(process.env.PORT);
+const port = Number(process.env.PORT);
 
 const dataSource = new DataSource({
   type: "mysql",

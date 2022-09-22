@@ -29,6 +29,22 @@ export type Friend = {
   profileImageUrl?: Maybe<Scalars['String']>;
 };
 
+export type LocalSignupInput = {
+  confPass: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  localSignup?: Maybe<User>;
+};
+
+
+export type MutationLocalSignupArgs = {
+  input: LocalSignupInput;
+};
+
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
@@ -124,6 +140,8 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  LocalSignupInput: LocalSignupInput;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<User>;
@@ -136,6 +154,8 @@ export type ResolversParentTypes = {
   Date: Scalars['Date'];
   Friend: Friend;
   ID: Scalars['ID'];
+  LocalSignupInput: LocalSignupInput;
+  Mutation: {};
   Query: {};
   String: Scalars['String'];
   User: User;
@@ -160,6 +180,10 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  localSignup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLocalSignupArgs, 'input'>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['Friend']>>, ParentType, ContextType, RequireFields<QueryFriendsArgs, 'userId'>>;
 };
@@ -179,6 +203,7 @@ export type Resolvers<ContextType = any> = {
   Basic?: BasicResolvers<ContextType>;
   Date?: GraphQLScalarType;
   Friend?: FriendResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

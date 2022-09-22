@@ -6,9 +6,11 @@ interface SeparatorProps {
 }
 
 const Separator: FC<SeparatorProps> = (props) => {
-  const {vertical=false} = props;
+  const { vertical = false } = props;
 
-  return <hr className={`${styles.separator} ${vertical && styles.vertical}`} />;
+  return (
+    <hr className={`${styles.separator} ${vertical && styles.vertical}`} />
+  );
 };
 
 export default Separator;

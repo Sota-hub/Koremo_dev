@@ -6,6 +6,7 @@ import Separator from "../../atoms/Separator";
 import styles from "./styles.module.css";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
+import { useLocalSignupMutation } from "@koremo/graphql-client";
 
 const emailExpression =
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; // eslint-disable-line
@@ -19,25 +20,48 @@ const SignupOrg: FC = (props) => {
   const [passwordError, setPasswordError] = useState(false);
   const [confPassError, setConfPassError] = useState(false);
 
-  const validateEmail = (email: string) => {
-    if (emailExpression.test(email)) {
-      setEmailError(false);
-    } else {
+  // useLocalSignupMutation returns Apollo.useMutation(LocalSignupDocument, options), as in, const [localSignupFunction, {data, loading, error}] = Apollo.useMutation(LocalSignupDocument, options)
+  const [localSignupFunction] = useLocalSignupMutation();
+
+  const validation = (email: string, password: string, confPass: string) => {
+    const emailTest = emailExpression.test(email);
+    const passwordTest = passwordExpression.test(password);
+    const confPassTest = password === confPass;
+
+    if (emailTest && passwordTest && confPassTest) {
+      return true;
+    }
+
+    if (!emailTest) {
       setEmailError(true);
     }
-  };
-  const validatePassword = (password: string) => {
-    if (passwordExpression.test(password)) {
-      setPasswordError(false);
-    } else {
+    if (!passwordTest) {
       setPasswordError(true);
     }
-  };
-  const validateConfPass = (confPass: string) => {
-    if (password === confPass) {
-      setConfPassError(false);
-    } else {
+    if (!confPassTest) {
       setConfPassError(true);
+    }
+    return false;
+  };
+
+  const localSignupRequest = async () => {
+    if (!validation(email, password, confPass)) {
+      return;
+    } else {
+      try {
+        const data = await localSignupFunction({
+          variables: {
+            input: {
+              email,
+              password,
+              confPass,
+            },
+          },
+        });
+        console.log("=== Signed up! ===", data);
+      } catch (e) {
+        console.log("=== Error occurred... ===", e);
+      }
     }
   };
 
@@ -51,30 +75,28 @@ const SignupOrg: FC = (props) => {
               type="email"
               placeholder="Email"
               onChange={useCallback((v: string) => setEmail(v), [])}
-              />
+            />
             <Input
               type="password"
               placeholder="Password"
               onChange={useCallback((v: string) => setPassword(v), [])}
-              />
+            />
             <Input
               type="password"
               placeholder="Confirm Password"
               onChange={useCallback((v: string) => setConfPass(v), [])}
-              />
+            />
           </form>
           <RemindCheckbox />
           <Button
             bgColor={BgColor.Blue}
             text="SIGN UP"
             textColor={TextColor.White}
-            onClick={() => {
-              console.log(email, password, confPass);
-            }}
-            />
+            onClick={localSignupRequest}
+          />
         </div>
         <div>
-          <Separator vertical={true}/>
+          <Separator vertical={true} />
         </div>
         <div className={styles.flexItem1}>
           <Button
@@ -86,8 +108,8 @@ const SignupOrg: FC = (props) => {
             onClick={() => {
               console.log("google o auth");
             }}
-            />
-          </div>
+          />
+        </div>
       </div>
     </>
   );

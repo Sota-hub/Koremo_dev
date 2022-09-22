@@ -3,7 +3,7 @@ import { QueryResolvers } from "@koremo/graphql-resolvers";
 import friends from "./friends";
 
 const Query: QueryResolvers = {
-  friends
+  friends,
 };
 
 export default Query;
