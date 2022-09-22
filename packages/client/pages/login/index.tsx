@@ -1,19 +1,19 @@
 import React from "react";
 import { PageFC } from "../../types";
 import titleSSG from "../../helpers/functions/titleSSG";
-import SignupOrg from "../../organisms/SignupOrg";
+import LoginOrg from "../../organisms/LoginOrg";
 import styles from "./styles.module.css";
 
-const Signup: PageFC = (props) => {
+const Login: PageFC = (props) => {
   // const { router, currentUser } = props;
 
   return (
     <div className={styles.container}>
-      <SignupOrg />
+      <LoginOrg />
     </div>
   );
 };
 
-export const getStaticProps = titleSSG("Sign up");
+export const getStaticProps = titleSSG("Login");
 
-export default Signup;
+export default Login;
