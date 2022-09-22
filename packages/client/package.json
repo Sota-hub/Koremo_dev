@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@koremo/constants": "^0.0.0",
     "@koremo/enums": "^0.0.0",
     "@koremo/graphql-client": "^0.0.0",
     "next": "12.1.6",

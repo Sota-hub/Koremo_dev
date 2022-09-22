@@ -5,13 +5,10 @@ import Input from "../../atoms/Input";
 import Separator from "../../atoms/Separator";
 import ErrorMessage from "../../atoms/ErrorMessage";
 import styles from "./styles.module.css";
+import { emailExpression, passwordExpression } from "@koremo/constants";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
 import { useLocalSignupMutation } from "@koremo/graphql-client";
-
-const emailExpression =
-  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i; // eslint-disable-line
-const passwordExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/; //eslint-disable-line
 
 const SignupOrg: FC = (props) => {
   const [email, setEmail] = useState("");
