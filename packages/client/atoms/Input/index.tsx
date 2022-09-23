@@ -3,18 +3,20 @@ import styles from "./styles.module.css";
 
 interface InputProps {
   type: string;
+  name: string;
   placeholder: string;
   id?: string;
   onChange?: (v: string) => void;
 }
 
 const Input: FC<InputProps> = (props) => {
-  const { type, placeholder, id, onChange } = props;
+  const { type, name, placeholder, id, onChange } = props;
 
   if (onChange) {
     return (
       <input
         type={type}
+        name={name}
         placeholder={placeholder}
         className={styles.input}
         id={id}
@@ -25,6 +27,7 @@ const Input: FC<InputProps> = (props) => {
   return (
     <input
       type={type}
+      name={name}
       placeholder={placeholder}
       className={styles.input}
       id={id}

@@ -1,4 +1,5 @@
 import React, { FC, useState, useCallback } from "react";
+import { Router } from "next/router";
 import RemindCheckbox from "../../molecules/RemindCheckbox";
 import Button from "../../molecules/Button";
 import Input from "../../atoms/Input";
@@ -15,6 +16,7 @@ const LoginOrg: FC = (props) => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [localLoginFunction] = useLocalLoginMutation();
 
   const validation = (email: string, password: string) => {
@@ -49,9 +51,11 @@ const LoginOrg: FC = (props) => {
             },
           },
         });
-        console.log("=== Logged in! ===", data);
+        console.log(data);
       } catch (e) {
-        console.log("=== Error occurred... ===", e);
+        const error = e as Error;
+        console.log(error);
+        setLoginErrorMessage(error.message);
       }
     }
   };
@@ -64,12 +68,14 @@ const LoginOrg: FC = (props) => {
           <form className={styles.form}>
             <Input
               type="email"
+              name="email"
               placeholder="Email"
               onChange={useCallback((v: string) => setEmail(v), [])}
             />
             {emailError && <ErrorMessage message="Invalid email address" />}
             <Input
               type="password"
+              name="password"
               placeholder="Password"
               onChange={useCallback((v: string) => setPassword(v), [])}
             />
@@ -82,6 +88,7 @@ const LoginOrg: FC = (props) => {
             textColor={TextColor.White}
             onClick={localLoginRequest}
           />
+          {loginErrorMessage && <ErrorMessage message={loginErrorMessage} />}
         </div>
         <div>
           <Separator vertical={true} />

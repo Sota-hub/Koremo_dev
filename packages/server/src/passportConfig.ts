@@ -33,10 +33,22 @@ passport.use(
       passwordField: "password",
     },
     async (email, password, done) => {
-      const user = await User.findOne({ where: { email } });
-      if (!user || !bcrypt.compareSync(password, user.passwordHash))
-        return done(null, false);
-      done(null, user);
+      console.log(email, password);
+      
+      try {
+        const user = await User.findOne({ where: { email } });
+        if(!user) {
+          return done(null, false, {message: "Email address is invalid"});
+        }
+        if (!bcrypt.compareSync(password, user.passwordHash)){
+          return done(null, false, {message: "Password is invalid"});
+        }
+        done(null, user);
+      } catch(e) {
+        const error = e as Error;
+        console.log(error);
+        return done(null, false, {message: error.message})
+      }
     }
   )
 );

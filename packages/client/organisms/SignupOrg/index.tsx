@@ -86,18 +86,21 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
           <form className={styles.form}>
             <Input
               type="email"
+              name="email"
               placeholder="Email"
               onChange={useCallback((v: string) => setEmail(v), [])}
             />
             {emailError && <ErrorMessage message="Invalid email address" />}
             <Input
               type="password"
+              name="password"
               placeholder="Password"
               onChange={useCallback((v: string) => setPassword(v), [])}
             />
             {passwordError && <ErrorMessage message="Invalid password" />}
             <Input
               type="password"
+              name="passConf"
               placeholder="Confirm Password"
               onChange={useCallback((v: string) => setConfPass(v), [])}
             />
