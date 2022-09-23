@@ -6,7 +6,7 @@ import resolvers from "./resolvers/index";
 import dotenv from "dotenv";
 import dataSource from "./_dataSource";
 import passport from "./passportConfig";
-// import apolloContext from "./apolloContext";
+import { buildContext } from "graphql-passport";
 
 dotenv.config();
 
@@ -43,10 +43,7 @@ const port = process.env.SERVER_PORT;
   const server = new ApolloServer({
     typeDefs: await typeDefs,
     resolvers,
-    context: ({ req, res }) => {
-      return { req, res };
-      // return apolloContext(req, res);
-    },
+    context: ({ req, res }) => buildContext({ req, res }),
     csrfPrevention: true,
     cache: "bounded",
   });

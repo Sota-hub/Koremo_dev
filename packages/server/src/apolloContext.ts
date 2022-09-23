@@ -39,18 +39,6 @@
 //     return currentUser;
 //   }
 
-
-
-
-
-
-
-
-
-
-
-
-
 //   const loginLocal = () => {
 //     return (
 //       passport.authenticate("local", {

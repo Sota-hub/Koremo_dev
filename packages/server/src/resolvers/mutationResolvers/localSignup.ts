@@ -6,7 +6,11 @@ import { User } from "@koremo/entities";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import bcrypt from "bcrypt";
 
-const localSignup: MutationResolvers["localSignup"] = async (_, args) => {
+const localSignup: MutationResolvers["localSignup"] = async (
+  _,
+  args,
+  context
+) => {
   const { email, password, confPass } = args.input;
 
   if (!email || !password) {
@@ -47,6 +51,8 @@ const localSignup: MutationResolvers["localSignup"] = async (_, args) => {
     profileImageUrl: savedUser.profileImageUrl,
     lastAccessedAt: savedUser.lastAccessedAt,
   };
+
+  context.login(savedUser);
   return currentUser;
 };
 

@@ -1,6 +1,6 @@
 // パスポートの設定をここでする
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
+import { GraphQLLocalStrategy } from "graphql-passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { User as CurrentUser } from "@koremo/graphql-resolvers";
 import { User } from "@koremo/entities";
@@ -21,36 +21,38 @@ passport.serializeUser((user: any, done) => {
 
 passport.deserializeUser(async (id: string, done) => {
   // ここで使うidはreq.session.passport.user.id
-  // serializeUserで取得したidでユーザー検索(セッションあったらここ走るかもpassport.session(）はこれを走らせる)
-  const user = await User.findOne({ where: { id } });
-  done(null, user); //これがreq.userになる done(第一引数はerr, 第二引数はuser)だから
+  // serializeUserでsessionに保存したidでユーザー検索(セッションあったらここ走るかもpassport.session(）はこれを走らせる)
+  try {
+    const user = await User.findOne({ where: { id } });
+    if (!user) {
+      done(null, false);
+    } else {
+      done(null, user); //これがreq.userになる done(第一引数はerr, 第二引数はuser)だから
+    }
+  } catch (e) {
+    const error = e as Error;
+    done(error);
+  }
 });
 
 passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password",
-    },
-    async (email, password, done) => {
-      console.log(email, password);
-      
-      try {
-        const user = await User.findOne({ where: { email } });
-        if(!user) {
-          return done(null, false, {message: "Email address is invalid"});
-        }
-        if (!bcrypt.compareSync(password, user.passwordHash)){
-          return done(null, false, {message: "Password is invalid"});
-        }
-        done(null, user);
-      } catch(e) {
-        const error = e as Error;
-        console.log(error);
-        return done(null, false, {message: error.message})
+  new GraphQLLocalStrategy(async (email, password, done) => {
+    const _email = email as string;
+    const _password = password as string;
+    try {
+      const user = await User.findOne({ where: { email: _email } });
+      if (!user) {
+        return done("Email address is invalid", false);
       }
+      if (!bcrypt.compareSync(_password, user.passwordHash.toString())) {
+        return done("Password is invalid", false);
+      }
+      done(null, user);
+    } catch (e) {
+      const error = e as Error;
+      return done(error.message, false);
     }
-  )
+  })
 );
 
 passport.use(

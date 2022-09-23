@@ -26,6 +26,7 @@ const LoginOrg: FC = (props) => {
     if (emailTest && passwordTest) {
       setEmailError(false);
       setPasswordError(false);
+      setLoginErrorMessage("");
       return true;
     }
 
