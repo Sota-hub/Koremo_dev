@@ -32,19 +32,21 @@ export type Friend = {
 
 export type LocalLoginInput = {
   email: Scalars['String'];
+  isChecked: Scalars['Boolean'];
   password: Scalars['String'];
 };
 
 export type LocalSignupInput = {
   confPass: Scalars['String'];
   email: Scalars['String'];
+  isChecked: Scalars['Boolean'];
   password: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  localLogin?: Maybe<User>;
-  localSignup?: Maybe<User>;
+  localLogin: Scalars['Boolean'];
+  localSignup: Scalars['Boolean'];
 };
 
 
@@ -83,14 +85,14 @@ export type LocalLoginMutationVariables = Exact<{
 }>;
 
 
-export type LocalLoginMutation = { __typename?: 'Mutation', localLogin?: { __typename?: 'User', id: string, createdAt: Date, updatedAt: Date, name: string, email: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null };
+export type LocalLoginMutation = { __typename?: 'Mutation', localLogin: boolean };
 
 export type LocalSignupMutationVariables = Exact<{
   input: LocalSignupInput;
 }>;
 
 
-export type LocalSignupMutation = { __typename?: 'Mutation', localSignup?: { __typename?: 'User', id: string, createdAt: Date, updatedAt: Date, name: string, email: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null };
+export type LocalSignupMutation = { __typename?: 'Mutation', localSignup: boolean };
 
 export type FriendsQueryVariables = Exact<{
   userId: Scalars['ID'];
@@ -102,15 +104,7 @@ export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?:
 
 export const LocalLoginDocument = gql`
     mutation localLogin($input: LocalLoginInput!) {
-  localLogin(input: $input) {
-    id
-    createdAt
-    updatedAt
-    name
-    email
-    profileImageUrl
-    lastAccessedAt
-  }
+  localLogin(input: $input)
 }
     `;
 export type LocalLoginMutationFn = Apollo.MutationFunction<LocalLoginMutation, LocalLoginMutationVariables>;
@@ -141,15 +135,7 @@ export type LocalLoginMutationResult = Apollo.MutationResult<LocalLoginMutation>
 export type LocalLoginMutationOptions = Apollo.BaseMutationOptions<LocalLoginMutation, LocalLoginMutationVariables>;
 export const LocalSignupDocument = gql`
     mutation localSignup($input: LocalSignupInput!) {
-  localSignup(input: $input) {
-    id
-    createdAt
-    updatedAt
-    name
-    email
-    profileImageUrl
-    lastAccessedAt
-  }
+  localSignup(input: $input)
 }
     `;
 export type LocalSignupMutationFn = Apollo.MutationFunction<LocalSignupMutation, LocalSignupMutationVariables>;

@@ -14,14 +14,18 @@ const clientSecret = process.env.CLIENT_SECRET as string;
 const callbackURL = process.env.CALLBACK_URL as string;
 
 passport.serializeUser((user: any, done) => {
+  console.log("Serialize executed");
+  
   // TODO: fix any type ( can't use User type from entities)
-  // req.session.passport.user = {id: user.id}みたいに登録する(app.use(session())が走ったときここ呼ばれる)
+  // req.session.passport.user = {id: user.id}みたいに登録するcontext.login()が走ったときここ呼ばれる)
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id: string, done) => {
+  console.log("Deserialize executed");
+
   // ここで使うidはreq.session.passport.user.id
-  // serializeUserでsessionに保存したidでユーザー検索(セッションあったらここ走るかもpassport.session(）はこれを走らせる)
+  // serializeUserでsessionに保存したidでユーザー検索(passport.session(）はこれを走らせる)
   try {
     const user = await User.findOne({ where: { id } });
     if (!user) {

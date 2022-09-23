@@ -21,6 +21,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPass, setConfPass] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [confPassError, setConfPassError] = useState(false);
@@ -29,10 +30,10 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
   // useLocalSignupMutation returns Apollo.useMutation(LocalSignupDocument, options), as in, const [localSignupFunction, {data, loading, error}] = Apollo.useMutation(LocalSignupDocument, options)
   const [localSignupFunction] = useLocalSignupMutation();
 
-  const validation = (input: LocalSignupInput) => {
-    const emailTest = emailExpression.test(input.email);
-    const passwordTest = passwordExpression.test(input.password);
-    const confPassTest = input.password === input.confPass;
+  const validation = (email: string, password: string, confPass: string) => {
+    const emailTest = emailExpression.test(email);
+    const passwordTest = passwordExpression.test(password);
+    const confPassTest = password === confPass;
 
     if (emailTest && passwordTest && confPassTest) {
       setEmailError(false);
@@ -55,7 +56,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
   };
 
   const localSignupRequest = async () => {
-    if (!validation({ email, password, confPass })) {
+    if (!validation(email, password, confPass)) {
       return;
     } else {
       try {
@@ -65,6 +66,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
               email,
               password,
               confPass,
+              isChecked
             },
           },
         });
@@ -106,7 +108,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
             />
             {confPassError && <ErrorMessage message="Doesn't match" />}
           </form>
-          <RemindCheckbox />
+          <RemindCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
           <Button
             bgColor={BgColor.Blue}
             text="SIGN UP"

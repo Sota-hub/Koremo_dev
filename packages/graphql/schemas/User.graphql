@@ -13,9 +13,11 @@ input LocalSignupInput {
   email: String!
   password: String!
   confPass: String!
+  isChecked: Boolean!
 }
 
 input LocalLoginInput {
   email: String!
   password: String!
+  isChecked: Boolean!
 }

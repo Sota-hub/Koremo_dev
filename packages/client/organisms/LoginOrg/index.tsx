@@ -14,6 +14,7 @@ import { useLocalLoginMutation } from "@koremo/graphql-client";
 const LoginOrg: FC = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
@@ -49,6 +50,7 @@ const LoginOrg: FC = (props) => {
             input: {
               email,
               password,
+              isChecked
             },
           },
         });
@@ -82,7 +84,7 @@ const LoginOrg: FC = (props) => {
             />
             {passwordError && <ErrorMessage message="Invalid password" />}
           </form>
-          <RemindCheckbox />
+          <RemindCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)}/>
           <Button
             bgColor={BgColor.Blue}
             text="LOGIN"

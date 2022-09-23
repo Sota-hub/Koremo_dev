@@ -1,4 +1,4 @@
 type Mutation {
-  localSignup(input: LocalSignupInput!): User
-  localLogin(input: LocalLoginInput!): User
+  localSignup(input: LocalSignupInput!): Boolean!
+  localLogin(input: LocalLoginInput!): Boolean!
 }

@@ -1,7 +1,4 @@
-import {
-  MutationResolvers,
-  User as CurrentUser,
-} from "@koremo/graphql-resolvers";
+import {MutationResolvers} from "@koremo/graphql-resolvers";
 import { User } from "@koremo/entities";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import bcrypt from "bcrypt";
@@ -11,7 +8,7 @@ const localSignup: MutationResolvers["localSignup"] = async (
   args,
   context
 ) => {
-  const { email, password, confPass } = args.input;
+  const { email, password, confPass, isChecked } = args.input;
 
   if (!email || !password) {
     throw new Error("Email and password are required");
@@ -26,34 +23,27 @@ const localSignup: MutationResolvers["localSignup"] = async (
     throw new Error("Password and confPass Don't match");
   }
 
-  const user = await User.findOne({ where: { email } });
-  if (user) {
+  const registeredUser = await User.findOne({ where: { email } });
+  if (registeredUser) {
     throw new Error("Entered Email has already been registered");
   }
 
   const salt = await bcrypt.genSalt(10);
   const passwordHash = bcrypt.hashSync(password, salt);
 
-  const newUser = new User();
-  newUser.name = "No name";
-  newUser.email = email;
-  newUser.lastAccessedAt = new Date();
-  newUser.passwordHash = passwordHash;
+  const user = new User();
+  user.name = "No name";
+  user.email = email;
+  user.lastAccessedAt = new Date();
+  user.passwordHash = passwordHash;
 
-  const savedUser = await newUser.save();
+  await user.save();
 
-  const currentUser: CurrentUser = {
-    id: savedUser.id,
-    createdAt: savedUser.createdAt,
-    updatedAt: savedUser.updatedAt,
-    name: savedUser.name,
-    email: savedUser.email,
-    profileImageUrl: savedUser.profileImageUrl,
-    lastAccessedAt: savedUser.lastAccessedAt,
-  };
-
-  context.login(savedUser);
-  return currentUser;
+  if (isChecked) {
+    context.login(user);
+  }
+  
+  return true;
 };
 
 export default localSignup;

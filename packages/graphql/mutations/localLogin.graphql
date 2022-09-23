@@ -1,11 +1,3 @@
 mutation localLogin($input: LocalLoginInput!) {
-  localLogin(input: $input) {
-    id
-    createdAt
-    updatedAt
-    name
-    email
-    profileImageUrl
-    lastAccessedAt
-  }
+  localLogin(input: $input)
 }

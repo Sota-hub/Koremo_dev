@@ -31,19 +31,21 @@ export type Friend = {
 
 export type LocalLoginInput = {
   email: Scalars['String'];
+  isChecked: Scalars['Boolean'];
   password: Scalars['String'];
 };
 
 export type LocalSignupInput = {
   confPass: Scalars['String'];
   email: Scalars['String'];
+  isChecked: Scalars['Boolean'];
   password: Scalars['String'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
-  localLogin?: Maybe<User>;
-  localSignup?: Maybe<User>;
+  localLogin: Scalars['Boolean'];
+  localSignup: Scalars['Boolean'];
 };
 
 
@@ -194,8 +196,8 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  localLogin?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLocalLoginArgs, 'input'>>;
-  localSignup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationLocalSignupArgs, 'input'>>;
+  localLogin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLocalLoginArgs, 'input'>>;
+  localSignup?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLocalSignupArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
