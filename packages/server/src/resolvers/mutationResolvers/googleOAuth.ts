@@ -1,16 +1,14 @@
 import { MutationResolvers } from "@koremo/graphql-resolvers";
-import passport from "passport";
+// import passport from "passport";
 
 const googleOAuth: MutationResolvers["googleOAuth"] = async (
   _,
   __,
   context
 ) => {
-  console.log("Run googleOAuth Mutation");
+  context.authenticate("google", { scope: ["profile", "email"] });
 
-  passport.authenticate("google", { scope: ["profile", "email"] });
-
-  console.log(context.req);
+  // console.log(context.req);
 
   //   const googleOAuthCallback = () => {
   //     passport.authenticate("google", { failureRedirect: "/login" }),

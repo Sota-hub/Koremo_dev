@@ -66,11 +66,7 @@ passport.use(
       clientSecret,
       callbackURL,
     },
-    async (accessToken, refreshToken, profile, done) => {
-      console.log("accessToken", accessToken);
-      console.log("refreshToken", refreshToken);
-      console.log("profile", profile);
-
+    async (_, __, profile, done) => {
       const user = await User.findOne({ where: { googleId: profile.id } });
 
       // login
