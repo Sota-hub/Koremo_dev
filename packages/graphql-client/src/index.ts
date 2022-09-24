@@ -45,6 +45,7 @@ export type LocalSignupInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  googleOAuth: Scalars['Boolean'];
   localLogin: Scalars['Boolean'];
   localSignup: Scalars['Boolean'];
 };
@@ -80,6 +81,11 @@ export type User = Basic & {
   updatedAt: Scalars['Date'];
 };
 
+export type GoogleOAuthMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GoogleOAuthMutation = { __typename?: 'Mutation', googleOAuth: boolean };
+
 export type LocalLoginMutationVariables = Exact<{
   input: LocalLoginInput;
 }>;
@@ -102,6 +108,36 @@ export type FriendsQueryVariables = Exact<{
 export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null> };
 
 
+export const GoogleOAuthDocument = gql`
+    mutation googleOAuth {
+  googleOAuth
+}
+    `;
+export type GoogleOAuthMutationFn = Apollo.MutationFunction<GoogleOAuthMutation, GoogleOAuthMutationVariables>;
+
+/**
+ * __useGoogleOAuthMutation__
+ *
+ * To run a mutation, you first call `useGoogleOAuthMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGoogleOAuthMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [googleOAuthMutation, { data, loading, error }] = useGoogleOAuthMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGoogleOAuthMutation(baseOptions?: Apollo.MutationHookOptions<GoogleOAuthMutation, GoogleOAuthMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GoogleOAuthMutation, GoogleOAuthMutationVariables>(GoogleOAuthDocument, options);
+      }
+export type GoogleOAuthMutationHookResult = ReturnType<typeof useGoogleOAuthMutation>;
+export type GoogleOAuthMutationResult = Apollo.MutationResult<GoogleOAuthMutation>;
+export type GoogleOAuthMutationOptions = Apollo.BaseMutationOptions<GoogleOAuthMutation, GoogleOAuthMutationVariables>;
 export const LocalLoginDocument = gql`
     mutation localLogin($input: LocalLoginInput!) {
   localLogin(input: $input)

@@ -1,10 +1,10 @@
 import React, { FC } from "react";
 import styles from "./styles.module.css";
-import {CheckboxProps} from "../../types/checkbox"
+import { CheckboxProps } from "../../types/checkbox";
 
 const Checkbox: FC<CheckboxProps> = (props) => {
   const { checked, onChange } = props;
-  
+
   return (
     <input
       type="checkbox"

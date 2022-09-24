@@ -9,9 +9,17 @@ import styles from "./styles.module.css";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
-import { useLocalLoginMutation } from "@koremo/graphql-client";
+import {
+  useLocalLoginMutation,
+  useGoogleOAuthMutation,
+} from "@koremo/graphql-client";
 
-const LoginOrg: FC = (props) => {
+interface LoginOrgProps {
+  router: Router;
+}
+
+const LoginOrg: FC<LoginOrgProps> = (props) => {
+  const { router } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -19,6 +27,7 @@ const LoginOrg: FC = (props) => {
   const [passwordError, setPasswordError] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [localLoginFunction] = useLocalLoginMutation();
+  const [googleOAuthFunction] = useGoogleOAuthMutation();
 
   const validation = (email: string, password: string) => {
     const emailTest = emailExpression.test(email);
@@ -50,7 +59,7 @@ const LoginOrg: FC = (props) => {
             input: {
               email,
               password,
-              isChecked
+              isChecked,
             },
           },
         });
@@ -61,6 +70,11 @@ const LoginOrg: FC = (props) => {
         setLoginErrorMessage(error.message);
       }
     }
+  };
+
+  const googleOAuthRequest = async () => {
+    const data = await googleOAuthFunction();
+    console.log(data);
   };
 
   return (
@@ -84,7 +98,10 @@ const LoginOrg: FC = (props) => {
             />
             {passwordError && <ErrorMessage message="Invalid password" />}
           </form>
-          <RemindCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)}/>
+          <RemindCheckbox
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
           <Button
             bgColor={BgColor.Blue}
             text="LOGIN"
@@ -103,9 +120,7 @@ const LoginOrg: FC = (props) => {
             alt="google"
             text="Login with Google"
             textColor={TextColor.Black}
-            onClick={() => {
-              console.log("google o auth");
-            }}
+            onClick={googleOAuthRequest}
           />
         </div>
       </div>

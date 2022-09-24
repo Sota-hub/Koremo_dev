@@ -2,10 +2,12 @@
 import { MutationResolvers } from "@koremo/graphql-resolvers";
 import localSignup from "./localSignup";
 import localLogin from "./localLogin";
+import googleOAuth from "./googleOAuth";
 
 const Mutation: MutationResolvers = {
   localSignup,
   localLogin,
+  googleOAuth,
 };
 
 export default Mutation;

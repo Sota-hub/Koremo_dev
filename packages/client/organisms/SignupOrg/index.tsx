@@ -66,7 +66,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
               email,
               password,
               confPass,
-              isChecked
+              isChecked,
             },
           },
         });
@@ -108,7 +108,10 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
             />
             {confPassError && <ErrorMessage message="Doesn't match" />}
           </form>
-          <RemindCheckbox checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
+          <RemindCheckbox
+            checked={isChecked}
+            onChange={() => setIsChecked(!isChecked)}
+          />
           <Button
             bgColor={BgColor.Blue}
             text="SIGN UP"

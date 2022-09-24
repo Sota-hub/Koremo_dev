@@ -5,11 +5,11 @@ import LoginOrg from "../../organisms/LoginOrg";
 import styles from "./styles.module.css";
 
 const Login: PageFC = (props) => {
-  // const { router, currentUser } = props;
+  const { router /*currentUser*/ } = props;
 
   return (
     <div className={styles.container}>
-      <LoginOrg />
+      <LoginOrg router={router} />
     </div>
   );
 };

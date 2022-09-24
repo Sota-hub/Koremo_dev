@@ -19,11 +19,11 @@ const localLogin: MutationResolvers["localLogin"] = async (
     email,
     password,
   });
-  
+
   if (isChecked) {
     context.login(user); // execute passport.serialize
   }
-  
+
   return true;
 };
 

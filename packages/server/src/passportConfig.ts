@@ -15,7 +15,7 @@ const callbackURL = process.env.CALLBACK_URL as string;
 
 passport.serializeUser((user: any, done) => {
   console.log("Serialize executed");
-  
+
   // TODO: fix any type ( can't use User type from entities)
   // req.session.passport.user = {id: user.id}みたいに登録するcontext.login()が走ったときここ呼ばれる)
   done(null, user.id);
@@ -66,8 +66,13 @@ passport.use(
       clientSecret,
       callbackURL,
     },
-    async (_, __, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
+      console.log("accessToken", accessToken);
+      console.log("refreshToken", refreshToken);
+      console.log("profile", profile);
+
       const user = await User.findOne({ where: { googleId: profile.id } });
+
       // login
       if (user) {
         const currentUser: CurrentUser = {
@@ -81,10 +86,12 @@ passport.use(
         };
         done(null, currentUser);
       }
+
       if (!profile.emails) {
         // emailが一個もないのはおかしい
         throw new Error("Something went wrong");
       }
+
       // signup
       if (!user) {
         const newUser = new User();

@@ -1,4 +1,4 @@
-import {MutationResolvers} from "@koremo/graphql-resolvers";
+import { MutationResolvers } from "@koremo/graphql-resolvers";
 import { User } from "@koremo/entities";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import bcrypt from "bcrypt";
@@ -42,7 +42,7 @@ const localSignup: MutationResolvers["localSignup"] = async (
   if (isChecked) {
     context.login(user);
   }
-  
+
   return true;
 };
 

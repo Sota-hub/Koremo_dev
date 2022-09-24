@@ -44,6 +44,7 @@ export type LocalSignupInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  googleOAuth: Scalars['Boolean'];
   localLogin: Scalars['Boolean'];
   localSignup: Scalars['Boolean'];
 };
@@ -196,6 +197,7 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  googleOAuth?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   localLogin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLocalLoginArgs, 'input'>>;
   localSignup?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLocalSignupArgs, 'input'>>;
 };

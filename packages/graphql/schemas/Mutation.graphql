@@ -1,4 +1,5 @@
 type Mutation {
   localSignup(input: LocalSignupInput!): Boolean!
   localLogin(input: LocalLoginInput!): Boolean!
+  googleOAuth: Boolean!
 }
