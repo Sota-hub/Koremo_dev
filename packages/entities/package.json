@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "create_migration": "typeorm migration:create",
-    "run_migration": "typeorm migration:run -d build/_dataSource.js",
+    "run_migration": "typeorm migration:run -d build/data-source.js",
     "lint": "eslint src/ --ext .js,.ts",
     "lint_fix": "eslint src/ --ext .js,.ts && prettier --write src/"
   },

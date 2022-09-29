@@ -1,30 +1,29 @@
 import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import session from "express-session";
+import bodyParser from "body-parser";
+import passport from "passport";
+import dotenv from "dotenv";
+import dataSource from "./data-source";
 import typeDefs from "@koremo/graphql";
 import resolvers from "./resolvers/index";
-import dotenv from "dotenv";
-import dataSource from "./_dataSource";
-import passport from "./passportConfig";
-import { buildContext } from "graphql-passport";
+import routers from "./routers";
+import "./passport-strategy.mw";
 
 dotenv.config();
 
-const secret = process.env.SESSION_SECRET as string;
 const port = process.env.SERVER_PORT;
+const secret = String(process.env.SESSION_SECRET);
 const isProduction = process.env.MODE === "production";
 
 (async () => {
-  // connect to the database when this app is up
   await dataSource
     .initialize()
     .then(() => console.log("Connection Succeeded!"))
-    .catch((err) => console.error("Connection Failed: ", err));
+    .catch((e) => console.error("Connection Failed: ", e));
 
-  // create app
   const app = express();
 
-  // Issue a session
   app.use(
     session({
       secret,
@@ -38,30 +37,22 @@ const isProduction = process.env.MODE === "production";
     })
   );
 
-  app.use("/graphql", (req, _, next) => {
-    console.log(req.session);
-
-    console.log("session", req.session);
-    return next();
-  });
-
-  // initialize passport and deserialize session
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(routers);
 
-  // establish the apollo server
   const server = new ApolloServer({
     typeDefs: await typeDefs,
     resolvers,
-    context: ({ req, res }) => buildContext({ req, res }),
+    // context: () => {},
     csrfPrevention: true,
     cache: "bounded",
   });
 
-  // start the server
   await server.start();
 
-  // apply middleware
   server.applyMiddleware({ app });
 
   app.listen(port, () => {
