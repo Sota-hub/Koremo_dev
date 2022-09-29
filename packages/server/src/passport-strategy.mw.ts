@@ -5,22 +5,22 @@ import { User } from "@koremo/entities";
 
 passport.serializeUser((user: any, done) => {
   // user: interface X extends Express.User didn't work
+  console.log("serializeUser called! id=", user.id);
   done(null, user.id);
 });
 
-passport.deserializeUser(async (userId: string, done) => {
-  console.log("Deserialize executed");
+passport.deserializeUser(async (id: string, done) => {
+  console.log("deserializeUser called! id=", id);
 
   try {
-    const user = await User.findOne({ where: { id: userId } });
+    const user = await User.findOne({ where: { id } });
     if (!user) {
       done(null, false);
     } else {
-      done(null, user); //これがreq.userになる done(第一引数はerr, 第二引数はuser)だから
+      done(null, user);
     }
   } catch (e) {
-    const error = e as Error;
-    done(error);
+    done(e);
   }
 });
 

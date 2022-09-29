@@ -9,13 +9,19 @@ const Index: PageFC = (props) => {
   console.log(currentUser);
 
   return (
-    <form action="http://localhost:80/login" method="post">
-      <label>Email</label>
-      <input type="email" name="email" />
-      <label>Password</label>
-      <input type="password" name="password" />
-      <input type="submit" value="Log in" />
-    </form>
+    <>
+      <form action="http://localhost:80/login" method="post">
+        <label>Email</label>
+        <input type="email" name="email" />
+        <label>Password</label>
+        <input type="password" name="password" />
+        <input type="submit" value="Log in" />
+      </form>
+
+      <form action="http://localhost:80/info" method="get">
+        <input type="submit" value="Get info" />
+      </form>
+    </>
   );
 };
 
