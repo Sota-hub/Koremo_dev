@@ -41,9 +41,9 @@ const isProduction = process.env.MODE === "production";
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.get("info", (req) => {
+  app.get("/info", (req) => {
     console.log("May run deserialize user before");
-    console.log(req.user);
+    console.log("req.user", req.user);
   });
   app.use(routers);
 
