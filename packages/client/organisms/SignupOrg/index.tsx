@@ -13,8 +13,8 @@ interface SignupOrgProps {
   router: Router;
 }
 
-const signupUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/signup`;
-const oauthUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth`;
+const localSignupUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/local/signup`;
+const oauthSignupUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth/signup`;
 
 const SignupOrg: FC<SignupOrgProps> = (props) => {
   const { router } = props;
@@ -52,7 +52,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
       return;
     } else {
       try {
-        const response = await fetch(signupUrl, {
+        const response = await fetch(localSignupUrl, {
           method: "post",
           headers: {
             "content-Type": "application/json",
@@ -117,7 +117,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
         </div>
         <div className={styles.flexItem1}>
           <form
-            action={oauthUrl}
+            action={oauthSignupUrl}
             method="post"
             id="oauth"
             className={styles.form}

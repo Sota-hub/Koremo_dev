@@ -2,9 +2,9 @@ import { Router } from "express";
 import passport from "passport";
 import RequestUser from "../../types/RequestUser";
 
-const loginRouter = Router();
+const localLoginRouter = Router();
 
-loginRouter.post(
+localLoginRouter.post(
   "/login",
   passport.authenticate("local"),
   (req: RequestUser, res) => {
@@ -18,4 +18,4 @@ loginRouter.post(
   }
 );
 
-export default loginRouter;
+export default localLoginRouter;

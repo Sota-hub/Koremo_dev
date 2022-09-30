@@ -3,16 +3,16 @@ import { PageFC } from "../types";
 import titleSSG from "../helpers/functions/titleSSG";
 
 const Index: PageFC = (props) => {
-  const { router, currentUser } = props;
+  // const { router, currentUser } = props;
 
-  console.log(router);
-  console.log(currentUser);
+  // console.log(router);
+  // console.log(currentUser);
 
   return (
     <>
-      <form action="http://localhost:80/info" method="get" id="form2" />
+      <form action="http://localhost:80/oauth/google" method="get" id="form2" />
       <button type="submit" form="form2">
-        info
+        google oauth
       </button>
     </>
   );

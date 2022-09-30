@@ -3,9 +3,9 @@ import { Router } from "express";
 import { User } from "@koremo/entities";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 
-const signupRouter = Router();
+const localSignupRouter = Router();
 
-signupRouter.post("/signup", async (req, res) => {
+localSignupRouter.post("/signup", async (req, res) => {
   const { email, password, confPass } = req.body;
 
   try {
@@ -45,4 +45,4 @@ signupRouter.post("/signup", async (req, res) => {
   }
 });
 
-export default signupRouter;
+export default localSignupRouter;

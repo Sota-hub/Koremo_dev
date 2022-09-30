@@ -1,10 +1,12 @@
 import { Router } from "express";
-import loginRouter from "./local/login";
-import signupRouter from "./local/signup";
+import localLoginRouter from "./local/login";
+import localSignupRouter from "./local/signup";
+import oauthLoginRouter from "./oauth/login";
 
 const routers = Router();
 
-routers.use(loginRouter);
-routers.use(signupRouter);
+routers.use("/local", localLoginRouter);
+routers.use("/local", localSignupRouter);
+routers.use("/oauth", oauthLoginRouter);
 
 export default routers;
