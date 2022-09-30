@@ -14,7 +14,9 @@ import "../styles/global.css";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: createHttpLink({ uri: process.env.NEXT_PUBLIC_SERVER_URL }),
+  link: createHttpLink({
+    uri: `${process.env.NEXT_PUBLIC_SERVER_URL}/graphql`,
+  }),
 });
 
 const App = ({ Component, pageProps, router }: AppProps) => {

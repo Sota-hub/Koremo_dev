@@ -5,32 +5,28 @@ import { BgColor } from "@koremo/enums";
 interface ButtonBaseProps {
   bgColor: number;
   children: React.ReactNode;
+  form?: string;
   onClick?: () => void;
 }
 
 const ButtonBase: FC<ButtonBaseProps> = (props) => {
-  const { bgColor, children, onClick } = props;
+  const { bgColor, children, form, onClick } = props;
 
+  let bgStyle = styles.transparent;
   if (bgColor === BgColor.Blue) {
-    return (
-      <span className={`${styles.button} ${styles.blue}`} onClick={onClick}>
-        {children}
-      </span>
-    );
-  }
-
-  if (bgColor === BgColor.Pink) {
-    return (
-      <span className={`${styles.button} ${styles.pink}`} onClick={onClick}>
-        {children}
-      </span>
-    );
+    bgStyle = styles.blue;
+  } else if (bgColor === BgColor.Pink) {
+    bgStyle = styles.pink;
   }
 
   return (
-    <span className={styles.button} onClick={onClick}>
+    <button
+      className={`${styles.button} ${bgStyle}`}
+      form={form}
+      onClick={onClick}
+    >
       {children}
-    </span>
+    </button>
   );
 };
 

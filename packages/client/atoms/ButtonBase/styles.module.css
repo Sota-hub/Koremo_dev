@@ -20,3 +20,7 @@
   border: none;
   background-color: #E06A9E;
 }
+
+.transparent {
+  background-color: #fff;
+}

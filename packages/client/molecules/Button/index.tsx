@@ -8,14 +8,15 @@ import { ButtonIconProps } from "../../types/buttonIcon";
 
 interface ButtonProps extends ButtonIconProps, ButtonTextProps {
   bgColor: number;
+  form?: string;
   onClick?: () => void;
 }
 
 const Button: FC<ButtonProps> = (props) => {
-  const { bgColor, src, alt, text, textColor, onClick } = props;
+  const { bgColor, form, src, alt, text, textColor, onClick } = props;
 
   return (
-    <ButtonBase bgColor={bgColor} onClick={onClick}>
+    <ButtonBase bgColor={bgColor} form={form} onClick={onClick}>
       {src && alt && <ButtonIcon src={src} alt={alt} />}
       <ButtonText text={text} textColor={textColor} />
     </ButtonBase>
