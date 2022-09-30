@@ -8,20 +8,20 @@ const signupRouter = Router();
 signupRouter.post("/signup", async (req, res) => {
   const { email, password, confPass } = req.body;
 
-  if (!email || !password) {
-    throw new Error("Email and password are required");
-  }
-  if (!emailExpression.test(email)) {
-    throw new Error("Email address is invalid");
-  }
-  if (!passwordExpression.test(password)) {
-    throw new Error("Password is invalid");
-  }
-  if (!(password === confPass)) {
-    throw new Error("Password and confPass Don't match");
-  }
-
   try {
+    if (!email || !password) {
+      throw new Error("Email and password are required");
+    }
+    if (!emailExpression.test(email)) {
+      throw new Error("Email address is invalid");
+    }
+    if (!passwordExpression.test(password)) {
+      throw new Error("Password is invalid");
+    }
+    if (!(password === confPass)) {
+      throw new Error("Password and confPass Don't match");
+    }
+
     const registeredUser = await User.findOne({ where: { email } });
 
     if (registeredUser) {
@@ -38,9 +38,10 @@ signupRouter.post("/signup", async (req, res) => {
     user.passwordHash = passwordHash;
 
     await user.save();
-    res.redirect("http://localhost:3000");
+    res.status(200).send(true);
   } catch (e) {
-    res.status(500).json({ message: e });
+    const error = e as Error;
+    res.status(400).send({ error: { message: error.message } });
   }
 });
 

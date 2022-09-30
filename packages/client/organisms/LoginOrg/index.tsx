@@ -7,6 +7,9 @@ import styles from "./styles.module.css";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
 
+const loginUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/login`;
+const oauthUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth`;
+
 const LoginOrg: FC = (props) => {
   return (
     <>
@@ -14,7 +17,7 @@ const LoginOrg: FC = (props) => {
       <div className={styles.flex}>
         <div className={styles.flexItem1}>
           <form
-            action={`${process.env.NEXT_PUBLIC_SERVER_URL}/login`}
+            action={loginUrl}
             method="post"
             id="local"
             className={styles.form}
@@ -34,7 +37,7 @@ const LoginOrg: FC = (props) => {
         </div>
         <div className={styles.flexItem1}>
           <form
-            action={`${process.env.NEXT_PUBLIC_SERVER_URL}/login`}
+            action={oauthUrl}
             method="post"
             id="oauth"
             className={styles.form}

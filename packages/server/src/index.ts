@@ -4,6 +4,7 @@ import session from "express-session";
 import bodyParser from "body-parser";
 import passport from "passport";
 import dotenv from "dotenv";
+import cors from "cors";
 import dataSource from "./data-source";
 import typeDefs from "@koremo/graphql";
 import resolvers from "./resolvers/index";
@@ -47,6 +48,7 @@ const isProduction = process.env.MODE === "production";
       },
     })
   );
+  app.use(cors());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());

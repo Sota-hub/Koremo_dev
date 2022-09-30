@@ -12,7 +12,8 @@ loginRouter.post(
       console.log(req.user);
       res.redirect("http://localhost:3000");
     } catch (e) {
-      res.status(500).json({ message: e });
+      const error = e as Error;
+      res.status(400).send({ error: { message: error.message } });
     }
   }
 );
