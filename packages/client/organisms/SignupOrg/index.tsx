@@ -65,7 +65,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
         });
         const data: boolean = await response.json();
         if (data) {
-          router.replace("/login");
+          router.replace("/login?prev=signup");
         }
       } catch (e) {
         const error = e as Error;

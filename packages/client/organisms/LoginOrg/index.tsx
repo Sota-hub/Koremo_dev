@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { Router } from "next/router";
 import Button from "../../molecules/Button";
 import Input from "../../atoms/Input";
 import Separator from "../../atoms/Separator";
