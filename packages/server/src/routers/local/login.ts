@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import RequestUser from "../types/RequestUser";
+import RequestUser from "../../types/RequestUser";
 
 const loginRouter = Router();
 
