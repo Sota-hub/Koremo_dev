@@ -17,13 +17,24 @@ const secret = String(process.env.SESSION_SECRET);
 const isProduction = process.env.MODE === "production";
 
 (async () => {
+  // Establish the connection
   await dataSource
     .initialize()
     .then(() => console.log("Connection Succeeded!"))
     .catch((e) => console.error("Connection Failed: ", e));
 
-  const app = express();
+  // Build apollo server
+  const server = new ApolloServer({
+    typeDefs: await typeDefs,
+    resolvers,
+    context: ({ req, res }) => ({ req, res }),
+    csrfPrevention: true,
+    cache: "bounded",
+  });
+  await server.start();
 
+  // Build express server
+  const app = express();
   app.use(
     session({
       secret,
@@ -32,32 +43,22 @@ const isProduction = process.env.MODE === "production";
       cookie: {
         httpOnly: true,
         secure: isProduction,
-        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 week
+        maxAge: 1000 * 60 * 60 * 24 * 7,
       },
     })
   );
-
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
   app.use(passport.session());
-  app.get("/info", (req) => {
-    console.log("May run deserialize user before");
-    console.log("req.user", req.user);
-  });
   app.use(routers);
-
-  const server = new ApolloServer({
-    typeDefs: await typeDefs,
-    resolvers,
-    // context: () => {},
-    csrfPrevention: true,
-    cache: "bounded",
-  });
-
-  await server.start();
-
   server.applyMiddleware({ app });
+
+  // ===== deserializeUserのtest用パス =====
+  app.get("/info", (req) => {
+    console.log(req.user);
+  });
+  // =======================================
 
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);

@@ -3,15 +3,13 @@ import bcrypt from "bcrypt";
 import { Strategy as LocalStrategy } from "passport-local";
 import { User } from "@koremo/entities";
 
-passport.serializeUser((user: any, done) => {
-  // user: interface X extends Express.User didn't work
-  console.log("serializeUser called! id=", user.id);
+passport.serializeUser((user: any /* ←FIX */, done) => {
+  console.log("+++++ serializeUser called +++++");
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id: string, done) => {
-  console.log("deserializeUser called! id=", id);
-
+  console.log("+++++ deserializeUser called +++++");
   try {
     const user = await User.findOne({ where: { id } });
     if (!user) {
@@ -27,7 +25,7 @@ passport.deserializeUser(async (id: string, done) => {
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "email", // ←This must be req.body.email
+      usernameField: "email",
       passwordField: "password",
     },
     async (email, password, done) => {
