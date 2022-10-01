@@ -1,10 +1,10 @@
 import { Router } from "express";
 import passport from "passport";
-import RequestUser from "../../types/RequestUser";
+import RequestUser from "../types/RequestUser";
 
-const localLoginRouter = Router();
+const loginRouter = Router();
 
-localLoginRouter.post(
+loginRouter.post(
   "/login",
   passport.authenticate("local"),
   (req: RequestUser, res) => {
@@ -18,4 +18,4 @@ localLoginRouter.post(
   }
 );
 
-export default localLoginRouter;
+export default loginRouter;

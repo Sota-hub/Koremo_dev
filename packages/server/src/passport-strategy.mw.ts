@@ -56,12 +56,23 @@ passport.use(
 
 passport.use(
   new GoogleStrategy(
+    // clientIDはクライアントを識別するために使用される
+    // callbackURLはアクセス承認をもらった後のリダイレクト先
+    // 3. 1で指定したscopeと共にclientIDとcallbackURLを含んだ認可サーバーのURLにリダイレクトされる
+    // 4. リソースオーナーがアクセスを許可し認可コードを発行する
+    // 5. 認可コードをqueryとしてcallbackURLに遷移する（例：localhost:80/google/callback?code=<認可コード>）
+    // 6. oauth/loginファイルの"/google/callback"のルーター処理に移動
     {
       clientID,
       clientSecret,
       callbackURL,
     },
-    (_, __, profile, cb) => {
+    // 8. queryに付属する認可コードを認可サーバーに渡してアクセストークンを発行する
+    // 9. アクセストークンを提示してリソースサーバーにアクセス
+    // 10. scopeで指定した情報を取得する
+    // 11. oauthでできることはこれで終わり！
+    (accessToken, refreshToken, profile, cb) => {
+      console.log(accessToken);
       console.log(profile);
       cb(null, profile);
     }

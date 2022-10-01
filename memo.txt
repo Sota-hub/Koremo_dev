@@ -11,3 +11,49 @@ colors
 break-point
   mobile: 800px
   laptop: 1280px
+
+
+
+login.ts("/oauth")
+oauthLoginRouter.get( 
+  "/google",
+  // 1. scopeに使用したい情報を指定する
+  // 2. passport-strategyファイルのGoogleStrategyの第一引数に移動
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+oauthLoginRouter.get(
+  "/google/callback",
+  // 7. 処理失敗時のリダイレクト先を指定する
+  // 8. passport-strategyファイルのGoogleStrategyの第二引数に移動
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  (req) => {
+    console.log(req.user);
+  }
+);
+
+passport-strategy.mw.ts
+passport.use(
+new GoogleStrategy(
+  // clientIDはクライアントを識別するために使用される
+  // callbackURLはアクセス承認をもらった後のリダイレクト先
+  // 3. 1で指定したscopeと共にclientIDとcallbackURLを含んだ認可サーバーのURLにリダイレクトされる
+  // 4. リソースオーナーがアクセスを許可し認可コードを発行する
+  // 5. 認可コードをqueryとしてcallbackURLに遷移する（例：localhost:80/google/callback?code=<認可コード>）
+  // 6. oauth/loginファイルの"/google/callback"のルーター処理に移動
+  {
+    clientID,
+    clientSecret,
+    callbackURL,
+  },
+  // 8. queryに付属する認可コードを認可サーバーに渡してアクセストークンを発行する
+  // 9. アクセストークンを提示してリソースサーバーにアクセス
+  // 10. scopeで指定した情報を取得する
+  // 11. oauthでできることはこれで終わり！
+  (accessToken, refreshToken, profile, cb) => {
+    console.log(accessToken);
+    console.log(profile);
+    cb(null, profile);
+  }
+)
+);

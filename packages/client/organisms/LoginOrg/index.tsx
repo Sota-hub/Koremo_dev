@@ -6,8 +6,8 @@ import styles from "./styles.module.css";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
 
-const localLoginUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/local/login`;
-const oauthLoginUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/oauth/login`;
+const localLoginUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/login`;
+const oauthLoginUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/google`;
 
 const LoginOrg: FC = (props) => {
   return (
