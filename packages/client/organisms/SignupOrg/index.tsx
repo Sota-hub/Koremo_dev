@@ -14,7 +14,7 @@ interface SignupOrgProps {
 }
 
 const localSignupUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/signup`;
-const oauthSignupUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/google`;
+const oauthSignupUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/google/signup`;
 
 const SignupOrg: FC<SignupOrgProps> = (props) => {
   const { router } = props;

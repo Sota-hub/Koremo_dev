@@ -10,10 +10,7 @@ const Index: PageFC = (props) => {
 
   return (
     <>
-      <form action="http://localhost:80/oauth/google" method="get" id="form2" />
-      <button type="submit" form="form2">
-        google oauth
-      </button>
+      <h1>Success!!</h1>
     </>
   );
 };
