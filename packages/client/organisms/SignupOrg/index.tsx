@@ -118,7 +118,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
         <div className={styles.flexItem1}>
           <form
             action={oauthSignupUrl}
-            method="post"
+            method="get"
             id="oauth"
             className={styles.form}
           />
@@ -127,7 +127,7 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
             form="oauth"
             src={Google}
             alt="google"
-            text="Login with Google"
+            text="Sign up with Google"
             textColor={TextColor.Black}
           />
         </div>

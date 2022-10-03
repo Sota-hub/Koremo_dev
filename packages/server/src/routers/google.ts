@@ -31,8 +31,7 @@ googleRouter.get(
   // 8. passport-strategyファイルのGoogleStrategyの第二引数に移動
   passport.authenticate("google", { failureRedirect: `${frontendUrl}/failed` }),
   (_, res) => {
-    console.log("Success");
-    res.redirect(`${frontendUrl}/signup`);
+    res.redirect(`${frontendUrl}`);
   }
 );
 

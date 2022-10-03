@@ -37,7 +37,7 @@ const LoginOrg: FC = (props) => {
         <div className={styles.flexItem1}>
           <form
             action={oauthLoginUrl}
-            method="post"
+            method="get"
             id="oauth"
             className={styles.form}
           />

@@ -14,7 +14,7 @@ const callbackURL = process.env.CALLBACK_URL as string;
 
 passport.serializeUser((user: any /* ←FIX */, done) => {
   console.log("+++++ serializeUser called +++++");
-  done(null, user.id);
+  return done(null, user.id);
 });
 
 passport.deserializeUser(async (id: string, done) => {
@@ -22,12 +22,12 @@ passport.deserializeUser(async (id: string, done) => {
   try {
     const user = await User.findOne({ where: { id } });
     if (!user) {
-      done(null, false);
+      return done(null, false);
     } else {
-      done(null, user);
+      return done(null, user);
     }
   } catch (e) {
-    done(e);
+    return done(e);
   }
 });
 
@@ -46,9 +46,9 @@ passport.use(
         if (!bcrypt.compareSync(password, user.passwordHash.toString())) {
           return done(null, false);
         }
-        done(null, user);
+        return done(null, user);
       } catch (e) {
-        done(e, false);
+        return done(e, false);
       }
     }
   )
@@ -79,30 +79,30 @@ passport.use(
 
         if (req.query.state === "login") {
           if (user) {
-            done(null, user);
+            return done(null, user);
           } else {
-            done(null, false);
+            return done(null, false);
           }
         }
 
         if (req.query.state === "signup") {
           if (user) {
-            done(null, false);
+            return done(null, false);
           } else {
             const newUser = new User();
             newUser.name = "No name";
-            newUser.email = "email";
+            newUser.email = profile._json.email!;
             newUser.lastAccessedAt = new Date();
             newUser.googleId = profile.id;
             await newUser.save();
-            done(null, newUser);
+            return done(null, newUser);
           }
         }
 
-        done(null, false);
+        return done(null, false);
       } catch (e) {
         const error = e as Error;
-        done(error);
+        return done(error);
       }
     }
   )
