@@ -7,6 +7,7 @@ colors
   pink: #E06A9E
   white-gray: #a0a0a0
   red; #ff3333;
+  pale-blue: #C3E1E7
 
 break-point
   mobile: 800px
