@@ -10,7 +10,7 @@ class User extends BasicColumns {
   email!: string;
 
   @Column({ nullable: true })
-  profileImageUrl!: string;
+  profileImageId!: string;
 
   @Column()
   lastAccessedAt!: Date;

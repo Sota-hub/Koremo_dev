@@ -27,7 +27,7 @@ export type Friend = {
   id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
-  profileImageUrl?: Maybe<Scalars['String']>;
+  profileImageId?: Maybe<Scalars['String']>;
 };
 
 export type LocalLoginInput = {
@@ -77,7 +77,7 @@ export type User = Basic & {
   id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
-  profileImageUrl?: Maybe<Scalars['String']>;
+  profileImageId?: Maybe<Scalars['String']>;
   updatedAt: Scalars['Date'];
 };
 
@@ -105,7 +105,7 @@ export type FriendsQueryVariables = Exact<{
 }>;
 
 
-export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageUrl?: string | null, lastAccessedAt: Date } | null> };
+export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
 
 
 export const GoogleOAuthDocument = gql`
@@ -205,7 +205,7 @@ export const FriendsDocument = gql`
   friends(userId: $userId) {
     id
     name
-    profileImageUrl
+    profileImageId
     lastAccessedAt
   }
 }

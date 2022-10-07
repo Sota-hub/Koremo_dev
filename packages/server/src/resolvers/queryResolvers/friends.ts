@@ -25,7 +25,7 @@ const friends: QueryResolvers["friends"] = async (/*_, args, context*/) => {
     return {
       id: user.id,
       name: user.name,
-      profileImageUrl: user.profileImageUrl,
+      profileImageId: user.profileImageId,
       lastAccessedAt: user.lastAccessedAt,
     };
   });

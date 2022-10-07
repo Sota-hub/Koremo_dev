@@ -2,7 +2,7 @@ query friends($userId: ID!) {
   friends(userId: $userId) {
     id
     name
-    profileImageUrl
+    profileImageId
     lastAccessedAt
   }
 }

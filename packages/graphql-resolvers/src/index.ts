@@ -26,7 +26,7 @@ export type Friend = {
   id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
-  profileImageUrl?: Maybe<Scalars['String']>;
+  profileImageId?: Maybe<Scalars['String']>;
 };
 
 export type LocalLoginInput = {
@@ -76,7 +76,7 @@ export type User = Basic & {
   id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
-  profileImageUrl?: Maybe<Scalars['String']>;
+  profileImageId?: Maybe<Scalars['String']>;
   updatedAt: Scalars['Date'];
 };
 
@@ -192,7 +192,7 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastAccessedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  profileImageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  profileImageId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -212,7 +212,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastAccessedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  profileImageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  profileImageId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };

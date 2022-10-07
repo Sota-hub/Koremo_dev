@@ -5,7 +5,7 @@ type User implements Basic {
   updatedAt: Date!
   name: String!
   email: String!
-  profileImageUrl: String
+  profileImageId: String
   lastAccessedAt: Date!
 }
 

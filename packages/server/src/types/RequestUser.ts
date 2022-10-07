@@ -7,7 +7,7 @@ interface RequestUser extends Request {
     updatedAt?: Date;
     name?: string;
     email?: string;
-    profileImageUrl?: string;
+    profileImageId?: string;
     lastAccessedAt?: Date;
     passwordHash?: string;
     googleId?: string;

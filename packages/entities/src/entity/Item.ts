@@ -4,10 +4,10 @@ import BasicColumns from "./BasicColumns";
 @Entity()
 class Item extends BasicColumns {
   @Column()
-  name!: string;
+  itemName!: string;
 
   @Column()
-  shopId!: string;
+  shopName!: string;
 
   @Column()
   price!: string;
