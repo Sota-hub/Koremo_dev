@@ -1,0 +1,27 @@
+.button {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  padding: 6px 0;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.rounded {
+  border-radius: 1000px;
+}
+
+@media screen and (min-width: 800px) {
+  .button {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .rounded {
+    border-radius: 1000px;
+  }
+}
