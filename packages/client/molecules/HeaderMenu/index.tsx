@@ -7,9 +7,9 @@ import { Home, List, User } from "../../public/images";
 import styles from "./styles.module.css";
 
 const items = [
-  { link: "/[userId]", text: "Home", icon: Home },
-  { link: "/[userId]/list", text: "List", icon: List },
-  { link: "/[userId]/account", text: "Account", icon: User },
+  { link: "/home", text: "Home", icon: Home },
+  { link: "/list", text: "List", icon: List },
+  { link: "/account", text: "Account", icon: User },
 ];
 
 const HeaderMenu: FC = (props) => {
