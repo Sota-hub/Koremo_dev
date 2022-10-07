@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background-color: #C3E1E7;
+}
+
+.image {
+  position: absolute;
+}
+
+.base {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    width: 108px;
+    height: 108px;
+  }
+
+  .base {
+    width: 59px;
+    height: 59px;
+  }
+}
