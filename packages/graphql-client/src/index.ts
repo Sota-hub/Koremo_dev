@@ -63,6 +63,7 @@ export type MutationLocalSignupArgs = {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
+  user: User;
 };
 
 
@@ -70,15 +71,11 @@ export type QueryFriendsArgs = {
   userId: Scalars['ID'];
 };
 
-export type User = Basic & {
+export type User = {
   __typename?: 'User';
-  createdAt: Scalars['Date'];
-  email: Scalars['String'];
   id: Scalars['ID'];
-  lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
   profileImageId?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['Date'];
 };
 
 export type GoogleOAuthMutationVariables = Exact<{ [key: string]: never; }>;
@@ -106,6 +103,11 @@ export type FriendsQueryVariables = Exact<{
 
 
 export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
+
+export type UserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, name: string, profileImageId?: string | null } };
 
 
 export const GoogleOAuthDocument = gql`
@@ -238,3 +240,39 @@ export function useFriendsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Fr
 export type FriendsQueryHookResult = ReturnType<typeof useFriendsQuery>;
 export type FriendsLazyQueryHookResult = ReturnType<typeof useFriendsLazyQuery>;
 export type FriendsQueryResult = Apollo.QueryResult<FriendsQuery, FriendsQueryVariables>;
+export const UserDocument = gql`
+    query user {
+  user {
+    id
+    name
+    profileImageId
+  }
+}
+    `;
+
+/**
+ * __useUserQuery__
+ *
+ * To run a query within a React component, call `useUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUserQuery(baseOptions?: Apollo.QueryHookOptions<UserQuery, UserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+      }
+export function useUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserQuery, UserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserQuery, UserQueryVariables>(UserDocument, options);
+        }
+export type UserQueryHookResult = ReturnType<typeof useUserQuery>;
+export type UserLazyQueryHookResult = ReturnType<typeof useUserLazyQuery>;
+export type UserQueryResult = Apollo.QueryResult<UserQuery, UserQueryVariables>;

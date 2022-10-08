@@ -2,9 +2,12 @@ import React from "react";
 import { PageFC } from "../../types";
 import Header from "../../organisms/Header";
 import AccountOrg from "../../organisms/AccountOrg";
+import { useUserQuery } from "@koremo/graphql-client";
 import styles from "./styles.module.css";
 
 const Account: PageFC = () => {
+  const user = useUserQuery();
+
   return (
     <>
       <Header />

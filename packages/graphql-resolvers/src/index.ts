@@ -62,6 +62,7 @@ export type MutationLocalSignupArgs = {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
+  user: User;
 };
 
 
@@ -69,15 +70,11 @@ export type QueryFriendsArgs = {
   userId: Scalars['ID'];
 };
 
-export type User = Basic & {
+export type User = {
   __typename?: 'User';
-  createdAt: Scalars['Date'];
-  email: Scalars['String'];
   id: Scalars['ID'];
-  lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
   profileImageId?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['Date'];
 };
 
 
@@ -149,7 +146,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Basic: ResolversTypes['User'];
+  Basic: never;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
@@ -164,7 +161,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Basic: ResolversParentTypes['User'];
+  Basic: never;
   Boolean: Scalars['Boolean'];
   Date: Scalars['Date'];
   Friend: Friend;
@@ -178,7 +175,7 @@ export type ResolversParentTypes = {
 };
 
 export type BasicResolvers<ContextType = any, ParentType extends ResolversParentTypes['Basic'] = ResolversParentTypes['Basic']> = {
-  __resolveType: TypeResolveFn<'User', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<null, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
@@ -204,16 +201,13 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['Friend']>>, ParentType, ContextType, RequireFields<QueryFriendsArgs, 'userId'>>;
+  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastAccessedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   profileImageId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

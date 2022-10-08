@@ -14,8 +14,10 @@ import "./passport-strategy.mw";
 dotenv.config();
 
 const port = process.env.SERVER_PORT;
+const frontendUrl = process.env.FRONTEND_URL;
 const secret = String(process.env.SESSION_SECRET);
 const isProduction = process.env.MODE === "production";
+const corsSetting = { origin: frontendUrl, credentials: true };
 
 (async () => {
   // Establish the connection
@@ -28,7 +30,9 @@ const isProduction = process.env.MODE === "production";
   const server = new ApolloServer({
     typeDefs: await typeDefs,
     resolvers,
-    context: ({ req, res }) => ({ req, res }),
+    context: ({ req }) => ({
+      user: req.user,
+    }),
     csrfPrevention: true,
     cache: "bounded",
   });
@@ -48,19 +52,13 @@ const isProduction = process.env.MODE === "production";
       },
     })
   );
-  app.use(cors());
+  app.use(cors(corsSetting));
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(routers);
-  server.applyMiddleware({ app });
-
-  // ===== deserializeUserのtest用パス =====
-  app.get("/info", (req) => {
-    console.log(req.user);
-  });
-  // =======================================
+  server.applyMiddleware({ app, cors: corsSetting });
 
   app.listen(port, () => {
     console.log(`App listening on port ${port}`);
