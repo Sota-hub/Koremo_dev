@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Button from "../../molecules/Button";
 import Input from "../../atoms/Input";
 import Separator from "../../atoms/Separator";
+import PlainLink from "../../atoms/PlainLink";
 import styles from "./styles.module.css";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Google } from "../../public/images";
@@ -12,7 +13,7 @@ const oauthLoginUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/google/login`;
 const LoginOrg: FC = (props) => {
   return (
     <>
-      <h1 className={styles.headline}>LOGIN</h1>
+      <h1 className={styles.headline}>LOG IN</h1>
       <div className={styles.flex}>
         <div className={styles.flexItem1}>
           <form
@@ -50,6 +51,10 @@ const LoginOrg: FC = (props) => {
             textColor={TextColor.Black}
           />
         </div>
+      </div>
+      <div className={styles.link}>
+        Don&apos;t have an account?
+        <PlainLink href="/signup" text="SIGN UP" />
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import Button from "../../molecules/Button";
 import Input from "../../atoms/Input";
 import Separator from "../../atoms/Separator";
 import ErrorMessage from "../../atoms/ErrorMessage";
+import PlainLink from "../../atoms/PlainLink";
 import styles from "./styles.module.css";
 import { emailExpression, passwordExpression } from "@koremo/constants";
 import { BgColor, TextColor } from "@koremo/enums";
@@ -131,6 +132,10 @@ const SignupOrg: FC<SignupOrgProps> = (props) => {
             textColor={TextColor.Black}
           />
         </div>
+      </div>
+      <div className={styles.link}>
+        Already have an account?
+        <PlainLink href="/login" text="LOG IN" />
       </div>
     </>
   );

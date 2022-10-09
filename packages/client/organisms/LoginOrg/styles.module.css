@@ -9,6 +9,11 @@
   margin-bottom: 1rem;
 }
 
+.link {
+  text-align: center;
+  margin-top: 2rem;
+}
+
 @media screen and (min-width: 800px) {
   .headline {
     margin-left: 13.5%;
