@@ -1,3 +1,3 @@
 export interface AccountIconProps {
-  imageId?: string;
+  imageId: string | null;
 }
