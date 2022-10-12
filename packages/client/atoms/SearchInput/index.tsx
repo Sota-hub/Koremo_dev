@@ -16,6 +16,7 @@ const SearchInput: FC<SearchInputProps> = (props) => {
       onKeyDown={(e) => {
         if (e.key === "Enter") {
           onKeyDown();
+          e.currentTarget.blur();
         }
       }}
     />

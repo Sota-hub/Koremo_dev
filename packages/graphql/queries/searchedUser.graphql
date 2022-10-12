@@ -1,5 +1,6 @@
 query searchedUser($id: ID!) {
   searchedUser(id: $id) {
+    id
     name
     profileImageId
   }

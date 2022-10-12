@@ -115,7 +115,7 @@ export type SearchedUserQueryVariables = Exact<{
 }>;
 
 
-export type SearchedUserQuery = { __typename?: 'Query', searchedUser?: { __typename?: 'User', name: string, profileImageId?: string | null } | null };
+export type SearchedUserQuery = { __typename?: 'Query', searchedUser?: { __typename?: 'User', id: string, name: string, profileImageId?: string | null } | null };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -256,6 +256,7 @@ export type FriendsQueryResult = Apollo.QueryResult<FriendsQuery, FriendsQueryVa
 export const SearchedUserDocument = gql`
     query searchedUser($id: ID!) {
   searchedUser(id: $id) {
+    id
     name
     profileImageId
   }
