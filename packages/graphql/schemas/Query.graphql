@@ -1,5 +1,7 @@
 type Query {
   user: User!
+  searchedUser(id: ID!): User
+
   # use fir login
   # user: User 
   # use for searching a friend & getting the friend data多分後者は使わない

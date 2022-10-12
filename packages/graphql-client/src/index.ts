@@ -63,12 +63,18 @@ export type MutationLocalSignupArgs = {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
+  searchedUser?: Maybe<User>;
   user: User;
 };
 
 
 export type QueryFriendsArgs = {
   userId: Scalars['ID'];
+};
+
+
+export type QuerySearchedUserArgs = {
+  id: Scalars['ID'];
 };
 
 export type User = {
@@ -103,6 +109,13 @@ export type FriendsQueryVariables = Exact<{
 
 
 export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
+
+export type SearchedUserQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type SearchedUserQuery = { __typename?: 'Query', searchedUser?: { __typename?: 'User', name: string, profileImageId?: string | null } | null };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -240,6 +253,42 @@ export function useFriendsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Fr
 export type FriendsQueryHookResult = ReturnType<typeof useFriendsQuery>;
 export type FriendsLazyQueryHookResult = ReturnType<typeof useFriendsLazyQuery>;
 export type FriendsQueryResult = Apollo.QueryResult<FriendsQuery, FriendsQueryVariables>;
+export const SearchedUserDocument = gql`
+    query searchedUser($id: ID!) {
+  searchedUser(id: $id) {
+    name
+    profileImageId
+  }
+}
+    `;
+
+/**
+ * __useSearchedUserQuery__
+ *
+ * To run a query within a React component, call `useSearchedUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchedUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchedUserQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSearchedUserQuery(baseOptions: Apollo.QueryHookOptions<SearchedUserQuery, SearchedUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchedUserQuery, SearchedUserQueryVariables>(SearchedUserDocument, options);
+      }
+export function useSearchedUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchedUserQuery, SearchedUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchedUserQuery, SearchedUserQueryVariables>(SearchedUserDocument, options);
+        }
+export type SearchedUserQueryHookResult = ReturnType<typeof useSearchedUserQuery>;
+export type SearchedUserLazyQueryHookResult = ReturnType<typeof useSearchedUserLazyQuery>;
+export type SearchedUserQueryResult = Apollo.QueryResult<SearchedUserQuery, SearchedUserQueryVariables>;
 export const UserDocument = gql`
     query user {
   user {

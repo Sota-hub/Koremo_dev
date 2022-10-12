@@ -62,12 +62,18 @@ export type MutationLocalSignupArgs = {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
+  searchedUser?: Maybe<User>;
   user: User;
 };
 
 
 export type QueryFriendsArgs = {
   userId: Scalars['ID'];
+};
+
+
+export type QuerySearchedUserArgs = {
+  id: Scalars['ID'];
 };
 
 export type User = {
@@ -201,6 +207,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['Friend']>>, ParentType, ContextType, RequireFields<QueryFriendsArgs, 'userId'>>;
+  searchedUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QuerySearchedUserArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
 
