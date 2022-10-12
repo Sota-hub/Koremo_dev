@@ -1,0 +1,18 @@
+.button {
+  display: block;
+  border-top-right-radius : 1000px;
+  border-bottom-right-radius : 1000px;
+  height: 45px;
+  border: 2px solid #000;
+  border-left: none;
+  cursor: pointer;
+}
+
+.icon {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}

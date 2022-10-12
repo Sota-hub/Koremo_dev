@@ -1,0 +1,20 @@
+.info {
+  margin: 2rem 0;
+}
+
+@media screen and (min-width: 800px) {
+  .info {
+    margin: 4rem 0 3rem;
+  }
+  
+
+  .container {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .button {
+    width: 400px;
+    margin: 0 auto;
+  }
+}
