@@ -1,0 +1,16 @@
+.icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 800px) {
+  .icon {
+    margin-bottom: 3rem;
+  }
+
+  .container {
+    width: 60%;
+    margin: 0 auto;
+  }
+}
