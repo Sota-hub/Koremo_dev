@@ -1,0 +1,32 @@
+.headline {
+  width: 80%;
+  margin: 0 auto 1.5rem;
+}
+
+.item {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.item+.item {
+  border-top: 1px solid #a0a0a0;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .item {
+    width: 25%;
+    justify-content: flex-start;
+    margin-top: 2%;
+  }
+
+  .item+.item {
+    border: none;
+  }
+}

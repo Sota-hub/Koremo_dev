@@ -1,0 +1,39 @@
+.container {
+  margin-left: 1rem;
+}
+
+.container > p {
+  margin: 0;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mainText {
+  font-weight: 600;
+  font-size: 26px;
+}
+
+.subText {
+  color: #a0a0a0;
+}
+
+@media screen and (min-width: 800px) {
+  .container > p {
+    max-width: 75%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+  }
+
+  .mainText {
+    transform: translate(-50%, -75%);
+  }
+
+  .subText {
+    transform: translate(-50%, 25%);
+  }
+}

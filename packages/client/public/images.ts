@@ -7,5 +7,17 @@ import UserWhite from "./user-white.svg";
 import Close from "./close.svg";
 import Google from "./google.png";
 import Search from "./search.svg";
+import Cart from "./cart.svg";
 
-export { Logo, Hamburger, Home, List, User, UserWhite, Close, Google, Search };
+export {
+  Logo,
+  Hamburger,
+  Home,
+  List,
+  User,
+  UserWhite,
+  Close,
+  Google,
+  Search,
+  Cart,
+};

@@ -1,0 +1,18 @@
+.container {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 800px) {
+  .container {
+    position: relative;
+    width: 90%;
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    display: block;
+    border-radius: 8px;
+    padding: 0;
+    max-width: 210px;
+  }
+}
