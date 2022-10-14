@@ -1,36 +1,40 @@
-import { QueryResolvers /*Friend*/ } from "@koremo/graphql-resolvers";
-// import { User } from "@koremo/entities";
-// import { In } from "typeorm";
+import { QueryResolvers } from "@koremo/graphql-resolvers";
+import { AuthenticationError } from "apollo-server-express";
+import { User, Friend } from "@koremo/entities";
+import { FriendStatus } from "@koremo/enums";
+import { In } from "typeorm";
 
-const friends: QueryResolvers["friends"] = async (/*_, args, context*/) => {
-  // const { userId } = args;
+const friends: QueryResolvers["friends"] = async (_, __, context) => {
+  const user = context.user;
+  if (!user) {
+    throw new AuthenticationError("Authentication Error");
+  }
 
-  // const a = Friend.find({
-  //   where: {
-  //     userId: "1", // ここはログインしてるユーザーのidが入る
-  //     status: 1
-  //   }
-  // });
-  // const b = a.map(aa => aa.friendId);
+  const friends = await Friend.findBy({
+    userId: user.id,
+    status: FriendStatus.Approved,
+  });
+  const friendIds = friends.map((friend) => {
+    return friend.friendId;
+  });
 
-  // const users = await User.find({
-  //   //本当は where: { id: In([b]) }
-  //   where: { id: In([1, 2]) },
-  //   order: { lastAccessedAt: "DESC" },
-  //   // skip: 0, 使うかも
-  //   // take: 10
-  // });
+  const approvedFriends = await User.find({
+    where: {
+      id: In(friendIds),
+    },
+    order: {
+      lastAccessedAt: "DESC",
+    },
+  });
 
-  // const friends_: Friend[] = users.map((user) => {
-  //   // return {
-  //   //   id: user.id,
-  //   //   name: user.name,
-  //   //   profileImageId: user.profileImageId,
-  //   //   lastAccessedAt: user.lastAccessedAt,
-  //   // };
-  // });
-
-  return [];
+  return approvedFriends.map((friend) => {
+    return {
+      id: friend.id,
+      name: friend.name,
+      profileImageId: friend.profileImageId,
+      lastAccessedAt: friend.lastAccessedAt,
+    };
+  });
 };
 
 export default friends;
