@@ -1,5 +1,5 @@
 import User from "./User";
 import Friend from "./Friend";
-import Item from "./Item";
+import Product from "./Product";
 
-export { User, Friend, Item };
+export { User, Friend, Product };

@@ -2,9 +2,12 @@ import { Entity, Column } from "typeorm";
 import BasicColumns from "./BasicColumns";
 
 @Entity()
-class Item extends BasicColumns {
+class Product extends BasicColumns {
+  @Column({ nullable: true })
+  productImageId!: string;
+
   @Column()
-  itemName!: string;
+  productName!: string;
 
   @Column()
   shopName!: string;
@@ -19,4 +22,4 @@ class Item extends BasicColumns {
   status!: number; // 1=InList, 2=Bought
 }
 
-export default Item;
+export default Product;
