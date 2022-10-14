@@ -62,7 +62,7 @@ export type MutationUpdateUserArgs = {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
-  pending: Array<Maybe<User>>;
+  pending: Array<Maybe<FriendUser>>;
   searchedUser?: Maybe<User>;
   user: User;
 };
@@ -218,7 +218,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
-  pending?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  pending?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   searchedUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QuerySearchedUserArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };

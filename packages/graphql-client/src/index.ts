@@ -63,7 +63,7 @@ export type MutationUpdateUserArgs = {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
-  pending: Array<Maybe<User>>;
+  pending: Array<Maybe<FriendUser>>;
   searchedUser?: Maybe<User>;
   user: User;
 };
@@ -114,7 +114,7 @@ export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?:
 export type PendingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PendingQuery = { __typename?: 'Query', pending: Array<{ __typename?: 'User', id: string, name: string, profileImageId?: string | null } | null> };
+export type PendingQuery = { __typename?: 'Query', pending: Array<{ __typename?: 'FriendUser', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
 
 export type SearchedUserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -279,6 +279,7 @@ export const PendingDocument = gql`
     id
     name
     profileImageId
+    lastAccessedAt
   }
 }
     `;

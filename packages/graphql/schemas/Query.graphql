@@ -2,5 +2,5 @@ type Query {
   user: User!
   searchedUser(id: ID!): User
   friends: [FriendUser]!
-  pending: [User]!
+  pending: [FriendUser]!
 }

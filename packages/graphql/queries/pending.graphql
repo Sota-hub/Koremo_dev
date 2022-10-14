@@ -3,5 +3,6 @@ query pending {
     id
     name
     profileImageId
+      lastAccessedAt
   }
 }
