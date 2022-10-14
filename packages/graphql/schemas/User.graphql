@@ -1,29 +1,10 @@
-# don't return password hash and google id from the perspective of security
-# type User implements Basic {
-#   id: ID!
-#   createdAt: Date!
-#   updatedAt: Date!
-#   name: String!
-#   email: String!
-#   profileImageId: String
-#   lastAccessedAt: Date!
-# }
-
 type User {
   id: ID!
   name: String!
   profileImageId: String
 }
 
-input LocalSignupInput {
-  email: String!
-  password: String!
-  confPass: String!
-  isChecked: Boolean!
-}
-
-input LocalLoginInput {
-  email: String!
-  password: String!
-  isChecked: Boolean!
+input UpdateUserInput {
+    name: String!
+    profileImageId: String
 }

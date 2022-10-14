@@ -1,5 +1,5 @@
-query friends($userId: ID!) {
-  friends(userId: $userId) {
+query friends {
+  friends {
     id
     name
     profileImageId

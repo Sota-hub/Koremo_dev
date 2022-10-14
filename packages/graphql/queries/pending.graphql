@@ -1,0 +1,7 @@
+query pending {
+  pending {
+    id
+    name
+    profileImageId
+  }
+}

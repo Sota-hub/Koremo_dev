@@ -1,5 +1,5 @@
 type Mutation {
-  localSignup(input: LocalSignupInput!): Boolean!
-  localLogin(input: LocalLoginInput!): Boolean!
-  googleOAuth: Boolean!
+  updateUser(input: UpdateUserInput!): User!
+  applyFriend(friendId: ID!): User!
+  approveFriend(friendId: ID!): User!
 }

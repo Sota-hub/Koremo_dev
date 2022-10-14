@@ -1,3 +1,0 @@
-mutation localLogin($input: LocalLoginInput!) {
-  localLogin(input: $input)
-}
