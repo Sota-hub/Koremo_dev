@@ -1,22 +1,44 @@
 import { MutationResolvers } from "@koremo/graphql-resolvers";
-import { AuthenticationError } from "apollo-server-express";
+import { AuthenticationError, ApolloError } from "apollo-server-express";
+import { Friend } from "@koremo/entities";
+import { FriendStatus } from "@koremo/enums";
 
 const applyFriend: MutationResolvers["applyFriend"] = async (
   _,
-  __,
+  args,
   context
 ) => {
   const user = context.user;
-
   if (!user) {
     throw new AuthenticationError("Authentication Error");
   }
 
-  return {
-    id: "1",
-    name: "user",
-    profileImageId: "22222",
-  };
+  const { friendId } = args;
+  const friend = await Friend.findOneBy({
+    userId: user.id,
+    friendId: friendId,
+  });
+  if (friend) {
+    throw new ApolloError("You have already sent the friend request");
+  }
+
+  const newFriend = new Friend();
+  newFriend.userId = user.id;
+  newFriend.friendId = friendId;
+  newFriend.status = FriendStatus.Pending;
+
+  try {
+    await newFriend.save();
+    return {
+      id: newFriend.id,
+      userId: newFriend.userId,
+      friendId: newFriend.friendId,
+      status: newFriend.status,
+    };
+  } catch (e) {
+    const error = e as Error;
+    throw new ApolloError(error.message);
+  }
 };
 
 export default applyFriend;

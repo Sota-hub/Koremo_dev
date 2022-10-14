@@ -1,7 +1,8 @@
 mutation applyFriend($friendId: ID!) {
   applyFriend(friendId: $friendId) {
     id
-    name
-    profileImageId
+    userId
+    friendId
+    status
   }
 }

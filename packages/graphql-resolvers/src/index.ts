@@ -23,6 +23,14 @@ export type Basic = {
 
 export type Friend = {
   __typename?: 'Friend';
+  friendId: Scalars['ID'];
+  id: Scalars['ID'];
+  status: Scalars['Int'];
+  userId: Scalars['ID'];
+};
+
+export type FriendUser = {
+  __typename?: 'FriendUser';
   id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
@@ -31,8 +39,8 @@ export type Friend = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  applyFriend: User;
-  approveFriend: User;
+  applyFriend: Friend;
+  approveFriend: Friend;
   updateUser: User;
 };
 
@@ -53,7 +61,7 @@ export type MutationUpdateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  friends: Array<Maybe<Friend>>;
+  friends: Array<Maybe<FriendUser>>;
   pending: Array<Maybe<User>>;
   searchedUser?: Maybe<User>;
   user: User;
@@ -149,7 +157,9 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
+  FriendUser: ResolverTypeWrapper<FriendUser>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -163,7 +173,9 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Date: Scalars['Date'];
   Friend: Friend;
+  FriendUser: FriendUser;
   ID: Scalars['ID'];
+  Int: Scalars['Int'];
   Mutation: {};
   Query: {};
   String: Scalars['String'];
@@ -183,6 +195,14 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type FriendResolvers<ContextType = any, ParentType extends ResolversParentTypes['Friend'] = ResolversParentTypes['Friend']> = {
+  friendId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  userId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FriendUserResolvers<ContextType = any, ParentType extends ResolversParentTypes['FriendUser'] = ResolversParentTypes['FriendUser']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastAccessedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -191,13 +211,13 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  applyFriend?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
-  approveFriend?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
+  applyFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
+  approveFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  friends?: Resolver<Array<Maybe<ResolversTypes['Friend']>>, ParentType, ContextType>;
+  friends?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   pending?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
   searchedUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QuerySearchedUserArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
@@ -214,6 +234,7 @@ export type Resolvers<ContextType = any> = {
   Basic?: BasicResolvers<ContextType>;
   Date?: GraphQLScalarType;
   Friend?: FriendResolvers<ContextType>;
+  FriendUser?: FriendUserResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

@@ -1,7 +1,8 @@
 mutation approveFriend($friendId: ID!) {
   approveFriend(friendId: $friendId) {
     id
-    name
-    profileImageId
+    userId
+    friendId
+    status
   }
 }

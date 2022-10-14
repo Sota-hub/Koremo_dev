@@ -8,3 +8,8 @@ export enum BgColor {
   Blue = 2,
   Pink = 3
 }
+
+export enum FriendStatus {
+  Pending = 1,
+  Approved = 2
+}

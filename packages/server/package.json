@@ -34,6 +34,7 @@
     "@koremo/common-types": "^0.0.0",
     "@koremo/constants": "^0.0.0",
     "@koremo/entities": "^0.0.0",
+    "@koremo/enums": "^0.0.0",
     "@koremo/graphql": "^0.0.0",
     "@koremo/graphql-resolvers": "^0.0.0",
     "apollo-server-express": "^3.9.0",

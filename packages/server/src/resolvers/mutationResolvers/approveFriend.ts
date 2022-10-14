@@ -14,8 +14,9 @@ const approveFriend: MutationResolvers["approveFriend"] = async (
 
   return {
     id: "1",
-    name: "user",
-    profileImageId: "22222",
+    userId: "1",
+    friendId: "2",
+    status: 1,
   };
 };
 

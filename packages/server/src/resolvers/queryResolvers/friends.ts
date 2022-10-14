@@ -1,6 +1,6 @@
-import { QueryResolvers, Friend } from "@koremo/graphql-resolvers";
-import { User } from "@koremo/entities";
-import { In } from "typeorm";
+import { QueryResolvers /*Friend*/ } from "@koremo/graphql-resolvers";
+// import { User } from "@koremo/entities";
+// import { In } from "typeorm";
 
 const friends: QueryResolvers["friends"] = async (/*_, args, context*/) => {
   // const { userId } = args;
@@ -13,24 +13,24 @@ const friends: QueryResolvers["friends"] = async (/*_, args, context*/) => {
   // });
   // const b = a.map(aa => aa.friendId);
 
-  const users = await User.find({
-    //本当は where: { id: In([b]) }
-    where: { id: In([1, 2]) },
-    order: { lastAccessedAt: "DESC" },
-    // skip: 0, 使うかも
-    // take: 10
-  });
+  // const users = await User.find({
+  //   //本当は where: { id: In([b]) }
+  //   where: { id: In([1, 2]) },
+  //   order: { lastAccessedAt: "DESC" },
+  //   // skip: 0, 使うかも
+  //   // take: 10
+  // });
 
-  const friends_: Friend[] = users.map((user) => {
-    return {
-      id: user.id,
-      name: user.name,
-      profileImageId: user.profileImageId,
-      lastAccessedAt: user.lastAccessedAt,
-    };
-  });
+  // const friends_: Friend[] = users.map((user) => {
+  //   // return {
+  //   //   id: user.id,
+  //   //   name: user.name,
+  //   //   profileImageId: user.profileImageId,
+  //   //   lastAccessedAt: user.lastAccessedAt,
+  //   // };
+  // });
 
-  return friends_;
+  return [];
 };
 
 export default friends;

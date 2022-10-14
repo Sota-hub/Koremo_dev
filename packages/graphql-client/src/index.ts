@@ -24,6 +24,14 @@ export type Basic = {
 
 export type Friend = {
   __typename?: 'Friend';
+  friendId: Scalars['ID'];
+  id: Scalars['ID'];
+  status: Scalars['Int'];
+  userId: Scalars['ID'];
+};
+
+export type FriendUser = {
+  __typename?: 'FriendUser';
   id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
@@ -32,8 +40,8 @@ export type Friend = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  applyFriend: User;
-  approveFriend: User;
+  applyFriend: Friend;
+  approveFriend: Friend;
   updateUser: User;
 };
 
@@ -54,7 +62,7 @@ export type MutationUpdateUserArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  friends: Array<Maybe<Friend>>;
+  friends: Array<Maybe<FriendUser>>;
   pending: Array<Maybe<User>>;
   searchedUser?: Maybe<User>;
   user: User;
@@ -82,14 +90,14 @@ export type ApplyFriendMutationVariables = Exact<{
 }>;
 
 
-export type ApplyFriendMutation = { __typename?: 'Mutation', applyFriend: { __typename?: 'User', id: string, name: string, profileImageId?: string | null } };
+export type ApplyFriendMutation = { __typename?: 'Mutation', applyFriend: { __typename?: 'Friend', id: string, userId: string, friendId: string, status: number } };
 
 export type ApproveFriendMutationVariables = Exact<{
   friendId: Scalars['ID'];
 }>;
 
 
-export type ApproveFriendMutation = { __typename?: 'Mutation', approveFriend: { __typename?: 'User', id: string, name: string, profileImageId?: string | null } };
+export type ApproveFriendMutation = { __typename?: 'Mutation', approveFriend: { __typename?: 'Friend', id: string, userId: string, friendId: string, status: number } };
 
 export type UpdateUserMutationVariables = Exact<{
   input: UpdateUserInput;
@@ -101,7 +109,7 @@ export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __type
 export type FriendsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
+export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'FriendUser', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
 
 export type PendingQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -125,8 +133,9 @@ export const ApplyFriendDocument = gql`
     mutation applyFriend($friendId: ID!) {
   applyFriend(friendId: $friendId) {
     id
-    name
-    profileImageId
+    userId
+    friendId
+    status
   }
 }
     `;
@@ -160,8 +169,9 @@ export const ApproveFriendDocument = gql`
     mutation approveFriend($friendId: ID!) {
   approveFriend(friendId: $friendId) {
     id
-    name
-    profileImageId
+    userId
+    friendId
+    status
   }
 }
     `;

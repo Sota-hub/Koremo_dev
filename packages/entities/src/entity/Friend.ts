@@ -10,7 +10,7 @@ class Friend extends BasicColumns {
   friendId!: string;
 
   @Column()
-  status!: number; // 1=Pending, 2=Friend
+  status!: number;
 }
 
 export default Friend;

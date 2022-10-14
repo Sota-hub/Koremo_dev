@@ -1,5 +1,5 @@
 type Mutation {
   updateUser(input: UpdateUserInput!): User!
-  applyFriend(friendId: ID!): User!
-  approveFriend(friendId: ID!): User!
+  applyFriend(friendId: ID!): Friend!
+  approveFriend(friendId: ID!): Friend!
 }

@@ -1,5 +1,12 @@
 type Friend {
   id: ID!
+  userId: ID!
+  friendId: ID!
+  status: Int!
+}
+
+type FriendUser {
+  id: ID!
   name: String!
   profileImageId: String
   lastAccessedAt: Date!

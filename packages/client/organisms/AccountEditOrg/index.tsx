@@ -1,14 +1,14 @@
-import React, { FC, useState, Dispatch, SetStateAction } from "react";
+import React, { FC, useState } from "react";
 import AccountIcon from "../../atoms/AccountIcon";
 import Input from "../../atoms/Input";
 import Button from "../../molecules/Button";
 import { BgColor, TextColor } from "@koremo/enums";
 import { User, useUpdateUserMutation } from "@koremo/graphql-client";
+import { SetMessageProps } from "../../types/setMessage";
 import styles from "./styles.module.css";
 
-interface AccountEditOrg {
+interface AccountEditOrg extends SetMessageProps {
   currentUser: User;
-  setMessage: Dispatch<SetStateAction<string>>;
 }
 
 const AccountEditOrg: FC<AccountEditOrg> = (props) => {
@@ -26,7 +26,7 @@ const AccountEditOrg: FC<AccountEditOrg> = (props) => {
           },
         },
       });
-      setMessage("Update was succeeded");
+      setMessage("You have applied the request");
     } catch (e) {
       const error = e as Error;
       setMessage(error.message);

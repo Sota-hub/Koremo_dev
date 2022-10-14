@@ -1,21 +1,25 @@
-import React, { FC, useState, useEffect, useCallback } from "react";
+import React, { FC, useState, useCallback } from "react";
 import SearchBar from "../../molecules/SearchBar";
 import AccountInfo from "../../molecules/AccountInfo";
 import Button from "../../molecules/Button";
+import Loader from "../../atoms/Loader";
 import { BgColor, TextColor } from "@koremo/enums";
 import {
   useSearchedUserQuery,
   SearchedUserQuery,
+  useApplyFriendMutation,
 } from "@koremo/graphql-client";
-import Loader from "../../atoms/Loader";
+import { SetMessageProps } from "../../types/setMessage";
 import styles from "./styles.module.css";
 
 interface SearchedUserProps {
   data: SearchedUserQuery;
+  onClick: () => void;
 }
 
 const SearchedUser: FC<SearchedUserProps> = (props) => {
-  const user = props.data.searchedUser;
+  const { data, onClick } = props;
+  const user = data.searchedUser;
 
   if (!user) {
     return null;
@@ -37,15 +41,18 @@ const SearchedUser: FC<SearchedUserProps> = (props) => {
           bgColor={BgColor.Pink}
           text="Apply"
           textColor={TextColor.White}
+          onClick={onClick}
         />
       </div>
     </>
   );
 };
 
-const AccountSearchOrg: FC = (props) => {
+const AccountSearchOrg: FC<SetMessageProps> = (props) => {
+  const { setMessage } = props;
   const [input, setInput] = useState("");
   const changeInput = useCallback((v: string) => setInput(v), []);
+  const [applyFriendFunction] = useApplyFriendMutation();
   const { loading, error, data, refetch } = useSearchedUserQuery({
     variables: {
       id: "",
@@ -66,6 +73,24 @@ const AccountSearchOrg: FC = (props) => {
     refetch({ id: input });
   };
 
+  const applyFriendRequest = async () => {
+    const user = data.searchedUser;
+    if (!user) {
+      return;
+    }
+    try {
+      await applyFriendFunction({
+        variables: {
+          friendId: user.id,
+        },
+      });
+      setMessage("Have sent the request");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <SearchBar
@@ -74,7 +99,7 @@ const AccountSearchOrg: FC = (props) => {
         onKeyDown={searchFriend}
         onClick={searchFriend}
       />
-      <SearchedUser data={data} />
+      <SearchedUser data={data} onClick={applyFriendRequest} />
     </div>
   );
 };
