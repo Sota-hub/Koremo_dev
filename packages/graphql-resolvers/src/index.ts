@@ -29,51 +29,44 @@ export type Friend = {
   profileImageId?: Maybe<Scalars['String']>;
 };
 
-export type LocalLoginInput = {
-  email: Scalars['String'];
-  isChecked: Scalars['Boolean'];
-  password: Scalars['String'];
-};
-
-export type LocalSignupInput = {
-  confPass: Scalars['String'];
-  email: Scalars['String'];
-  isChecked: Scalars['Boolean'];
-  password: Scalars['String'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  googleOAuth: Scalars['Boolean'];
-  localLogin: Scalars['Boolean'];
-  localSignup: Scalars['Boolean'];
+  applyFriend: User;
+  approveFriend: User;
+  updateUser: User;
 };
 
 
-export type MutationLocalLoginArgs = {
-  input: LocalLoginInput;
+export type MutationApplyFriendArgs = {
+  friendId: Scalars['ID'];
 };
 
 
-export type MutationLocalSignupArgs = {
-  input: LocalSignupInput;
+export type MutationApproveFriendArgs = {
+  friendId: Scalars['ID'];
+};
+
+
+export type MutationUpdateUserArgs = {
+  input: UpdateUserInput;
 };
 
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<Friend>>;
+  pending: Array<Maybe<User>>;
   searchedUser?: Maybe<User>;
   user: User;
 };
 
 
-export type QueryFriendsArgs = {
-  userId: Scalars['ID'];
-};
-
-
 export type QuerySearchedUserArgs = {
   id: Scalars['ID'];
+};
+
+export type UpdateUserInput = {
+  name: Scalars['String'];
+  profileImageId?: InputMaybe<Scalars['String']>;
 };
 
 export type User = {
@@ -157,11 +150,10 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
-  LocalLoginInput: LocalLoginInput;
-  LocalSignupInput: LocalSignupInput;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  UpdateUserInput: UpdateUserInput;
   User: ResolverTypeWrapper<User>;
 };
 
@@ -172,11 +164,10 @@ export type ResolversParentTypes = {
   Date: Scalars['Date'];
   Friend: Friend;
   ID: Scalars['ID'];
-  LocalLoginInput: LocalLoginInput;
-  LocalSignupInput: LocalSignupInput;
   Mutation: {};
   Query: {};
   String: Scalars['String'];
+  UpdateUserInput: UpdateUserInput;
   User: User;
 };
 
@@ -200,13 +191,14 @@ export type FriendResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  googleOAuth?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  localLogin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLocalLoginArgs, 'input'>>;
-  localSignup?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationLocalSignupArgs, 'input'>>;
+  applyFriend?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
+  approveFriend?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
+  updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  friends?: Resolver<Array<Maybe<ResolversTypes['Friend']>>, ParentType, ContextType, RequireFields<QueryFriendsArgs, 'userId'>>;
+  friends?: Resolver<Array<Maybe<ResolversTypes['Friend']>>, ParentType, ContextType>;
+  pending?: Resolver<Array<Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
   searchedUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QuerySearchedUserArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };
