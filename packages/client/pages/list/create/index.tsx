@@ -3,8 +3,8 @@ import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import styles from "./styles.module.css";
 
-const Product: PageFC = (props) => {
+const ProductCreate: PageFC = (props) => {
   return <Header />;
 };
 
-export default Product;
+export default ProductCreate;
