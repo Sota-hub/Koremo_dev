@@ -8,7 +8,9 @@ const AccountSearch: PageFC = (props) => {
   return (
     <>
       <Header />
-      <AccountSearchOrg />
+      <div className={styles.container}>
+        <AccountSearchOrg />
+      </div>
     </>
   );
 };

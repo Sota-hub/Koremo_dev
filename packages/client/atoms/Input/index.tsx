@@ -5,12 +5,13 @@ interface InputProps {
   type: string;
   name: string;
   placeholder: string;
+  value?: string;
   id?: string;
   onChange?: (v: string) => void;
 }
 
 const Input: FC<InputProps> = (props) => {
-  const { type, name, placeholder, id, onChange } = props;
+  const { type, name, placeholder, value, id, onChange } = props;
 
   if (onChange) {
     return (
@@ -18,6 +19,7 @@ const Input: FC<InputProps> = (props) => {
         type={type}
         name={name}
         placeholder={placeholder}
+        value={value}
         className={styles.input}
         id={id}
         onChange={(e) => onChange(e.target.value)}
@@ -29,6 +31,7 @@ const Input: FC<InputProps> = (props) => {
       type={type}
       name={name}
       placeholder={placeholder}
+      value={value}
       className={styles.input}
       id={id}
     />
