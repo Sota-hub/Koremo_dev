@@ -4,7 +4,11 @@ import AddButton from "../../atoms/AddButton";
 import Loader from "../../atoms/Loader";
 import { CardIconProps } from "../../types/cardIcon";
 import { CardTextProps } from "../../types/cardText";
-import { usePendingQuery } from "@koremo/graphql-client";
+import {
+  usePendingQuery,
+  useApproveFriendMutation,
+} from "@koremo/graphql-client";
+import { SetMessageProps } from "../../types/setMessage";
 import styles from "./styles.module.css";
 
 interface CardWithButtonProps extends CardIconProps, CardTextProps {
@@ -26,8 +30,10 @@ const CardWithButton: FC<CardWithButtonProps> = (props) => {
   );
 };
 
-const AccountPendingOrg: FC = (props) => {
-  const { loading, error, data } = usePendingQuery();
+const AccountPendingOrg: FC<SetMessageProps> = (props) => {
+  const { setMessage } = props;
+  const { loading, error, data, refetch } = usePendingQuery();
+  const [approveFriendFunction] = useApproveFriendMutation();
 
   if (loading) {
     return <Loader />;
@@ -38,6 +44,21 @@ const AccountPendingOrg: FC = (props) => {
   if (!data) {
     return <span>Something went wrong</span>;
   }
+
+  const approveFriendRequest = async (props: { friendId: string }) => {
+    const { friendId } = props;
+    try {
+      await approveFriendFunction({
+        variables: {
+          friendId,
+        },
+      });
+      refetch();
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
 
   return (
     <>
@@ -53,7 +74,9 @@ const AccountPendingOrg: FC = (props) => {
                 imageId={user.profileImageId || null}
                 mainText={user.name}
                 subText={`ID: ${user.id}`}
-                onClick={() => console.log("AAA")}
+                onClick={() => {
+                  approveFriendRequest({ friendId: user.id });
+                }}
               />
             </div>
           );
