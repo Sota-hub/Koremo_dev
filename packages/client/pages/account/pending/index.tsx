@@ -3,6 +3,7 @@ import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import AccountPendingOrg from "../../../organisms/AccountPendingOrg";
 import Alert from "../../../atoms/Alert";
+import auth from "../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
 const AccountPending: PageFC = (props) => {
@@ -19,4 +20,4 @@ const AccountPending: PageFC = (props) => {
   );
 };
 
-export default AccountPending;
+export default auth(AccountPending);

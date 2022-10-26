@@ -3,6 +3,7 @@ import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import AccountSearchOrg from "../../../organisms/AccountSearchOrg";
 import Alert from "../../../atoms/Alert";
+import auth from "../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
 const AccountSearch: PageFC = (props) => {
@@ -19,4 +20,4 @@ const AccountSearch: PageFC = (props) => {
   );
 };
 
-export default AccountSearch;
+export default auth(AccountSearch);

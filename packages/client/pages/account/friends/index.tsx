@@ -2,6 +2,7 @@ import React from "react";
 import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import AccountFriendsOrg from "../../../organisms/AccountFriendsOrg";
+import auth from "../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
 const AccountFriends: PageFC = (props) => {
@@ -15,4 +16,4 @@ const AccountFriends: PageFC = (props) => {
   );
 };
 
-export default AccountFriends;
+export default auth(AccountFriends);
