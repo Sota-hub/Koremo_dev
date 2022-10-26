@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 interface InputProps {
   type: string;
   name: string;
-  placeholder: string;
+  placeholder?: string;
   value?: string;
   id?: string;
   onChange?: (v: string) => void;
