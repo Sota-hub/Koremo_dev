@@ -3,6 +3,7 @@ import { PageFC } from "../../types";
 import Header from "../../organisms/Header";
 import AccountOrg from "../../organisms/AccountOrg";
 import auth from "../../helpers/functions/auth";
+import titleSSG from "../../helpers/functions/titleSSG";
 import styles from "./styles.module.css";
 
 const Account: PageFC = (props) => {
@@ -22,5 +23,7 @@ const Account: PageFC = (props) => {
     </>
   );
 };
+
+export const getStaticProps = titleSSG("Account");
 
 export default auth(Account);

@@ -4,6 +4,7 @@ import Header from "../../../organisms/Header";
 import Alert from "../../../atoms/Alert";
 import AccountEditOrg from "../../../organisms/AccountEditOrg";
 import auth from "../../../helpers/functions/auth";
+import titleSSG from "../../../helpers/functions/titleSSG";
 import styles from "./styles.module.css";
 
 const AccountEdit: PageFC = (props) => {
@@ -20,5 +21,7 @@ const AccountEdit: PageFC = (props) => {
     </>
   );
 };
+
+export const getStaticProps = titleSSG("Account Edit");
 
 export default auth(AccountEdit);
