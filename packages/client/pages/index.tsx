@@ -2,9 +2,12 @@ import React from "react";
 import { PageFC } from "../types";
 import titleSSG from "../helpers/functions/titleSSG";
 
+// import {uploadFile} from "../helpers/functions/googleDrive"
+
 import ProductEditOrg from "../organisms/ProductEditOrg";
 
 const Index: PageFC = (props) => {
+  // uploadFile();
   // const { router, currentUser } = props;
 
   // console.log(router);

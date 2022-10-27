@@ -1,24 +1,9 @@
-import React, {
-  FC,
-  useState,
-  useCallback,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { FC, useCallback } from "react";
 import Input from "../../atoms/Input";
+import { InputProps, SetInputProps } from "../../types/inputAndSetInput";
 import styles from "./styles.module.css";
 
-interface Product {
-  product: string;
-  shop: string;
-  price: string;
-  supplement: string;
-}
-
-interface ProductInputsProps {
-  input: Product;
-  setInput: Dispatch<SetStateAction<Product>>;
-}
+interface ProductInputsProps extends InputProps, SetInputProps {}
 
 const ProductInputs: FC<ProductInputsProps> = (props) => {
   const { input, setInput } = props;

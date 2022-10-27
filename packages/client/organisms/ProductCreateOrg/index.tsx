@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 
 const ProductCreateOrg: FC = (props) => {
   const [input, setInput] = useState({
+    imageId: null,
     product: "",
     shop: "",
     price: "",
@@ -16,7 +17,7 @@ const ProductCreateOrg: FC = (props) => {
   return (
     <div className={styles.container}>
       <div>
-        <ImageUploader imageId={null} />
+        <ImageUploader imageId={input.imageId} setInput={setInput} />
       </div>
       <div>
         <div className={styles.inputs}>
