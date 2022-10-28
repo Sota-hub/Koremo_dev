@@ -1,0 +1,9 @@
+type ImageId {
+  imageId: String!
+}
+
+input UploadImageInput {
+  fileBody: String!
+  fileName: String!
+  fileType: String!
+}

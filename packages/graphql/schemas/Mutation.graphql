@@ -2,4 +2,5 @@ type Mutation {
   updateUser(input: UpdateUserInput!): User!
   applyFriend(friendId: ID!): Friend!
   approveFriend(friendId: ID!): Friend!
+  uploadImage(input: UploadImageInput!): ImageId!
 }

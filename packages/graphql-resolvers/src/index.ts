@@ -37,11 +37,17 @@ export type FriendUser = {
   profileImageId?: Maybe<Scalars['String']>;
 };
 
+export type ImageId = {
+  __typename?: 'ImageId';
+  imageId: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   applyFriend: Friend;
   approveFriend: Friend;
   updateUser: User;
+  uploadImage: ImageId;
 };
 
 
@@ -57,6 +63,11 @@ export type MutationApproveFriendArgs = {
 
 export type MutationUpdateUserArgs = {
   input: UpdateUserInput;
+};
+
+
+export type MutationUploadImageArgs = {
+  input: UploadImageInput;
 };
 
 export type Query = {
@@ -75,6 +86,12 @@ export type QuerySearchedUserArgs = {
 export type UpdateUserInput = {
   name: Scalars['String'];
   profileImageId?: InputMaybe<Scalars['String']>;
+};
+
+export type UploadImageInput = {
+  fileBody: Scalars['String'];
+  fileName: Scalars['String'];
+  fileType: Scalars['String'];
 };
 
 export type User = {
@@ -159,11 +176,13 @@ export type ResolversTypes = {
   Friend: ResolverTypeWrapper<Friend>;
   FriendUser: ResolverTypeWrapper<FriendUser>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
+  ImageId: ResolverTypeWrapper<ImageId>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   UpdateUserInput: UpdateUserInput;
+  UploadImageInput: UploadImageInput;
   User: ResolverTypeWrapper<User>;
 };
 
@@ -175,11 +194,13 @@ export type ResolversParentTypes = {
   Friend: Friend;
   FriendUser: FriendUser;
   ID: Scalars['ID'];
+  ImageId: ImageId;
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
   String: Scalars['String'];
   UpdateUserInput: UpdateUserInput;
+  UploadImageInput: UploadImageInput;
   User: User;
 };
 
@@ -210,10 +231,16 @@ export type FriendUserResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ImageIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['ImageId'] = ResolversParentTypes['ImageId']> = {
+  imageId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   applyFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
   approveFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'input'>>;
+  uploadImage?: Resolver<ResolversTypes['ImageId'], ParentType, ContextType, RequireFields<MutationUploadImageArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -235,6 +262,7 @@ export type Resolvers<ContextType = any> = {
   Date?: GraphQLScalarType;
   Friend?: FriendResolvers<ContextType>;
   FriendUser?: FriendUserResolvers<ContextType>;
+  ImageId?: ImageIdResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
