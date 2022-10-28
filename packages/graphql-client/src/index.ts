@@ -14,6 +14,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   Date: Date;
+  File: any;
 };
 
 export type Basic = {
@@ -38,11 +39,17 @@ export type FriendUser = {
   profileImageId?: Maybe<Scalars['String']>;
 };
 
+export type ImageId = {
+  __typename?: 'ImageId';
+  imageId: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   applyFriend: Friend;
   approveFriend: Friend;
   updateUser: User;
+  uploadImage: ImageId;
 };
 
 
@@ -58,6 +65,11 @@ export type MutationApproveFriendArgs = {
 
 export type MutationUpdateUserArgs = {
   input: UpdateUserInput;
+};
+
+
+export type MutationUploadImageArgs = {
+  file: Scalars['File'];
 };
 
 export type Query = {
@@ -105,6 +117,13 @@ export type UpdateUserMutationVariables = Exact<{
 
 
 export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, name: string, profileImageId?: string | null } };
+
+export type UploadImageMutationVariables = Exact<{
+  file: Scalars['File'];
+}>;
+
+
+export type UploadImageMutation = { __typename?: 'Mutation', uploadImage: { __typename?: 'ImageId', imageId: string } };
 
 export type FriendsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -236,6 +255,39 @@ export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
 export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
 export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
+export const UploadImageDocument = gql`
+    mutation uploadImage($file: File!) {
+  uploadImage(file: $file) {
+    imageId
+  }
+}
+    `;
+export type UploadImageMutationFn = Apollo.MutationFunction<UploadImageMutation, UploadImageMutationVariables>;
+
+/**
+ * __useUploadImageMutation__
+ *
+ * To run a mutation, you first call `useUploadImageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUploadImageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [uploadImageMutation, { data, loading, error }] = useUploadImageMutation({
+ *   variables: {
+ *      file: // value for 'file'
+ *   },
+ * });
+ */
+export function useUploadImageMutation(baseOptions?: Apollo.MutationHookOptions<UploadImageMutation, UploadImageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UploadImageMutation, UploadImageMutationVariables>(UploadImageDocument, options);
+      }
+export type UploadImageMutationHookResult = ReturnType<typeof useUploadImageMutation>;
+export type UploadImageMutationResult = Apollo.MutationResult<UploadImageMutation>;
+export type UploadImageMutationOptions = Apollo.BaseMutationOptions<UploadImageMutation, UploadImageMutationVariables>;
 export const FriendsDocument = gql`
     query friends {
   friends {
