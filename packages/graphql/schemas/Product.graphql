@@ -1,5 +1,6 @@
 type Product {
   id: ID!
+  ownerId: String!
   productImageId: String
   productName: String!
   shopName: String!
@@ -9,6 +10,7 @@ type Product {
 }
 
 input CreateProductInput {
+  ownerId: String!
   productImageId: String
   productName: String!
   shopName: String!

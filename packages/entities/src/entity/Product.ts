@@ -3,6 +3,9 @@ import BasicColumns from "./BasicColumns";
 
 @Entity()
 class Product extends BasicColumns {
+  @Column()
+  ownerId!: string;
+
   @Column({ nullable: true })
   productImageId!: string;
 

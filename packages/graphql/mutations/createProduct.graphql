@@ -1,9 +1,12 @@
 mutation createProduct($input: CreateProductInput!) {
   createProduct(input: $input) {
+    id
+    ownerId
     productImageId
     productName
     shopName
     price
     supplement
+    status
   }
 }

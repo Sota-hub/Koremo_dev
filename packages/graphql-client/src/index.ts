@@ -23,6 +23,7 @@ export type Basic = {
 };
 
 export type CreateProductInput = {
+  ownerId: Scalars['String'];
   price: Scalars['String'];
   productImageId?: InputMaybe<Scalars['String']>;
   productName: Scalars['String'];
@@ -88,6 +89,7 @@ export type MutationUploadImageArgs = {
 export type Product = {
   __typename?: 'Product';
   id: Scalars['ID'];
+  ownerId: Scalars['String'];
   price: Scalars['String'];
   productImageId?: Maybe<Scalars['String']>;
   productName: Scalars['String'];
@@ -146,7 +148,7 @@ export type CreateProductMutationVariables = Exact<{
 }>;
 
 
-export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'Product', productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null } };
+export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'Product', id: string, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } };
 
 export type UpdateUserMutationVariables = Exact<{
   input: UpdateUserInput;
@@ -260,11 +262,14 @@ export type ApproveFriendMutationOptions = Apollo.BaseMutationOptions<ApproveFri
 export const CreateProductDocument = gql`
     mutation createProduct($input: CreateProductInput!) {
   createProduct(input: $input) {
+    id
+    ownerId
     productImageId
     productName
     shopName
     price
     supplement
+    status
   }
 }
     `;

@@ -22,6 +22,7 @@ export type Basic = {
 };
 
 export type CreateProductInput = {
+  ownerId: Scalars['String'];
   price: Scalars['String'];
   productImageId?: InputMaybe<Scalars['String']>;
   productName: Scalars['String'];
@@ -87,6 +88,7 @@ export type MutationUploadImageArgs = {
 export type Product = {
   __typename?: 'Product';
   id: Scalars['ID'];
+  ownerId: Scalars['String'];
   price: Scalars['String'];
   productImageId?: Maybe<Scalars['String']>;
   productName: Scalars['String'];
@@ -275,6 +277,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  ownerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   productImageId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   productName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
