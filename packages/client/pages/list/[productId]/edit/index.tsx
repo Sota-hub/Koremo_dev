@@ -6,11 +6,13 @@ import auth from "../../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
 const ProductEdit: PageFC = (props) => {
+  const { router } = props;
+
   return (
     <>
       <Header />
       <div className={styles.container}>
-        <ProductEditOrg />
+        <ProductEditOrg router={router} />
       </div>
     </>
   );

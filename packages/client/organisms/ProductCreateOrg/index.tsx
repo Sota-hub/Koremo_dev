@@ -12,15 +12,16 @@ interface ProductCreateOrgProps extends SetMessageProps {
   currentUser: User;
 }
 
+const initialState = {
+  imageId: null,
+  product: "",
+  shop: "",
+  price: "",
+  supplement: "",
+};
+
 const ProductCreateOrg: FC<ProductCreateOrgProps> = (props) => {
   const { currentUser, setMessage } = props;
-  const initialState = {
-    imageId: null,
-    product: "",
-    shop: "",
-    price: "",
-    supplement: "",
-  };
   const [input, setInput] = useState<Input>(initialState);
   const [createProductFunction] = useCreateProductMutation();
 

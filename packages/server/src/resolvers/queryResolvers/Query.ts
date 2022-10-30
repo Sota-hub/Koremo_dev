@@ -4,12 +4,14 @@ import user from "./user";
 import searchedUser from "./searchedUser";
 import friends from "./friends";
 import pending from "./pending";
+import product from "./product";
 
 const Query: QueryResolvers = {
   user,
   searchedUser,
   friends,
   pending,
+  product,
 };
 
 export default Query;
