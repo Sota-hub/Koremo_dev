@@ -85,8 +85,9 @@ export type MutationUploadImageArgs = {
   input: UploadImageInput;
 };
 
-export type Product = {
+export type Product = Basic & {
   __typename?: 'Product';
+  createdAt: Scalars['Date'];
   id: Scalars['ID'];
   ownerId: Scalars['String'];
   price: Scalars['String'];
@@ -95,14 +96,21 @@ export type Product = {
   shopName: Scalars['String'];
   status?: Maybe<Scalars['Int']>;
   supplement?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['Date'];
 };
 
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
   pending: Array<Maybe<FriendUser>>;
+  product: Product;
   searchedUser?: Maybe<User>;
   user: User;
+};
+
+
+export type QueryProductArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -197,7 +205,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Basic: never;
+  Basic: ResolversTypes['Product'];
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CreateProductInput: CreateProductInput;
   Date: ResolverTypeWrapper<Scalars['Date']>;
@@ -217,7 +225,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Basic: never;
+  Basic: ResolversParentTypes['Product'];
   Boolean: Scalars['Boolean'];
   CreateProductInput: CreateProductInput;
   Date: Scalars['Date'];
@@ -236,7 +244,7 @@ export type ResolversParentTypes = {
 };
 
 export type BasicResolvers<ContextType = any, ParentType extends ResolversParentTypes['Basic'] = ResolversParentTypes['Basic']> = {
-  __resolveType: TypeResolveFn<null, ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Product', ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
@@ -276,6 +284,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   ownerId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -284,12 +293,14 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
   shopName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   supplement?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   pending?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
+  product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   searchedUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QuerySearchedUserArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };

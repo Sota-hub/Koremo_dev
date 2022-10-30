@@ -86,8 +86,9 @@ export type MutationUploadImageArgs = {
   input: UploadImageInput;
 };
 
-export type Product = {
+export type Product = Basic & {
   __typename?: 'Product';
+  createdAt: Scalars['Date'];
   id: Scalars['ID'];
   ownerId: Scalars['String'];
   price: Scalars['String'];
@@ -96,14 +97,21 @@ export type Product = {
   shopName: Scalars['String'];
   status?: Maybe<Scalars['Int']>;
   supplement?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['Date'];
 };
 
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
   pending: Array<Maybe<FriendUser>>;
+  product: Product;
   searchedUser?: Maybe<User>;
   user: User;
+};
+
+
+export type QueryProductArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -173,6 +181,13 @@ export type PendingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PendingQuery = { __typename?: 'Query', pending: Array<{ __typename?: 'FriendUser', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
+
+export type ProductQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } };
 
 export type SearchedUserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -441,6 +456,48 @@ export function usePendingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pe
 export type PendingQueryHookResult = ReturnType<typeof usePendingQuery>;
 export type PendingLazyQueryHookResult = ReturnType<typeof usePendingLazyQuery>;
 export type PendingQueryResult = Apollo.QueryResult<PendingQuery, PendingQueryVariables>;
+export const ProductDocument = gql`
+    query product($id: ID!) {
+  product(id: $id) {
+    id
+    ownerId
+    productImageId
+    productName
+    shopName
+    price
+    supplement
+    status
+  }
+}
+    `;
+
+/**
+ * __useProductQuery__
+ *
+ * To run a query within a React component, call `useProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProductQuery(baseOptions: Apollo.QueryHookOptions<ProductQuery, ProductQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
+      }
+export function useProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductQuery, ProductQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
+        }
+export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
+export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
+export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;
 export const SearchedUserDocument = gql`
     query searchedUser($id: ID!) {
   searchedUser(id: $id) {
