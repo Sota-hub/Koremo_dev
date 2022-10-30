@@ -1,18 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
-interface Product {
+export interface Input {
+  imageId: null | string;
   product: string;
   shop: string;
   price: string;
   supplement: string;
-}
-
-interface Input extends Product {
-  imageId: null | string;
-}
-
-interface SetInput extends Product {
-  imageId: null;
 }
 
 export interface InputProps {
@@ -20,5 +13,5 @@ export interface InputProps {
 }
 
 export interface SetInputProps {
-  setInput: Dispatch<SetStateAction<SetInput>>;
+  setInput: Dispatch<SetStateAction<Input>>;
 }

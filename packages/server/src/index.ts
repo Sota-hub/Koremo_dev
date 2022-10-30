@@ -53,7 +53,7 @@ const corsSetting = { origin: frontendUrl, credentials: true };
     })
   );
   app.use(cors(corsSetting));
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({ limit: "1.5mb" }));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(passport.initialize());
   app.use(passport.session());

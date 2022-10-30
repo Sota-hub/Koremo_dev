@@ -2,11 +2,12 @@ import React, { FC, useState } from "react";
 import ImageUploader from "../../molecules/ImageUploader";
 import ProductInputs from "../../molecules/ProductInputs";
 import Button from "../../molecules/Button";
+import { Input } from "../../types/inputAndSetInput";
 import { BgColor, TextColor } from "@koremo/enums";
 import styles from "./styles.module.css";
 
 const ProductCreateOrg: FC = (props) => {
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<Input>({
     imageId: null,
     product: "",
     shop: "",
