@@ -13,3 +13,8 @@ export enum FriendStatus {
   Pending = 1,
   Approved = 2
 }
+
+export enum ProductStatus {
+  InList = 1,
+  Bought = 2,
+}

@@ -4,12 +4,14 @@ import updateUser from "./updateUser";
 import applyFriend from "./applyFriend";
 import approveFriend from "./approveFriend";
 import uploadImage from "./uploadImage";
+import createProduct from "./createProduct";
 
 const Mutation: MutationResolvers = {
   updateUser,
   applyFriend,
   approveFriend,
   uploadImage,
+  createProduct,
 };
 
 export default Mutation;

@@ -2,11 +2,19 @@ import React, { FC, useState } from "react";
 import ImageUploader from "../../molecules/ImageUploader";
 import ProductInputs from "../../molecules/ProductInputs";
 import Button from "../../molecules/Button";
+import { useCreateProductMutation, User } from "@koremo/graphql-client";
+import { SetMessageProps } from "../../types/setMessage";
 import { Input } from "../../types/inputAndSetInput";
 import { BgColor, TextColor } from "@koremo/enums";
 import styles from "./styles.module.css";
 
-const ProductCreateOrg: FC = (props) => {
+interface ProductCreateOrgProps extends SetMessageProps {
+  currentUser: User;
+}
+
+const ProductCreateOrg: FC<ProductCreateOrgProps> = (props) => {
+  const { currentUser, setMessage } = props;
+  const [createProductFunction] = useCreateProductMutation();
   const [input, setInput] = useState<Input>({
     imageId: null,
     product: "",
@@ -14,6 +22,27 @@ const ProductCreateOrg: FC = (props) => {
     price: "",
     supplement: "",
   });
+
+  const createProductRequest = async () => {
+    try {
+      await createProductFunction({
+        variables: {
+          input: {
+            ownerId: currentUser.id,
+            productImageId: input.imageId,
+            productName: input.product,
+            shopName: input.shop,
+            price: input.price,
+            supplement: input.supplement || null,
+          },
+        },
+      });
+      setMessage("Product is added in your list!");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -29,9 +58,7 @@ const ProductCreateOrg: FC = (props) => {
             bgColor={BgColor.Pink}
             text="Create"
             textColor={TextColor.White}
-            onClick={() => {
-              console.log("create");
-            }}
+            onClick={createProductRequest}
           />
         </div>
       </div>
