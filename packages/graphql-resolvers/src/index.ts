@@ -21,6 +21,14 @@ export type Basic = {
   updatedAt: Scalars['Date'];
 };
 
+export type CreateProductInput = {
+  price: Scalars['String'];
+  productImageId?: InputMaybe<Scalars['String']>;
+  productName: Scalars['String'];
+  shopName: Scalars['String'];
+  supplement?: InputMaybe<Scalars['String']>;
+};
+
 export type Friend = {
   __typename?: 'Friend';
   friendId: Scalars['ID'];
@@ -46,6 +54,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   applyFriend: Friend;
   approveFriend: Friend;
+  createProduct: Product;
   updateUser: User;
   uploadImage: ImageId;
 };
@@ -61,6 +70,11 @@ export type MutationApproveFriendArgs = {
 };
 
 
+export type MutationCreateProductArgs = {
+  input: CreateProductInput;
+};
+
+
 export type MutationUpdateUserArgs = {
   input: UpdateUserInput;
 };
@@ -68,6 +82,17 @@ export type MutationUpdateUserArgs = {
 
 export type MutationUploadImageArgs = {
   input: UploadImageInput;
+};
+
+export type Product = {
+  __typename?: 'Product';
+  id: Scalars['ID'];
+  price: Scalars['String'];
+  productImageId?: Maybe<Scalars['String']>;
+  productName: Scalars['String'];
+  shopName: Scalars['String'];
+  status?: Maybe<Scalars['Int']>;
+  supplement?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -172,6 +197,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Basic: never;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  CreateProductInput: CreateProductInput;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
   FriendUser: ResolverTypeWrapper<FriendUser>;
@@ -179,6 +205,7 @@ export type ResolversTypes = {
   ImageId: ResolverTypeWrapper<ImageId>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
+  Product: ResolverTypeWrapper<Product>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   UpdateUserInput: UpdateUserInput;
@@ -190,6 +217,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Basic: never;
   Boolean: Scalars['Boolean'];
+  CreateProductInput: CreateProductInput;
   Date: Scalars['Date'];
   Friend: Friend;
   FriendUser: FriendUser;
@@ -197,6 +225,7 @@ export type ResolversParentTypes = {
   ImageId: ImageId;
   Int: Scalars['Int'];
   Mutation: {};
+  Product: Product;
   Query: {};
   String: Scalars['String'];
   UpdateUserInput: UpdateUserInput;
@@ -239,8 +268,20 @@ export type ImageIdResolvers<ContextType = any, ParentType extends ResolversPare
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   applyFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
   approveFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
+  createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'input'>>;
   uploadImage?: Resolver<ResolversTypes['ImageId'], ParentType, ContextType, RequireFields<MutationUploadImageArgs, 'input'>>;
+};
+
+export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  productImageId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  productName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  shopName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  supplement?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -264,6 +305,7 @@ export type Resolvers<ContextType = any> = {
   FriendUser?: FriendUserResolvers<ContextType>;
   ImageId?: ImageIdResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };

@@ -1,0 +1,17 @@
+type Product {
+  id: ID!
+  productImageId: String
+  productName: String!
+  shopName: String!
+  price: String!
+  supplement: String
+  status: Int
+}
+
+input CreateProductInput {
+  productImageId: String
+  productName: String!
+  shopName: String!
+  price: String!
+  supplement: String
+}
