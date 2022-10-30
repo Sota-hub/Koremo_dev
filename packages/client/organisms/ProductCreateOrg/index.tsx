@@ -14,14 +14,15 @@ interface ProductCreateOrgProps extends SetMessageProps {
 
 const ProductCreateOrg: FC<ProductCreateOrgProps> = (props) => {
   const { currentUser, setMessage } = props;
-  const [createProductFunction] = useCreateProductMutation();
-  const [input, setInput] = useState<Input>({
+  const initialState = {
     imageId: null,
     product: "",
     shop: "",
     price: "",
     supplement: "",
-  });
+  };
+  const [input, setInput] = useState<Input>(initialState);
+  const [createProductFunction] = useCreateProductMutation();
 
   const createProductRequest = async () => {
     try {
@@ -38,6 +39,7 @@ const ProductCreateOrg: FC<ProductCreateOrgProps> = (props) => {
         },
       });
       setMessage("Product is added in your list!");
+      setInput(initialState);
     } catch (e) {
       const error = e as Error;
       setMessage(error.message);
