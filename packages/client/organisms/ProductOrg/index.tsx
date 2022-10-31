@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Router } from "next/router";
 import ProductImage from "../../atoms/ProductImage";
 import ProductItems from "../../molecules/ProductItems";
-import LinkButton from "../../atoms/LinkButton";
 import Button from "../../molecules/Button";
 import Loader from "../../atoms/Loader";
 import {
@@ -63,7 +62,14 @@ const ProductOrg: FC<ProductOrgProps> = (props) => {
           <ProductItems product={product} />
         </div>
         <div className={styles.item}>
-          <LinkButton path={`/list/${productId}/edit`} text="Edit" />
+          <Button
+            bgColor={BgColor.Pink}
+            text="Edit"
+            textColor={TextColor.White}
+            onClick={() => {
+              router.push(`/list/${productId}/edit`);
+            }}
+          />
           <Button
             bgColor={BgColor.Pink}
             text="Delete"
