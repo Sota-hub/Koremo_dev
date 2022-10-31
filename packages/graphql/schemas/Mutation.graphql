@@ -5,4 +5,5 @@ type Mutation {
   uploadImage(input: UploadImageInput!): ImageId!
   createProduct(input: CreateProductInput!): Product!
   updateProduct(input: UpdateProductInput!): Product!
+  deleteProduct(productId: ID!): ID!
 }

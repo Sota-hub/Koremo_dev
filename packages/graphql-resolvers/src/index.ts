@@ -56,6 +56,7 @@ export type Mutation = {
   applyFriend: Friend;
   approveFriend: Friend;
   createProduct: Product;
+  deleteProduct: Scalars['ID'];
   updateProduct: Product;
   updateUser: User;
   uploadImage: ImageId;
@@ -74,6 +75,11 @@ export type MutationApproveFriendArgs = {
 
 export type MutationCreateProductArgs = {
   input: CreateProductInput;
+};
+
+
+export type MutationDeleteProductArgs = {
+  productId: Scalars['ID'];
 };
 
 
@@ -296,6 +302,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   applyFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
   approveFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
+  deleteProduct?: Resolver<ResolversTypes['ID'], ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'productId'>>;
   updateProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationUpdateProductArgs, 'input'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'input'>>;
   uploadImage?: Resolver<ResolversTypes['ImageId'], ParentType, ContextType, RequireFields<MutationUploadImageArgs, 'input'>>;
