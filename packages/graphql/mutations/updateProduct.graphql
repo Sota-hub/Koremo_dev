@@ -1,5 +1,5 @@
-mutation createProduct($input: CreateProductInput!) {
-  createProduct(input: $input) {
+mutation updateProduct($input: UpdateProductInput!) {
+  updateProduct(input: $input) {
     id
     createdAt
     updatedAt

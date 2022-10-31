@@ -56,6 +56,7 @@ export type Mutation = {
   applyFriend: Friend;
   approveFriend: Friend;
   createProduct: Product;
+  updateProduct: Product;
   updateUser: User;
   uploadImage: ImageId;
 };
@@ -73,6 +74,11 @@ export type MutationApproveFriendArgs = {
 
 export type MutationCreateProductArgs = {
   input: CreateProductInput;
+};
+
+
+export type MutationUpdateProductArgs = {
+  input: UpdateProductInput;
 };
 
 
@@ -116,6 +122,15 @@ export type QueryProductArgs = {
 
 export type QuerySearchedUserArgs = {
   id: Scalars['ID'];
+};
+
+export type UpdateProductInput = {
+  id: Scalars['String'];
+  price: Scalars['String'];
+  productImageId?: InputMaybe<Scalars['String']>;
+  productName: Scalars['String'];
+  shopName: Scalars['String'];
+  supplement?: InputMaybe<Scalars['String']>;
 };
 
 export type UpdateUserInput = {
@@ -218,6 +233,7 @@ export type ResolversTypes = {
   Product: ResolverTypeWrapper<Product>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  UpdateProductInput: UpdateProductInput;
   UpdateUserInput: UpdateUserInput;
   UploadImageInput: UploadImageInput;
   User: ResolverTypeWrapper<User>;
@@ -238,6 +254,7 @@ export type ResolversParentTypes = {
   Product: Product;
   Query: {};
   String: Scalars['String'];
+  UpdateProductInput: UpdateProductInput;
   UpdateUserInput: UpdateUserInput;
   UploadImageInput: UploadImageInput;
   User: User;
@@ -279,6 +296,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   applyFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
   approveFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'friendId'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
+  updateProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationUpdateProductArgs, 'input'>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'input'>>;
   uploadImage?: Resolver<ResolversTypes['ImageId'], ParentType, ContextType, RequireFields<MutationUploadImageArgs, 'input'>>;
 };

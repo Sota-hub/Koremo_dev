@@ -19,3 +19,12 @@ input CreateProductInput {
   price: String!
   supplement: String
 }
+
+input UpdateProductInput {
+  id: String!
+  productImageId: String
+  productName: String!
+  shopName: String!
+  price: String!
+  supplement: String
+}

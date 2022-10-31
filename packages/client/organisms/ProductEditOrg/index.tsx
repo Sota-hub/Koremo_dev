@@ -4,12 +4,16 @@ import ImageUploader from "../../molecules/ImageUploader";
 import ProductInputs from "../../molecules/ProductInputs";
 import Button from "../../molecules/Button";
 import Loader from "../../atoms/Loader";
-import { useProductQuery } from "@koremo/graphql-client";
+import {
+  useProductQuery,
+  useUpdateProductMutation,
+} from "@koremo/graphql-client";
 import { BgColor, TextColor } from "@koremo/enums";
 import { Input } from "../../types/inputAndSetInput";
+import { SetMessageProps } from "../../types/setMessage";
 import styles from "./styles.module.css";
 
-interface ProductEditOrgProps {
+interface ProductEditOrgProps extends SetMessageProps {
   router: Router;
 }
 
@@ -22,11 +26,13 @@ const initialState = {
 };
 
 const ProductEditOrg: FC<ProductEditOrgProps> = (props) => {
-  const { productId } = props.router.query;
+  const { setMessage } = props;
+  const productId = props.router.query.productId as string;
   const [input, setInput] = useState<Input>(initialState);
+  const [updateProductFunction] = useUpdateProductMutation();
   const { loading, error, data } = useProductQuery({
     variables: {
-      id: productId as string,
+      id: productId,
     },
   });
 
@@ -53,6 +59,27 @@ const ProductEditOrg: FC<ProductEditOrgProps> = (props) => {
     return <span>Something went wrong</span>;
   }
 
+  const updateProductRequest = async () => {
+    try {
+      await updateProductFunction({
+        variables: {
+          input: {
+            id: productId,
+            productImageId: input.imageId,
+            productName: input.product,
+            shopName: input.shop,
+            price: input.price,
+            supplement: input.supplement,
+          },
+        },
+      });
+      setMessage("Product is updated");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div>
@@ -67,9 +94,7 @@ const ProductEditOrg: FC<ProductEditOrgProps> = (props) => {
             bgColor={BgColor.Pink}
             text="Update"
             textColor={TextColor.White}
-            onClick={() => {
-              console.log("update");
-            }}
+            onClick={updateProductRequest}
           />
         </div>
       </div>
