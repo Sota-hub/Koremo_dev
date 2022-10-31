@@ -5,16 +5,22 @@ import ProductItems from "../../molecules/ProductItems";
 import LinkButton from "../../atoms/LinkButton";
 import Button from "../../molecules/Button";
 import Loader from "../../atoms/Loader";
-import { useProductQuery } from "@koremo/graphql-client";
+import {
+  useProductQuery,
+  useDeleteProductMutation,
+} from "@koremo/graphql-client";
 import { BgColor, TextColor } from "@koremo/enums";
+import { SetMessageProps } from "../../types/setMessage";
 import styles from "./styles.module.css";
 
-interface ProductOrgProps {
+interface ProductOrgProps extends SetMessageProps {
   router: Router;
 }
 
 const ProductOrg: FC<ProductOrgProps> = (props) => {
-  const productId = props.router.query.productId as string;
+  const { router, setMessage } = props;
+  const productId = router.query.productId as string;
+  const [deleteProductFunction] = useDeleteProductMutation();
   const { loading, error, data } = useProductQuery({
     variables: {
       id: productId,
@@ -33,6 +39,20 @@ const ProductOrg: FC<ProductOrgProps> = (props) => {
 
   const { product } = data;
 
+  const deleteProductRequest = async () => {
+    try {
+      await deleteProductFunction({
+        variables: {
+          productId: product.id,
+        },
+      });
+      setMessage("Product is deleted");
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
+
   return (
     <div className={styles.wrap}>
       <div className={styles.container}>
@@ -48,6 +68,7 @@ const ProductOrg: FC<ProductOrgProps> = (props) => {
             bgColor={BgColor.Pink}
             text="Delete"
             textColor={TextColor.White}
+            onClick={deleteProductRequest}
           />
         </div>
       </div>

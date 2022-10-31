@@ -6,6 +6,7 @@ import approveFriend from "./approveFriend";
 import uploadImage from "./uploadImage";
 import createProduct from "./createProduct";
 import updateProduct from "./updateProduct";
+import deleteProduct from "./deleteProduct";
 
 const Mutation: MutationResolvers = {
   updateUser,
@@ -14,6 +15,7 @@ const Mutation: MutationResolvers = {
   uploadImage,
   createProduct,
   updateProduct,
+  deleteProduct,
 };
 
 export default Mutation;
