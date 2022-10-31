@@ -1,6 +1,8 @@
 query product($id: ID!) {
   product(id: $id) {
     id
+    createdAt
+    updatedAt
     ownerId
     productImageId
     productName

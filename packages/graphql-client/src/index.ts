@@ -209,7 +209,7 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, createdAt: Date, updatedAt: Date, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } };
 
 export type SearchedUserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -526,6 +526,8 @@ export const ProductDocument = gql`
     query product($id: ID!) {
   product(id: $id) {
     id
+    createdAt
+    updatedAt
     ownerId
     productImageId
     productName
