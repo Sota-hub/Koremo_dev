@@ -5,6 +5,7 @@ import searchedUser from "./searchedUser";
 import friends from "./friends";
 import pending from "./pending";
 import product from "./product";
+import products from "./products";
 
 const Query: QueryResolvers = {
   user,
@@ -12,6 +13,7 @@ const Query: QueryResolvers = {
   friends,
   pending,
   product,
+  products,
 };
 
 export default Query;

@@ -4,12 +4,23 @@
 }
 
 .item {
+  display: block;
   width: 80%;
   margin: 0 auto;
+  color: #000;
+  text-decoration: none;
 }
 
 .item+.item {
   border-top: 1px solid #a0a0a0;
+}
+
+.inaccessible {
+  pointer-events: none;
+}
+
+.inaccessible > div {
+  opacity: 0.3;
 }
 
 @media screen and (min-width: 800px) {
