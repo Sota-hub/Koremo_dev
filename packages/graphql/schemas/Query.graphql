@@ -4,4 +4,5 @@ type Query {
   friends: [FriendUser]!
   pending: [FriendUser]!
   product(id: ID!): Product!
+  products(userId: ID!): [Product]!
 }

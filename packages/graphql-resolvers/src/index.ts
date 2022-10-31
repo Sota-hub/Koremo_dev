@@ -116,6 +116,7 @@ export type Query = {
   friends: Array<Maybe<FriendUser>>;
   pending: Array<Maybe<FriendUser>>;
   product: Product;
+  products: Array<Maybe<Product>>;
   searchedUser?: Maybe<User>;
   user: User;
 };
@@ -123,6 +124,11 @@ export type Query = {
 
 export type QueryProductArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryProductsArgs = {
+  userId: Scalars['ID'];
 };
 
 
@@ -326,6 +332,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   friends?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   pending?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryProductsArgs, 'userId'>>;
   searchedUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QuerySearchedUserArgs, 'id'>>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
 };

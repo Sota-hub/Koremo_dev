@@ -117,6 +117,7 @@ export type Query = {
   friends: Array<Maybe<FriendUser>>;
   pending: Array<Maybe<FriendUser>>;
   product: Product;
+  products: Array<Maybe<Product>>;
   searchedUser?: Maybe<User>;
   user: User;
 };
@@ -124,6 +125,11 @@ export type Query = {
 
 export type QueryProductArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryProductsArgs = {
+  userId: Scalars['ID'];
 };
 
 
@@ -223,6 +229,13 @@ export type ProductQueryVariables = Exact<{
 
 
 export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, createdAt: Date, updatedAt: Date, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } };
+
+export type ProductsQueryVariables = Exact<{
+  userId: Scalars['ID'];
+}>;
+
+
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, createdAt: Date, updatedAt: Date, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } | null> };
 
 export type SearchedUserQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -610,6 +623,50 @@ export function useProductLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pr
 export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
 export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
 export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;
+export const ProductsDocument = gql`
+    query products($userId: ID!) {
+  products(userId: $userId) {
+    id
+    createdAt
+    updatedAt
+    ownerId
+    productImageId
+    productName
+    shopName
+    price
+    supplement
+    status
+  }
+}
+    `;
+
+/**
+ * __useProductsQuery__
+ *
+ * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductsQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useProductsQuery(baseOptions: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
+      }
+export function useProductsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
+        }
+export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
+export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
 export const SearchedUserDocument = gql`
     query searchedUser($id: ID!) {
   searchedUser(id: $id) {

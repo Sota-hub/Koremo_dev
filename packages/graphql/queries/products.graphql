@@ -1,0 +1,14 @@
+query products($userId: ID!) {
+  products(userId: $userId) {
+    id
+    createdAt
+    updatedAt
+    ownerId
+    productImageId
+    productName
+    shopName
+    price
+    supplement
+    status
+  }
+}
