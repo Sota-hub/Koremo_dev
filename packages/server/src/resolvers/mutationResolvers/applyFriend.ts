@@ -14,6 +14,11 @@ const applyFriend: MutationResolvers["applyFriend"] = async (
   }
 
   const { friendId } = args;
+
+  if (String(user.id) === friendId) {
+    throw new ApolloError("You can't send the friend request to yourself");
+  }
+
   const friend = await Friend.findOne({
     where: [
       { userId: user.id, friendId: friendId },

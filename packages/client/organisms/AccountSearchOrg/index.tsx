@@ -59,6 +59,10 @@ const AccountSearchOrg: FC<SetMessageProps> = (props) => {
     },
   });
 
+  const searchFriend = useCallback(() => {
+    refetch({ id: input });
+  }, [input]);
+
   if (loading) {
     return <Loader />;
   }
@@ -68,10 +72,6 @@ const AccountSearchOrg: FC<SetMessageProps> = (props) => {
   if (!data) {
     return <span>Something went wrong</span>;
   }
-
-  const searchFriend = () => {
-    refetch({ id: input });
-  };
 
   const applyFriendRequest = async () => {
     const user = data.searchedUser;
