@@ -1,0 +1,19 @@
+.container {
+  width: 80%;
+  margin: 2.5rem auto 0;
+}
+
+.headline {
+  margin: 0 0 1.5rem ;
+  font-weight: 200;
+}
+
+.item {
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+.item+.item {
+  border-top: 1px solid #a0a0a0;
+}

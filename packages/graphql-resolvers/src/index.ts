@@ -48,6 +48,7 @@ export type FriendUser = {
 
 export type FriendsAndProductsLength = {
   __typename?: 'FriendsAndProductsLength';
+  id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
   productsLength: Scalars['Int'];
@@ -122,7 +123,7 @@ export type Product = Basic & {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
-  friendsAndProductsLength: Array<Maybe<FriendsAndProductsLength>>;
+  friendsAndProductsLength: Array<FriendsAndProductsLength>;
   pending: Array<Maybe<FriendUser>>;
   product: Product;
   products: Array<Maybe<Product>>;
@@ -311,6 +312,7 @@ export type FriendUserResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type FriendsAndProductsLengthResolvers<ContextType = any, ParentType extends ResolversParentTypes['FriendsAndProductsLength'] = ResolversParentTypes['FriendsAndProductsLength']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastAccessedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   productsLength?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -349,7 +351,7 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
-  friendsAndProductsLength?: Resolver<Array<Maybe<ResolversTypes['FriendsAndProductsLength']>>, ParentType, ContextType>;
+  friendsAndProductsLength?: Resolver<Array<ResolversTypes['FriendsAndProductsLength']>, ParentType, ContextType>;
   pending?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryProductsArgs, 'userId'>>;

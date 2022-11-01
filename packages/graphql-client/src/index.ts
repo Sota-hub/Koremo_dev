@@ -49,6 +49,7 @@ export type FriendUser = {
 
 export type FriendsAndProductsLength = {
   __typename?: 'FriendsAndProductsLength';
+  id: Scalars['ID'];
   lastAccessedAt: Scalars['Date'];
   name: Scalars['String'];
   productsLength: Scalars['Int'];
@@ -123,7 +124,7 @@ export type Product = Basic & {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
-  friendsAndProductsLength: Array<Maybe<FriendsAndProductsLength>>;
+  friendsAndProductsLength: Array<FriendsAndProductsLength>;
   pending: Array<Maybe<FriendUser>>;
   product: Product;
   products: Array<Maybe<Product>>;
@@ -230,7 +231,7 @@ export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?:
 export type FriendsAndProductsLengthQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FriendsAndProductsLengthQuery = { __typename?: 'Query', friendsAndProductsLength: Array<{ __typename?: 'FriendsAndProductsLength', name: string, profileImageId?: string | null, lastAccessedAt: Date, productsLength: number } | null> };
+export type FriendsAndProductsLengthQuery = { __typename?: 'Query', friendsAndProductsLength: Array<{ __typename?: 'FriendsAndProductsLength', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date, productsLength: number }> };
 
 export type PendingQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -559,6 +560,7 @@ export type FriendsQueryResult = Apollo.QueryResult<FriendsQuery, FriendsQueryVa
 export const FriendsAndProductsLengthDocument = gql`
     query friendsAndProductsLength {
   friendsAndProductsLength {
+    id
     name
     profileImageId
     lastAccessedAt

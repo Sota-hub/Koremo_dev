@@ -5,5 +5,5 @@ type Query {
   pending: [FriendUser]!
   product(id: ID!): Product!
   products(userId: ID!): [Product]!
-  friendsAndProductsLength: [FriendsAndProductsLength]!
+  friendsAndProductsLength: [FriendsAndProductsLength!]!
 }

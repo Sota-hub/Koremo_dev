@@ -1,5 +1,6 @@
 query friendsAndProductsLength {
   friendsAndProductsLength {
+    id
     name
     profileImageId
     lastAccessedAt
