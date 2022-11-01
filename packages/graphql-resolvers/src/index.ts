@@ -46,6 +46,14 @@ export type FriendUser = {
   profileImageId?: Maybe<Scalars['String']>;
 };
 
+export type FriendsAndProductsLength = {
+  __typename?: 'FriendsAndProductsLength';
+  lastAccessedAt: Scalars['Date'];
+  name: Scalars['String'];
+  productsLength: Scalars['Int'];
+  profileImageId?: Maybe<Scalars['String']>;
+};
+
 export type ImageId = {
   __typename?: 'ImageId';
   imageId: Scalars['String'];
@@ -114,6 +122,7 @@ export type Product = Basic & {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
+  friendsAndProductsLength: Array<Maybe<FriendsAndProductsLength>>;
   pending: Array<Maybe<FriendUser>>;
   product: Product;
   products: Array<Maybe<Product>>;
@@ -238,6 +247,7 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Friend: ResolverTypeWrapper<Friend>;
   FriendUser: ResolverTypeWrapper<FriendUser>;
+  FriendsAndProductsLength: ResolverTypeWrapper<FriendsAndProductsLength>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   ImageId: ResolverTypeWrapper<ImageId>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -259,6 +269,7 @@ export type ResolversParentTypes = {
   Date: Scalars['Date'];
   Friend: Friend;
   FriendUser: FriendUser;
+  FriendsAndProductsLength: FriendsAndProductsLength;
   ID: Scalars['ID'];
   ImageId: ImageId;
   Int: Scalars['Int'];
@@ -299,6 +310,14 @@ export type FriendUserResolvers<ContextType = any, ParentType extends ResolversP
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type FriendsAndProductsLengthResolvers<ContextType = any, ParentType extends ResolversParentTypes['FriendsAndProductsLength'] = ResolversParentTypes['FriendsAndProductsLength']> = {
+  lastAccessedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  productsLength?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  profileImageId?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ImageIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['ImageId'] = ResolversParentTypes['ImageId']> = {
   imageId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -330,6 +349,7 @@ export type ProductResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   friends?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
+  friendsAndProductsLength?: Resolver<Array<Maybe<ResolversTypes['FriendsAndProductsLength']>>, ParentType, ContextType>;
   pending?: Resolver<Array<Maybe<ResolversTypes['FriendUser']>>, ParentType, ContextType>;
   product?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
   products?: Resolver<Array<Maybe<ResolversTypes['Product']>>, ParentType, ContextType, RequireFields<QueryProductsArgs, 'userId'>>;
@@ -349,6 +369,7 @@ export type Resolvers<ContextType = any> = {
   Date?: GraphQLScalarType;
   Friend?: FriendResolvers<ContextType>;
   FriendUser?: FriendUserResolvers<ContextType>;
+  FriendsAndProductsLength?: FriendsAndProductsLengthResolvers<ContextType>;
   ImageId?: ImageIdResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;

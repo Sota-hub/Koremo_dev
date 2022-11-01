@@ -1,0 +1,6 @@
+type FriendsAndProductsLength {
+    name: String!
+    profileImageId: String
+    lastAccessedAt: Date!
+    productsLength: Int!
+}

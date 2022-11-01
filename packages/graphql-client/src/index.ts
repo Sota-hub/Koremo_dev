@@ -47,6 +47,14 @@ export type FriendUser = {
   profileImageId?: Maybe<Scalars['String']>;
 };
 
+export type FriendsAndProductsLength = {
+  __typename?: 'FriendsAndProductsLength';
+  lastAccessedAt: Scalars['Date'];
+  name: Scalars['String'];
+  productsLength: Scalars['Int'];
+  profileImageId?: Maybe<Scalars['String']>;
+};
+
 export type ImageId = {
   __typename?: 'ImageId';
   imageId: Scalars['String'];
@@ -115,6 +123,7 @@ export type Product = Basic & {
 export type Query = {
   __typename?: 'Query';
   friends: Array<Maybe<FriendUser>>;
+  friendsAndProductsLength: Array<Maybe<FriendsAndProductsLength>>;
   pending: Array<Maybe<FriendUser>>;
   product: Product;
   products: Array<Maybe<Product>>;
@@ -217,6 +226,11 @@ export type FriendsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'FriendUser', id: string, name: string, profileImageId?: string | null, lastAccessedAt: Date } | null> };
+
+export type FriendsAndProductsLengthQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FriendsAndProductsLengthQuery = { __typename?: 'Query', friendsAndProductsLength: Array<{ __typename?: 'FriendsAndProductsLength', name: string, profileImageId?: string | null, lastAccessedAt: Date, productsLength: number } | null> };
 
 export type PendingQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -542,6 +556,43 @@ export function useFriendsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Fr
 export type FriendsQueryHookResult = ReturnType<typeof useFriendsQuery>;
 export type FriendsLazyQueryHookResult = ReturnType<typeof useFriendsLazyQuery>;
 export type FriendsQueryResult = Apollo.QueryResult<FriendsQuery, FriendsQueryVariables>;
+export const FriendsAndProductsLengthDocument = gql`
+    query friendsAndProductsLength {
+  friendsAndProductsLength {
+    name
+    profileImageId
+    lastAccessedAt
+    productsLength
+  }
+}
+    `;
+
+/**
+ * __useFriendsAndProductsLengthQuery__
+ *
+ * To run a query within a React component, call `useFriendsAndProductsLengthQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFriendsAndProductsLengthQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFriendsAndProductsLengthQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFriendsAndProductsLengthQuery(baseOptions?: Apollo.QueryHookOptions<FriendsAndProductsLengthQuery, FriendsAndProductsLengthQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FriendsAndProductsLengthQuery, FriendsAndProductsLengthQueryVariables>(FriendsAndProductsLengthDocument, options);
+      }
+export function useFriendsAndProductsLengthLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FriendsAndProductsLengthQuery, FriendsAndProductsLengthQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FriendsAndProductsLengthQuery, FriendsAndProductsLengthQueryVariables>(FriendsAndProductsLengthDocument, options);
+        }
+export type FriendsAndProductsLengthQueryHookResult = ReturnType<typeof useFriendsAndProductsLengthQuery>;
+export type FriendsAndProductsLengthLazyQueryHookResult = ReturnType<typeof useFriendsAndProductsLengthLazyQuery>;
+export type FriendsAndProductsLengthQueryResult = Apollo.QueryResult<FriendsAndProductsLengthQuery, FriendsAndProductsLengthQueryVariables>;
 export const PendingDocument = gql`
     query pending {
   pending {
