@@ -1,5 +1,5 @@
-mutation approveFriend($friendId: ID!) {
-  approveFriend(friendId: $friendId) {
+mutation approveFriend($userId: ID!) {
+  approveFriend(userId: $userId) {
     id
     userId
     friendId

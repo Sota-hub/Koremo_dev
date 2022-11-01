@@ -13,10 +13,10 @@ const approveFriend: MutationResolvers["approveFriend"] = async (
     throw new AuthenticationError("Authentication Error");
   }
 
-  const { friendId } = args;
+  const { userId } = args;
   const friend = await Friend.findOneBy({
-    userId: user.id,
-    friendId: friendId,
+    userId: userId,
+    friendId: user.id,
     status: FriendStatus.Pending,
   });
   if (!friend) {

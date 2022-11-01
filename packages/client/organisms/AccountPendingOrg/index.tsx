@@ -45,12 +45,12 @@ const AccountPendingOrg: FC<SetMessageProps> = (props) => {
     return <span>Something went wrong</span>;
   }
 
-  const approveFriendRequest = async (props: { friendId: string }) => {
-    const { friendId } = props;
+  const approveFriendRequest = async (props: { userId: string }) => {
+    const { userId } = props;
     try {
       await approveFriendFunction({
         variables: {
-          friendId,
+          userId,
         },
       });
       refetch();
@@ -75,7 +75,7 @@ const AccountPendingOrg: FC<SetMessageProps> = (props) => {
                 mainText={user.name}
                 subText={`ID: ${user.id}`}
                 onClick={() => {
-                  approveFriendRequest({ friendId: user.id });
+                  approveFriendRequest({ userId: user.id });
                 }}
               />
             </div>

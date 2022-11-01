@@ -70,7 +70,7 @@ export type MutationApplyFriendArgs = {
 
 
 export type MutationApproveFriendArgs = {
-  friendId: Scalars['ID'];
+  userId: Scalars['ID'];
 };
 
 
@@ -172,7 +172,7 @@ export type ApplyFriendMutationVariables = Exact<{
 export type ApplyFriendMutation = { __typename?: 'Mutation', applyFriend: { __typename?: 'Friend', id: string, userId: string, friendId: string, status: number } };
 
 export type ApproveFriendMutationVariables = Exact<{
-  friendId: Scalars['ID'];
+  userId: Scalars['ID'];
 }>;
 
 
@@ -287,8 +287,8 @@ export type ApplyFriendMutationHookResult = ReturnType<typeof useApplyFriendMuta
 export type ApplyFriendMutationResult = Apollo.MutationResult<ApplyFriendMutation>;
 export type ApplyFriendMutationOptions = Apollo.BaseMutationOptions<ApplyFriendMutation, ApplyFriendMutationVariables>;
 export const ApproveFriendDocument = gql`
-    mutation approveFriend($friendId: ID!) {
-  approveFriend(friendId: $friendId) {
+    mutation approveFriend($userId: ID!) {
+  approveFriend(userId: $userId) {
     id
     userId
     friendId
@@ -311,7 +311,7 @@ export type ApproveFriendMutationFn = Apollo.MutationFunction<ApproveFriendMutat
  * @example
  * const [approveFriendMutation, { data, loading, error }] = useApproveFriendMutation({
  *   variables: {
- *      friendId: // value for 'friendId'
+ *      userId: // value for 'userId'
  *   },
  * });
  */

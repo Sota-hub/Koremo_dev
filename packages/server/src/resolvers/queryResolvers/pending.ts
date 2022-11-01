@@ -11,16 +11,16 @@ const pending: QueryResolvers["pending"] = async (_, __, context) => {
   }
 
   const pending = await Friend.findBy({
-    userId: user.id,
+    friendId: user.id,
     status: FriendStatus.Pending,
   });
-  const friendIds = pending.map((pend) => {
-    return pend.friendId;
+  const userId = pending.map((pend) => {
+    return pend.userId;
   });
 
   const pendingFriends = await User.find({
     where: {
-      id: In(friendIds),
+      id: In(userId),
     },
     order: {
       lastAccessedAt: "DESC",

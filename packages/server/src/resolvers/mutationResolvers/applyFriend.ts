@@ -14,12 +14,14 @@ const applyFriend: MutationResolvers["applyFriend"] = async (
   }
 
   const { friendId } = args;
-  const friend = await Friend.findOneBy({
-    userId: user.id,
-    friendId: friendId,
+  const friend = await Friend.findOne({
+    where: [
+      { userId: user.id, friendId: friendId },
+      { userId: friendId, friendId: user.id },
+    ],
   });
   if (friend) {
-    throw new ApolloError("You have already sent the friend request");
+    throw new ApolloError("You have already sent/received the friend request");
   }
 
   const newFriend = new Friend();

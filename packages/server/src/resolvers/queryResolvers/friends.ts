@@ -10,17 +10,26 @@ const friends: QueryResolvers["friends"] = async (_, __, context) => {
     throw new AuthenticationError("Authentication Error");
   }
 
-  const friends = await Friend.findBy({
-    userId: user.id,
-    status: FriendStatus.Approved,
+  const friends = await Friend.find({
+    where: [
+      { userId: user.id, status: FriendStatus.Approved },
+      { friendId: user.id, status: FriendStatus.Approved },
+    ],
   });
-  const friendIds = friends.map((friend) => {
-    return friend.friendId;
+
+  console.log(friends);
+
+  const ids = friends.map((friend) => {
+    if (friend.userId === user.id) {
+      return friend.friendId;
+    } else {
+      return friend.userId;
+    }
   });
 
   const approvedFriends = await User.find({
     where: {
-      id: In(friendIds),
+      id: In(ids),
     },
     order: {
       lastAccessedAt: "DESC",
