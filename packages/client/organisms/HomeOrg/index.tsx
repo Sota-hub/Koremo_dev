@@ -62,7 +62,7 @@ const HomeOrg: FC = (props) => {
         {friend &&
           friend.map((item) => (
             <Link
-              href={`/home/list?userId=${item.id}`}
+              href={`/home/list?userId=${item.id}&name=${item.name}`}
               passHref
               key={item.name}
             >
