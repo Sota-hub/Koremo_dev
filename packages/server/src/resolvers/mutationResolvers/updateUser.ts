@@ -1,6 +1,7 @@
 import { MutationResolvers } from "@koremo/graphql-resolvers";
 import { AuthenticationError, ApolloError } from "apollo-server-express";
 import { User } from "@koremo/entities";
+import drive from "../../drive";
 
 const updateUser: MutationResolvers["updateUser"] = async (
   _,
@@ -21,9 +22,14 @@ const updateUser: MutationResolvers["updateUser"] = async (
 
   const { name, profileImageId } = args.input;
   foundUser.name = name;
-  if (profileImageId) foundUser.profileImageId = profileImageId;
 
   try {
+    if (profileImageId && foundUser.profileImageId !== profileImageId) {
+      await drive.files.delete({
+        fileId: foundUser.profileImageId,
+      });
+      foundUser.profileImageId = profileImageId;
+    }
     await foundUser.save();
     return {
       id: foundUser.id,

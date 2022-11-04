@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import AccountIcon from "../../atoms/AccountIcon";
+import ImageUploader from "../../molecules/ImageUploader";
 import Input from "../../atoms/Input";
 import Button from "../../molecules/Button";
 import { BgColor, TextColor } from "@koremo/enums";
@@ -13,6 +13,9 @@ interface AccountEditOrg extends SetMessageProps {
 
 const AccountEditOrg: FC<AccountEditOrg> = (props) => {
   const { currentUser, setMessage } = props;
+  const [imageId, setImageId] = useState<string | null>(null);
+  console.log(imageId);
+
   const [userName, setUserName] = useState(currentUser.name);
   const [updateUserFunction] = useUpdateUserMutation();
 
@@ -22,7 +25,7 @@ const AccountEditOrg: FC<AccountEditOrg> = (props) => {
         variables: {
           input: {
             name: userName,
-            profileImageId: "",
+            profileImageId: imageId,
           },
         },
       });
@@ -34,11 +37,11 @@ const AccountEditOrg: FC<AccountEditOrg> = (props) => {
   };
 
   return (
-    <>
-      <div className={styles.icon}>
-        <AccountIcon imageId="" /> {/*変更できるようなコンポーネントを作成*/}
+    <div className={styles.container}>
+      <div className={styles.uploader}>
+        <ImageUploader imageId={imageId} setImageId={setImageId} />
       </div>
-      <div className={styles.container}>
+      <div>
         <Input
           type="text"
           name="name"
@@ -55,7 +58,7 @@ const AccountEditOrg: FC<AccountEditOrg> = (props) => {
           onClick={updateUserRequest}
         />
       </div>
-    </>
+    </div>
   );
 };
 

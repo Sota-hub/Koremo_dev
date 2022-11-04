@@ -1,4 +1,10 @@
-import React, { FC, useState, ChangeEvent } from "react";
+import React, {
+  FC,
+  useState,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import ProductImage from "../../atoms/ProductImage";
 import ImageUploadButton from "../../atoms/ImageUploadButton";
 import {
@@ -9,10 +15,12 @@ import { ProductImageProps } from "../../types/productImage";
 import { SetInputProps } from "../../types/inputAndSetInput";
 import styles from "./styles.module.css";
 
-interface ImageUploaderProps extends ProductImageProps, SetInputProps {}
+interface ImageUploaderProps extends ProductImageProps, SetInputProps {
+  setImageId?: Dispatch<SetStateAction<string | null>>;
+}
 
 const ImageUploader: FC<ImageUploaderProps> = (props) => {
-  const { imageId, setInput } = props;
+  const { imageId, setInput, setImageId } = props;
   const [file, setFile] = useState<UploadImageInput | null>(null);
   const [uploadImageFunction] = useUploadImageMutation();
 
@@ -52,10 +60,15 @@ const ImageUploader: FC<ImageUploaderProps> = (props) => {
         return console.log("There is no response data");
       }
       const imageId = response.data.uploadImage.imageId;
-      setInput((prev) => ({
-        ...prev,
-        imageId,
-      }));
+      if (setInput) {
+        setInput((prev) => ({
+          ...prev,
+          imageId,
+        }));
+      }
+      if (setImageId) {
+        setImageId(imageId);
+      }
     } catch (e) {
       const error = e as Error;
       console.log(error.message);
