@@ -2,6 +2,7 @@ import React from "react";
 import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import HomeListOrg from "../../../organisms/HomeListOrg";
+import auth from "../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
 const List: PageFC = (props) => {
@@ -17,4 +18,4 @@ const List: PageFC = (props) => {
   );
 };
 
-export default List;
+export default auth(List);

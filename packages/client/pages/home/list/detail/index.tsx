@@ -3,6 +3,7 @@ import { PageFC } from "../../../../types";
 import Header from "../../../../organisms/Header";
 import HomeDetailOrg from "../../../../organisms/HomeDetailOrg";
 import Alert from "../../../../atoms/Alert";
+import auth from "../../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
 const Detail: PageFC = (props) => {
@@ -20,4 +21,4 @@ const Detail: PageFC = (props) => {
   );
 };
 
-export default Detail;
+export default auth(Detail);
