@@ -64,6 +64,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   applyFriend: Friend;
   approveFriend: Friend;
+  checkProduct: Product;
   createProduct: Product;
   deleteProduct: Scalars['ID'];
   updateProduct: Product;
@@ -79,6 +80,11 @@ export type MutationApplyFriendArgs = {
 
 export type MutationApproveFriendArgs = {
   userId: Scalars['ID'];
+};
+
+
+export type MutationCheckProductArgs = {
+  productId: Scalars['ID'];
 };
 
 
@@ -328,6 +334,7 @@ export type ImageIdResolvers<ContextType = any, ParentType extends ResolversPare
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   applyFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApplyFriendArgs, 'friendId'>>;
   approveFriend?: Resolver<ResolversTypes['Friend'], ParentType, ContextType, RequireFields<MutationApproveFriendArgs, 'userId'>>;
+  checkProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCheckProductArgs, 'productId'>>;
   createProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationCreateProductArgs, 'input'>>;
   deleteProduct?: Resolver<ResolversTypes['ID'], ParentType, ContextType, RequireFields<MutationDeleteProductArgs, 'productId'>>;
   updateProduct?: Resolver<ResolversTypes['Product'], ParentType, ContextType, RequireFields<MutationUpdateProductArgs, 'input'>>;

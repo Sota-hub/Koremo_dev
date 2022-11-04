@@ -1,0 +1,14 @@
+mutation checkProduct($productId: ID!) {
+  checkProduct(productId: $productId) {
+    id
+    createdAt
+    updatedAt
+    ownerId
+    productImageId
+    productName
+    shopName
+    price
+    supplement
+    status
+  }
+}

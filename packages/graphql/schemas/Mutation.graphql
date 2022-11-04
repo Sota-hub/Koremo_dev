@@ -6,4 +6,5 @@ type Mutation {
   createProduct(input: CreateProductInput!): Product!
   updateProduct(input: UpdateProductInput!): Product!
   deleteProduct(productId: ID!): ID!
+  checkProduct(productId: ID!): Product!
 }

@@ -65,6 +65,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   applyFriend: Friend;
   approveFriend: Friend;
+  checkProduct: Product;
   createProduct: Product;
   deleteProduct: Scalars['ID'];
   updateProduct: Product;
@@ -80,6 +81,11 @@ export type MutationApplyFriendArgs = {
 
 export type MutationApproveFriendArgs = {
   userId: Scalars['ID'];
+};
+
+
+export type MutationCheckProductArgs = {
+  productId: Scalars['ID'];
 };
 
 
@@ -187,6 +193,13 @@ export type ApproveFriendMutationVariables = Exact<{
 
 
 export type ApproveFriendMutation = { __typename?: 'Mutation', approveFriend: { __typename?: 'Friend', id: string, userId: string, friendId: string, status: number } };
+
+export type CheckProductMutationVariables = Exact<{
+  productId: Scalars['ID'];
+}>;
+
+
+export type CheckProductMutation = { __typename?: 'Mutation', checkProduct: { __typename?: 'Product', id: string, createdAt: Date, updatedAt: Date, ownerId: string, productImageId?: string | null, productName: string, shopName: string, price: string, supplement?: string | null, status?: number | null } };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -337,6 +350,48 @@ export function useApproveFriendMutation(baseOptions?: Apollo.MutationHookOption
 export type ApproveFriendMutationHookResult = ReturnType<typeof useApproveFriendMutation>;
 export type ApproveFriendMutationResult = Apollo.MutationResult<ApproveFriendMutation>;
 export type ApproveFriendMutationOptions = Apollo.BaseMutationOptions<ApproveFriendMutation, ApproveFriendMutationVariables>;
+export const CheckProductDocument = gql`
+    mutation checkProduct($productId: ID!) {
+  checkProduct(productId: $productId) {
+    id
+    createdAt
+    updatedAt
+    ownerId
+    productImageId
+    productName
+    shopName
+    price
+    supplement
+    status
+  }
+}
+    `;
+export type CheckProductMutationFn = Apollo.MutationFunction<CheckProductMutation, CheckProductMutationVariables>;
+
+/**
+ * __useCheckProductMutation__
+ *
+ * To run a mutation, you first call `useCheckProductMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCheckProductMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [checkProductMutation, { data, loading, error }] = useCheckProductMutation({
+ *   variables: {
+ *      productId: // value for 'productId'
+ *   },
+ * });
+ */
+export function useCheckProductMutation(baseOptions?: Apollo.MutationHookOptions<CheckProductMutation, CheckProductMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CheckProductMutation, CheckProductMutationVariables>(CheckProductDocument, options);
+      }
+export type CheckProductMutationHookResult = ReturnType<typeof useCheckProductMutation>;
+export type CheckProductMutationResult = Apollo.MutationResult<CheckProductMutation>;
+export type CheckProductMutationOptions = Apollo.BaseMutationOptions<CheckProductMutation, CheckProductMutationVariables>;
 export const CreateProductDocument = gql`
     mutation createProduct($input: CreateProductInput!) {
   createProduct(input: $input) {
