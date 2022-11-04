@@ -22,6 +22,10 @@ const ProductEdit: PageFC = (props) => {
   );
 };
 
+export const getStaticPaths = async () => {
+  return { paths: [], fallback: "blocking" };
+};
+
 export const getStaticProps = titleSSG("List Edit");
 
 export default auth(ProductEdit);

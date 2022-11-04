@@ -22,6 +22,10 @@ const Product: PageFC = (props) => {
   );
 };
 
+export const getStaticPaths = async () => {
+  return { paths: [], fallback: "blocking" };
+};
+
 export const getStaticProps = titleSSG("List Detail");
 
 export default auth(Product);
