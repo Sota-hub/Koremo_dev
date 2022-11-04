@@ -24,3 +24,9 @@
 .transparent {
   background-color: #fff;
 }
+
+.disabled {
+  background-color: #a0a0a0;
+  pointer-events: none;
+  user-select: none;
+}

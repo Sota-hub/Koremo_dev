@@ -7,10 +7,11 @@ interface ButtonBaseProps {
   children: React.ReactNode;
   form?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const ButtonBase: FC<ButtonBaseProps> = (props) => {
-  const { bgColor, children, form, onClick } = props;
+  const { bgColor, children, form, onClick, disabled } = props;
 
   let bgStyle = styles.transparent;
   if (bgColor === BgColor.Blue) {
@@ -21,7 +22,7 @@ const ButtonBase: FC<ButtonBaseProps> = (props) => {
 
   return (
     <button
-      className={`${styles.button} ${bgStyle}`}
+      className={`${styles.button} ${bgStyle} ${disabled && styles.disabled}`}
       form={form}
       onClick={onClick}
     >

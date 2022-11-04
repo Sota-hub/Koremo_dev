@@ -4,17 +4,24 @@ import Loader from "../../atoms/Loader";
 import ProductImage from "../../atoms/ProductImage";
 import ProductItems from "../../molecules/ProductItems";
 import Button from "../../molecules/Button";
-import { useProductQuery } from "@koremo/graphql-client";
+import {
+  useProductQuery,
+  useCheckProductMutation,
+} from "@koremo/graphql-client";
 import { BgColor, TextColor } from "@koremo/enums";
+import { ProductStatus } from "@koremo/enums";
+import { SetMessageProps } from "../../types/setMessage";
 import styles from "./styles.module.css";
 
-interface HomeDetailOrgProps {
+interface HomeDetailOrgProps extends SetMessageProps {
   router: Router;
 }
 
 const HomeDetailOrg: FC<HomeDetailOrgProps> = (props) => {
+  const { setMessage } = props;
   const productId = props.router.query.productId as string;
-  const { loading, error, data } = useProductQuery({
+  const [checkProductFunction] = useCheckProductMutation();
+  const { loading, error, data, refetch } = useProductQuery({
     variables: {
       id: productId,
     },
@@ -32,6 +39,21 @@ const HomeDetailOrg: FC<HomeDetailOrgProps> = (props) => {
 
   const { product } = data;
 
+  const checkProductRequest = async () => {
+    try {
+      await checkProductFunction({
+        variables: {
+          productId: product.id,
+        },
+      });
+      setMessage("Product is checked as bought");
+      refetch();
+    } catch (e) {
+      const error = e as Error;
+      setMessage(error.message);
+    }
+  };
+
   return (
     <div className={styles.wrap}>
       <div className={styles.container}>
@@ -46,9 +68,8 @@ const HomeDetailOrg: FC<HomeDetailOrgProps> = (props) => {
             bgColor={BgColor.Pink}
             text="Check as Bought"
             textColor={TextColor.White}
-            onClick={() => {
-              console.log("ase");
-            }}
+            onClick={checkProductRequest}
+            disabled={product.status === ProductStatus.Bought ? true : false}
           />
         </div>
       </div>

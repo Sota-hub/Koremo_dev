@@ -10,13 +10,19 @@ interface ButtonProps extends ButtonIconProps, ButtonTextProps {
   bgColor: number;
   form?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button: FC<ButtonProps> = (props) => {
-  const { bgColor, form, src, alt, text, textColor, onClick } = props;
+  const { bgColor, form, src, alt, text, textColor, onClick, disabled } = props;
 
   return (
-    <ButtonBase bgColor={bgColor} form={form} onClick={onClick}>
+    <ButtonBase
+      bgColor={bgColor}
+      form={form}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {src && alt && <ButtonIcon src={src} alt={alt} />}
       <ButtonText text={text} textColor={textColor} />
     </ButtonBase>

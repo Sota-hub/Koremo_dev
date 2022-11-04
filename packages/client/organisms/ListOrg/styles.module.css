@@ -17,6 +17,7 @@
 
 .inaccessible {
   pointer-events: none;
+  user-select: none;
 }
 
 .inaccessible > div {
