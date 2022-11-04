@@ -13,9 +13,7 @@ interface AccountEditOrg extends SetMessageProps {
 
 const AccountEditOrg: FC<AccountEditOrg> = (props) => {
   const { currentUser, setMessage } = props;
-  const [imageId, setImageId] = useState<string | null>(null);
-  console.log(imageId);
-
+  const [imageId, setImageId] = useState(currentUser.profileImageId || null);
   const [userName, setUserName] = useState(currentUser.name);
   const [updateUserFunction] = useUpdateUserMutation();
 

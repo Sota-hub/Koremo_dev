@@ -25,9 +25,11 @@ const updateUser: MutationResolvers["updateUser"] = async (
 
   try {
     if (profileImageId && foundUser.profileImageId !== profileImageId) {
-      await drive.files.delete({
-        fileId: foundUser.profileImageId,
-      });
+      if (foundUser.profileImageId) {
+        await drive.files.delete({
+          fileId: foundUser.profileImageId,
+        });
+      }
       foundUser.profileImageId = profileImageId;
     }
     await foundUser.save();
