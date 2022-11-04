@@ -2,6 +2,7 @@ import React from "react";
 import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import HomeListOrg from "../../../organisms/HomeListOrg";
+import titleSSG from "../../../helpers/functions/titleSSG";
 import auth from "../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
@@ -17,5 +18,7 @@ const List: PageFC = (props) => {
     </>
   );
 };
+
+export const getStaticProps = titleSSG("Home List");
 
 export default auth(List);

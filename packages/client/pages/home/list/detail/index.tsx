@@ -3,6 +3,7 @@ import { PageFC } from "../../../../types";
 import Header from "../../../../organisms/Header";
 import HomeDetailOrg from "../../../../organisms/HomeDetailOrg";
 import Alert from "../../../../atoms/Alert";
+import titleSSG from "../../../../helpers/functions/titleSSG";
 import auth from "../../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
@@ -20,5 +21,7 @@ const Detail: PageFC = (props) => {
     </>
   );
 };
+
+export const getStaticProps = titleSSG("Home Detail");
 
 export default auth(Detail);

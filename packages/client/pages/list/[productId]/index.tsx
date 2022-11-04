@@ -3,6 +3,7 @@ import { PageFC } from "../../../types";
 import Header from "../../../organisms/Header";
 import ProductOrg from "../../../organisms/ProductOrg";
 import Alert from "../../../atoms/Alert";
+import titleSSG from "../../../helpers/functions/titleSSG";
 import auth from "../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
@@ -20,5 +21,7 @@ const Product: PageFC = (props) => {
     </>
   );
 };
+
+export const getStaticProps = titleSSG("List Detail");
 
 export default auth(Product);

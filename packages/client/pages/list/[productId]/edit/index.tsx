@@ -3,6 +3,7 @@ import { PageFC } from "../../../../types";
 import Header from "../../../../organisms/Header";
 import ProductEditOrg from "../../../../organisms/ProductEditOrg";
 import Alert from "../../../../atoms/Alert";
+import titleSSG from "../../../../helpers/functions/titleSSG";
 import auth from "../../../../helpers/functions/auth";
 import styles from "./styles.module.css";
 
@@ -20,5 +21,7 @@ const ProductEdit: PageFC = (props) => {
     </>
   );
 };
+
+export const getStaticProps = titleSSG("List Edit");
 
 export default auth(ProductEdit);
