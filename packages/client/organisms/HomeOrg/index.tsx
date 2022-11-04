@@ -57,24 +57,26 @@ const HomeOrg: FC = (props) => {
         onClick={onFilterFriend}
         onKeyDown={onFilterFriend}
       />
-      <div className={styles.container}>
+      <div className={styles.wrap}>
         <h2 className={styles.headline}>Check what your friend want</h2>
-        {friend &&
-          friend.map((item) => (
-            <Link
-              href={`/home/list?userId=${item.id}&name=${item.name}`}
-              passHref
-              key={item.name}
-            >
-              <a className={styles.item}>
-                <Card
-                  imageId={item.profileImageId || null}
-                  mainText={item.name}
-                  subText={`${String(item.productsLength)} products in list`}
-                />
-              </a>
-            </Link>
-          ))}
+        <div className={styles.container}>
+          {friend &&
+            friend.map((item) => (
+              <Link
+                href={`/home/list?userId=${item.id}&name=${item.name}`}
+                passHref
+                key={item.name}
+              >
+                <a className={styles.item}>
+                  <Card
+                    imageId={item.profileImageId || null}
+                    mainText={item.name}
+                    subText={`${String(item.productsLength)} products in list`}
+                  />
+                </a>
+              </Link>
+            ))}
+        </div>
       </div>
     </>
   );
