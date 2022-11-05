@@ -12,10 +12,11 @@ import {
   UploadImageInput,
 } from "@koremo/graphql-client";
 import { ProductImageProps } from "../../types/productImage";
-import { SetInputProps } from "../../types/inputAndSetInput";
+import { Input } from "../../types/inputAndSetInput";
 import styles from "./styles.module.css";
 
-interface ImageUploaderProps extends ProductImageProps, SetInputProps {
+interface ImageUploaderProps extends ProductImageProps {
+  setInput?: Dispatch<SetStateAction<Input>>;
   setImageId?: Dispatch<SetStateAction<string | null>>;
 }
 

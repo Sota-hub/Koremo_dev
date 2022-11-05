@@ -13,5 +13,5 @@ export interface InputProps {
 }
 
 export interface SetInputProps {
-  setInput?: Dispatch<SetStateAction<Input>>;
+  setInput: Dispatch<SetStateAction<Input>>;
 }
