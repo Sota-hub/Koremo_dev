@@ -84,3 +84,9 @@
     margin-top: 3rem;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .wrap_bottom {
+    width: 30%;
+  }
+}
