@@ -1,9 +1,9 @@
-import React from "react";
-import { PageFC } from "../types";
+import React, { FC } from "react";
+import IndexOrg from "../organisms/IndexOrg";
 import titleSSG from "../helpers/functions/titleSSG";
 
-const Index: PageFC = (props) => {
-  return <p>Index Page</p>;
+const Index: FC = (props) => {
+  return <IndexOrg />;
 };
 
 export const getStaticProps = titleSSG("Koremo");

@@ -8,6 +8,9 @@ import Close from "./close.svg";
 import Google from "./google.png";
 import Search from "./search.svg";
 import Cart from "./cart.svg";
+import Map from "./map.jpg";
+import Check from "./check.svg";
+import ArrowDown from "./arrow-down.svg";
 
 export {
   Logo,
@@ -20,4 +23,7 @@ export {
   Google,
   Search,
   Cart,
+  Map,
+  Check,
+  ArrowDown,
 };

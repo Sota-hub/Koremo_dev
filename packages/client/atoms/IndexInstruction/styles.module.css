@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.text {
+  margin: 1rem 0 1rem 1rem;
+  font-size: 20px;
+}
+
+@media screen and (min-width: 800px) {
+  .text {
+    margin: 20px 0 20px 20px;
+  }
+}
