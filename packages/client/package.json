@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint ./**/*.{ts,tsx}",
-    "lint_fix": "eslint './**/*.{ts,tsx}' && prettier --write './**/*.{ts,tsx}'"
+    "lint_fix": "eslint './**/*.{ts,tsx}' && prettier --write './**/*.{ts,tsx}'",
+    "production": "cd ../common-types && yarn build && cd ../constants && yarn build && cd ../enums && yarn build && cd ../graphql-client && yarn build && cd ../client && next build"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
