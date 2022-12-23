@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { PageFC } from "../../../../types";
 import Header from "../../../../organisms/Header";
-// import HomeDetailOrg from "../../../../organisms/HomeDetailOrg"; TODO: can't find module on vercel
+import HomeListDetailOrg from "../../../../organisms/HomeListDetailorg";
 import Alert from "../../../../atoms/Alert";
 import titleSSG from "../../../../helpers/functions/titleSSG";
 import auth from "../../../../helpers/functions/auth";
@@ -15,7 +15,7 @@ const Detail: PageFC = (props) => {
     <>
       <Header />
       <div className={styles.container}>
-        {/* <HomeDetailOrg router={router} setMessage={setMessage} /> */}
+        <HomeListDetailOrg router={router} setMessage={setMessage} />
       </div>
       {message && <Alert message={message} />}
     </>
