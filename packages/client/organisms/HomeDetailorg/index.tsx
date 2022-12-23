@@ -77,4 +77,4 @@ const HomeDetailOrg: FC<HomeDetailOrgProps> = (props) => {
   );
 };
 
-export default HomeDetailOrg;
+export { HomeDetailOrg };
