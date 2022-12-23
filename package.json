@@ -12,7 +12,7 @@
     "strap": "lerna bootstrap",
     "up": "docker-compose up",
     "down": "docker-compose down",
-    "build-client": "lerna run build --scope={@koremo/common-types,@koremo/constants,@koremo/enums,@koremo/graphql-client}",
+    "build-client": "lerna run build --scope={@koremo/common-types,@koremo/constants,@koremo/enums,@koremo/graphql-client,@koremo/client}",
     "build-server": "lerna run build --scope={@koremo/common-types,@koremo/constants,@koremo/entities,@koremo/enums,@koremo/graphql,@koremo/graphql-resolvers,@koremo/server}"
   },
   "dependencies": {
