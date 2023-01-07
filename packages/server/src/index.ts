@@ -13,7 +13,7 @@ import "./passport-strategy.mw";
 
 dotenv.config();
 
-const port = process.env.SERVER_PORT;
+const port = process.env.PORT;
 const frontendUrl = process.env.FRONTEND_URL;
 const secret = String(process.env.SESSION_SECRET);
 const isProduction = process.env.MODE === "production";
