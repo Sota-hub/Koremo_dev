@@ -13,7 +13,10 @@ const dataSource = new DataSource({
   host: process.env.HOST,
   password: process.env.PASSWORD,
   logging: false,
-  entities: Object.values(entities)
+  entities: Object.values(entities),
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 export default dataSource;
