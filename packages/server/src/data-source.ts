@@ -15,8 +15,8 @@ const dataSource = new DataSource({
   logging: false,
   entities: Object.values(entities),
   ssl: {
-    rejectUnauthorized: false
-  }
+    rejectUnauthorized: false,
+  },
 });
 
 export default dataSource;
