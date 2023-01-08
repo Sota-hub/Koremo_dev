@@ -40,13 +40,14 @@ const corsSetting = { origin: frontendUrl, credentials: true };
 
   // Build express server
   const app = express();
-  app.set("trust proxy", (ip: string) => {
-    if (ip === process.env.TRUST_IP) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  app.set("trust proxy", 1);
+  // app.set("trust proxy", (ip: string) => {
+  //   if (ip === process.env.TRUST_IP) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // });
 
   app.use(
     session({
