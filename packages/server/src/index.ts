@@ -40,6 +40,7 @@ const corsSetting = { origin: frontendUrl, credentials: true };
 
   // Build express server
   const app = express();
+  app.set('trust proxy', 1);
   app.use(
     session({
       secret,
