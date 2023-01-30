@@ -9,10 +9,8 @@ import { FriendStatus } from "@koremo/enums";
 const friendsAndProductsLength: QueryResolvers["friendsAndProductsLength"] =
   async (_, __, context) => {
     const user = context.user;
-    console.log("current user = ", user);
-    
     if (!user) {
-      throw new AuthenticationError("Authentication Error !!!!!!!!!!!!!!!!!!!!!");
+      throw new AuthenticationError("Authentication Error");
     }
 
     const friendIds = (
