@@ -17,7 +17,7 @@ dotenv.config();
 const port = process.env.PORT;
 const frontendUrl = process.env.FRONTEND_URL;
 const secret = String(process.env.SESSION_SECRET);
-const isProduction = process.env.MODE === "production";
+// const isProduction = process.env.MODE === "production";
 const corsSetting = { origin: frontendUrl, credentials: true };
 
 (async () => {
@@ -51,8 +51,8 @@ const corsSetting = { origin: frontendUrl, credentials: true };
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: isProduction,
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+        // secure: isProduction,
+        // maxAge: 1000 * 60 * 60 * 24 * 7,
       },
     })
   );
