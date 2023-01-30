@@ -14,6 +14,8 @@ const callbackURL = process.env.CALLBACK_URL as string;
 
 passport.serializeUser((user: any /* ←FIX */, done) => {
   // console.log("+++++ serializeUser called +++++");
+  console.log(user);
+  
   return done(null, user.id);
 });
 
