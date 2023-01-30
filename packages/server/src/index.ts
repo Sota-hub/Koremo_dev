@@ -17,7 +17,7 @@ const port = process.env.PORT;
 const frontendUrl = process.env.FRONTEND_URL;
 const secret = String(process.env.SESSION_SECRET);
 const isProduction = process.env.MODE === "production";
-const corsSetting = { origin: frontendUrl, credentials: true };
+const corsSetting = { origin: frontendUrl, credentials: false };
 
 (async () => {
   // Establish the connection
