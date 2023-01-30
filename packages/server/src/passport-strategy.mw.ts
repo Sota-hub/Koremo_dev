@@ -13,12 +13,12 @@ const clientSecret = process.env.CLIENT_SECRET as string;
 const callbackURL = process.env.CALLBACK_URL as string;
 
 passport.serializeUser((user: any /* ←FIX */, done) => {
-  console.log("+++++ serializeUser called +++++");
+  // console.log("+++++ serializeUser called +++++");
   return done(null, user.id);
 });
 
 passport.deserializeUser(async (id: string, done) => {
-  console.log("+++++ deserializeUser called +++++");
+  // console.log("+++++ deserializeUser called +++++");
   try {
     const user = await User.findOne({ where: { id } });
     if (!user) {
