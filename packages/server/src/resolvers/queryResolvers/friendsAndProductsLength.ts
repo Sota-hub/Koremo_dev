@@ -12,7 +12,7 @@ const friendsAndProductsLength: QueryResolvers["friendsAndProductsLength"] =
     console.log("current user = ", user);
     
     if (!user) {
-      throw new AuthenticationError("Authentication Error");
+      throw new AuthenticationError("Authentication Error !!!!!!!!!!!!!!!!!!!!!");
     }
 
     const friendIds = (
