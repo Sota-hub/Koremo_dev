@@ -10,6 +10,7 @@ const friendsAndProductsLength: QueryResolvers["friendsAndProductsLength"] =
   async (_, __, context) => {
     const user = context.user;
     if (!user) {
+      console.log("========================== No User ==========================");
       throw new AuthenticationError("Authentication Error");
     }
 
