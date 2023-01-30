@@ -4,7 +4,7 @@ import { AuthenticationError } from "apollo-server-express";
 const user: QueryResolvers["user"] = async (_, __, context) => {
   const user = context.user;
 
-  console.log("========== User ==========", user);
+  console.log(user);
 
   if (!user) {
     throw new AuthenticationError("Authentication Error!!!!!!!!!!!!");

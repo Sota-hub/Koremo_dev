@@ -42,14 +42,8 @@ const corsSetting = { origin: frontendUrl, credentials: true };
   // Build express server
   const app = express();
   app.set("trust proxy", 1);
-  // app.set("trust proxy", (ip: string) => {
-  //   if (ip === process.env.TRUST_IP) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // });
 
+  app.use(cookieParser());
   app.use(
     session({
       secret,
@@ -62,13 +56,15 @@ const corsSetting = { origin: frontendUrl, credentials: true };
       },
     })
   );
+  app.use(passport.initialize());
+  app.use(passport.session());
+
   app.use(cors(corsSetting));
   app.use(bodyParser.json({ limit: "1.5mb" }));
   app.use(bodyParser.urlencoded({ extended: true }));
-  app.use(cookieParser());
-  app.use(passport.initialize());
-  app.use(passport.session());
+
   app.use(routers);
+
   server.applyMiddleware({ app, cors: corsSetting });
 
   app.listen(port, () => {
