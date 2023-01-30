@@ -36,12 +36,15 @@ const HomeOrg: FC = (props) => {
   );
 
   if (loading) {
+    console.log("ロード中です");
     return <Loader />;
   }
   if (error) {
+    console.log("エラーが発生しました");
     return <span>{error.message}</span>;
   }
   if (!data) {
+    console.log("データが存在します");
     return <span>Something went wrong</span>;
   }
 
