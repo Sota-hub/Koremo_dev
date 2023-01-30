@@ -2,6 +2,7 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import session from "express-session";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import passport from "passport";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -17,7 +18,7 @@ const port = process.env.PORT;
 const frontendUrl = process.env.FRONTEND_URL;
 const secret = String(process.env.SESSION_SECRET);
 const isProduction = process.env.MODE === "production";
-const corsSetting = { origin: frontendUrl, credentials: false };
+const corsSetting = { origin: frontendUrl, credentials: true };
 
 (async () => {
   // Establish the connection
@@ -64,6 +65,7 @@ const corsSetting = { origin: frontendUrl, credentials: false };
   app.use(cors(corsSetting));
   app.use(bodyParser.json({ limit: "1.5mb" }));
   app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(cookieParser());
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(routers);
