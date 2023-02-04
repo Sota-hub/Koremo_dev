@@ -1,5 +1,8 @@
 # Koremo
 
+## application url
+https://koremo-client.vercel.app/
+
 ## Proposal
 https://docs.google.com/spreadsheets/d/1q5keO94RGYksayOxepTWbNeWENbLdQanqxkKcpiMkAE/edit?usp=sharing
 
