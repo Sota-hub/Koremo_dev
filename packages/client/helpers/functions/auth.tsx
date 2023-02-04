@@ -10,7 +10,6 @@ interface AuthProps {
 
 const auth = (Component: PageFC) => {
   const Auth: FC<AuthProps> = (props) => {
-    console.log(document.cookie);
     const { router } = props;
     const { loading, error, data } = useUserQuery();
 
