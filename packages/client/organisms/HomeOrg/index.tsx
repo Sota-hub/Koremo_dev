@@ -10,7 +10,6 @@ import {
 import styles from "./styles.module.css";
 
 const HomeOrg: FC = (props) => {
-  console.log(document.cookie);
   const [input, setInput] = useState("");
   const [friend, setFriend] = useState<FriendsAndProductsLength[]>();
   const { loading, error, data } = useFriendsAndProductsLengthQuery();
