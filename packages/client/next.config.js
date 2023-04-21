@@ -3,12 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      "drive.google.com",
-      "/koremo-client.vercel.app",
-      "https://koremo-server.onrender.com",
-    ],
-    path: "/_next/images",
-  },
-};
+      "drive.google.com"
+    ]
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
