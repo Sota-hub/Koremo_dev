@@ -1,5 +1,8 @@
 # Koremo
 
+## 使用手順
+https://docs.google.com/document/d/1hWvpvOobd4VKKGQommdeRXl0rQrE-GATd91-ZCu8nZU/edit?usp=sharing
+
 ## application url
 https://koremo-client.vercel.app/
 
