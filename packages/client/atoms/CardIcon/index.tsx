@@ -24,6 +24,9 @@ const CardIcon: FC<CardIconProps> = (props) => {
             alt={isItem ? "item image" : "profile image"}
             layout="fill"
             className={styles.radius}
+            loader={({ src }) => {
+              return src;
+            }}
           />
         </div>
       )}
