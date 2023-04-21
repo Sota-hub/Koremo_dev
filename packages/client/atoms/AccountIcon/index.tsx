@@ -24,6 +24,9 @@ const AccountIcon: FC<AccountIconProps> = (props) => {
             alt="profile image"
             layout="fill"
             className={styles.circle}
+            loader={({ src }) => {
+              return src;
+            }}
           />
         </div>
       )}

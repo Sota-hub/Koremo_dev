@@ -24,6 +24,7 @@ const CardIcon: FC<CardIconProps> = (props) => {
             alt={isItem ? "item image" : "profile image"}
             layout="fill"
             className={styles.radius}
+            // add loader to avoid google understand "&" as "&amp;" in /_next/img out url
             loader={({ src }) => {
               return src;
             }}

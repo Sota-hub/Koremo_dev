@@ -24,6 +24,9 @@ const ProductImage: FC<ProductImageProps> = (props) => {
             alt="product image"
             layout="fill"
             className={styles.radius}
+            loader={({ src }) => {
+              return src;
+            }}
           />
         </div>
       )}
